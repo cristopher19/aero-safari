@@ -1,0 +1,6 @@
+framework module Pods_safariapp {
+  umbrella header "Pods-safariapp-umbrella.h"
+
+  export *
+  module * { export * }
+}
