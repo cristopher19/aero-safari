@@ -75,6 +75,17 @@ class LoginViewModel{
             userView.phone = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.phone
             userView.addressLine1 = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.address
             userView.addressLine2 = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.address2
+            userView.mailLine1 = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.mailLine1
+            userView.mailLine2 = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.mailLine2
+            userView.mailLine3 = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.mailLine3
+            userView.accountStatus = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.accountStatus
+            userView.csymbol = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.csymbol
+            userView.currencyISO = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.currencyISO
+            userView.isValid = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.isValid
+            userView.packageState = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.packageState
+            userView.packageZipCode = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.packageZipCode
+            userView.personId = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.personId
+         
         }
         
     }

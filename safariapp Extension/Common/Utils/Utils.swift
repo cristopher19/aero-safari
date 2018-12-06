@@ -88,3 +88,37 @@ func getUserInformationInStorage() -> UserView?{
     }
     return resultView
 }
+
+
+func getUserInformationInStorageInJsonString() -> String{
+    var resultView:String = ""
+    if let data = UserDefaults.standard.value(forKey:"userInformation") as? Data {
+        let user = try? PropertyListDecoder().decode(UserView.self, from: data)
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try? jsonEncoder.encode(user)
+        resultView = String(data: jsonData!, encoding: .utf8)!
+        
+    }
+    
+    return resultView
+}
+
+
+func activeAccount() -> Bool?{
+    var result = false
+    if let data = UserDefaults.standard.value(forKey:"userInformation") as? Data {
+        let user = try? PropertyListDecoder().decode(UserView.self, from: data)
+        if (user?.token) != nil{
+            result = true
+        }
+    }
+    return result
+}
+extension Encodable {
+    subscript(key: String) -> Any? {
+        return dictionary[key]
+    }
+    var dictionary: [String: Any] {
+        return (try? JSONSerialization.jsonObject(with: JSONEncoder().encode(self))) as? [String: Any] ?? [:]
+    }
+}

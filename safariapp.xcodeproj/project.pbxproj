@@ -15,7 +15,7 @@
 		0E1D45AD218CE1370079BB2A /* safariapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E1D45B2218CE1370079BB2A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1D45B1218CE1370079BB2A /* Cocoa.framework */; };
 		0E1D45B5218CE1370079BB2A /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */; };
-		0E1D45BD218CE1370079BB2A /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45BC218CE1370079BB2A /* script.js */; };
+		0E1D45BD218CE1370079BB2A /* contentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45BC218CE1370079BB2A /* contentScript.js */; };
 		0E1D45CC218CE47F0079BB2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45CB218CE47F0079BB2A /* LoginViewController.swift */; };
 		0E1D45CE218CE4C20079BB2A /* ModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45CD218CE4C20079BB2A /* ModalAnimator.swift */; };
 		0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45CF218CE4CB0079BB2A /* myaero.pdf */; };
@@ -44,6 +44,12 @@
 		0E2ADBEA21AEF5F30095BC18 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADBE921AEF5F30095BC18 /* CartModel.swift */; };
 		0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45D1218CE4E00079BB2A /* LoginStoryboard.storyboard */; };
 		0E2CD61B21B5A381007C0AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E261D0E219A1C770048E91B /* Main.storyboard */; };
+		0E2E68FE21B973E2001CFE81 /* amazonContentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */; };
+		0E2E690021B99C21001CFE81 /* locales.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E68FF21B99C21001CFE81 /* locales.js */; };
+		0E2E690221B99DAE001CFE81 /* PropertyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E690121B99DAE001CFE81 /* PropertyHelper.swift */; };
+		0E2E690421B9C03E001CFE81 /* jquery.colorbox-min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */; };
+		0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690521B9C04D001CFE81 /* colorbox.css */; };
+		0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690721B9C102001CFE81 /* jquery.i18n.js */; };
 		0E30B6D821A36B7300662A34 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30B6D721A36B7300662A34 /* ColorPalette.swift */; };
 		84428F4BB20E7FFC3C8A647F /* Pods_safariapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */; };
 		9CB894D69239C1606EB24F81 /* Pods_safariapp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E13290951B41B9A5D8C24B /* Pods_safariapp_Extension.framework */; };
@@ -88,7 +94,7 @@
 		0E1D45B1218CE1370079BB2A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
 		0E1D45BB218CE1370079BB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E1D45BC218CE1370079BB2A /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		0E1D45BC218CE1370079BB2A /* contentScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = contentScript.js; sourceTree = "<group>"; };
 		0E1D45C0218CE1370079BB2A /* safariapp_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = safariapp_Extension.entitlements; sourceTree = "<group>"; };
 		0E1D45CB218CE47F0079BB2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0E1D45CD218CE4C20079BB2A /* ModalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAnimator.swift; sourceTree = "<group>"; };
@@ -117,6 +123,12 @@
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
 		0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertItemView.swift; sourceTree = "<group>"; };
 		0E2ADBE921AEF5F30095BC18 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = amazonContentScript.js; sourceTree = "<group>"; };
+		0E2E68FF21B99C21001CFE81 /* locales.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = locales.js; sourceTree = "<group>"; };
+		0E2E690121B99DAE001CFE81 /* PropertyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyHelper.swift; sourceTree = "<group>"; };
+		0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.colorbox-min.js"; sourceTree = "<group>"; };
+		0E2E690521B9C04D001CFE81 /* colorbox.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = colorbox.css; sourceTree = "<group>"; };
+		0E2E690721B9C102001CFE81 /* jquery.i18n.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.i18n.js; sourceTree = "<group>"; };
 		0E30B6D721A36B7300662A34 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safariapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE3BD78068C3E509B61FC2A /* Pods-safariapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp/Pods-safariapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,11 +292,16 @@
 			children = (
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
-				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
-				F9D4DD7021B8E3070078F23E /* icon-a.png */,
-				0E1D45BC218CE1370079BB2A /* script.js */,
-				F9D4DD6C21B8757E0078F23E /* jquery.js */,
 				0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */,
+				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				0E2E690521B9C04D001CFE81 /* colorbox.css */,
+				F9D4DD7021B8E3070078F23E /* icon-a.png */,
+				F9D4DD6C21B8757E0078F23E /* jquery.js */,
+				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
+				0E1D45BC218CE1370079BB2A /* contentScript.js */,
+				0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */,
+				0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */,
+				0E2E68FF21B99C21001CFE81 /* locales.js */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -293,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				0E2504F32190B26100159CB0 /* ConfigurationFile.swift */,
+				0E2E690121B99DAE001CFE81 /* PropertyHelper.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -473,13 +491,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D4DD6F21B8DE2B0078F23E /* contentScript.css in Resources */,
+				0E2E690421B9C03E001CFE81 /* jquery.colorbox-min.js in Resources */,
 				0E1D45D2218CE4E00079BB2A /* LoginStoryboard.storyboard in Resources */,
 				0E261D0F219A1C770048E91B /* Main.storyboard in Resources */,
-				0E1D45BD218CE1370079BB2A /* script.js in Resources */,
+				0E2E68FE21B973E2001CFE81 /* amazonContentScript.js in Resources */,
+				0E1D45BD218CE1370079BB2A /* contentScript.js in Resources */,
 				F9D4DD7121B8E3070078F23E /* icon-a.png in Resources */,
 				0E1D45D7218CF35A0079BB2A /* Media.xcassets in Resources */,
 				F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */,
+				0E2E690021B99C21001CFE81 /* locales.js in Resources */,
+				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
+				0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +620,7 @@
 				0E25334121A5A63700EE0221 /* TextFieldStyle.swift in Sources */,
 				0E1D45CE218CE4C20079BB2A /* ModalAnimator.swift in Sources */,
 				0E23B62921A770E4001AB560 /* UserView.swift in Sources */,
+				0E2E690221B99DAE001CFE81 /* PropertyHelper.swift in Sources */,
 				0E261D14219A3A800048E91B /* MainDataManager.swift in Sources */,
 				0E1D45B5218CE1370079BB2A /* SafariExtensionHandler.swift in Sources */,
 				0E2ADBEA21AEF5F30095BC18 /* CartModel.swift in Sources */,

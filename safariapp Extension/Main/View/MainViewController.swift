@@ -64,7 +64,7 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     }
     
     @objc func logOutPressed(){
-        viewModel.userLogOut(){ result in
+       viewModel.userLogOut(){ result in
             let loginView = LoginViewController.getInstance()
             self.present(loginView, animator: ModalAnimator())
         }

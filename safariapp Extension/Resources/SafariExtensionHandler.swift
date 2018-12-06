@@ -7,7 +7,7 @@
 //
 
 import SafariServices
-
+import SwiftyJSON
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
@@ -15,16 +15,20 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         page.getPropertiesWithCompletionHandler { properties in
             NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
         }
-        if (messageName == "passObj") {
-            
+        if (messageName == "processPage") {
             //pasa el mensaje al script
-            page.dispatchMessageToScript(withName: "appExtMessage", userInfo: userInfo)
+            var firstRunColorboxArray = [String]()
+            firstRunColorboxArray.append(PropertyHelper.PROP_COLORBOX_FIRST_RUN_AMAZON)
+           
+            
+            var processPageMessage = [String:Any]()
+            processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
+            processPageMessage["clientAllowed"] = true
+            processPageMessage["checkRecipient"] = false
+            processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
+            
+            page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
         }
-        
-       
-        
-        //popoverViewController().sfPage = page
-        
     }
     
     override func toolbarItemClicked(in window: SFSafariWindow) {
