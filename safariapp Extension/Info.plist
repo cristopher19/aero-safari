@@ -32,7 +32,18 @@
 		<array>
 			<dict>
 				<key>Script</key>
+				<string>jquery.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
 				<string>script.js</string>
+			</dict>
+		</array>
+		<key>SFSafariStyleSheet</key>
+		<array>
+			<dict>
+				<key>Style Sheet</key>
+				<string>contentScript.css</string>
 			</dict>
 		</array>
 		<key>SFSafariToolbarItem</key>
@@ -56,11 +67,11 @@
 			<string>Some</string>
 		</dict>
 	</dict>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 Aeropost. All rights reserved.</string>
 	<key>NSHumanReadableDescription</key>

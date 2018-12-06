@@ -21,6 +21,8 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             page.dispatchMessageToScript(withName: "appExtMessage", userInfo: userInfo)
         }
         
+       
+        
         //popoverViewController().sfPage = page
         
     }

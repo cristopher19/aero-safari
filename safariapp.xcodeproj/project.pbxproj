@@ -47,6 +47,9 @@
 		0E30B6D821A36B7300662A34 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30B6D721A36B7300662A34 /* ColorPalette.swift */; };
 		84428F4BB20E7FFC3C8A647F /* Pods_safariapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */; };
 		9CB894D69239C1606EB24F81 /* Pods_safariapp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E13290951B41B9A5D8C24B /* Pods_safariapp_Extension.framework */; };
+		F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = F9D4DD6C21B8757E0078F23E /* jquery.js */; };
+		F9D4DD6F21B8DE2B0078F23E /* contentScript.css in Resources */ = {isa = PBXBuildFile; fileRef = F9D4DD6E21B8DE2B0078F23E /* contentScript.css */; };
+		F9D4DD7121B8E3070078F23E /* icon-a.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D4DD7021B8E3070078F23E /* icon-a.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,9 @@
 		3C08F956E80338FD526A1B44 /* Pods-safariapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp/Pods-safariapp.release.xcconfig"; sourceTree = "<group>"; };
 		76E13290951B41B9A5D8C24B /* Pods_safariapp_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safariapp_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCA9A4E53254E388320ACB1F /* Pods-safariapp Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp Extension/Pods-safariapp Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		F9D4DD6C21B8757E0078F23E /* jquery.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
+		F9D4DD6E21B8DE2B0078F23E /* contentScript.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = contentScript.css; sourceTree = "<group>"; };
+		F9D4DD7021B8E3070078F23E /* icon-a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-a.png"; sourceTree = "<group>"; };
 		F9F6F8CBF9F4106D0EAF722F /* Pods-safariapp Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp Extension/Pods-safariapp Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,7 +280,10 @@
 			children = (
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
+				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				F9D4DD7021B8E3070078F23E /* icon-a.png */,
 				0E1D45BC218CE1370079BB2A /* script.js */,
+				F9D4DD6C21B8757E0078F23E /* jquery.js */,
 				0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */,
 			);
 			path = Resources;
@@ -463,10 +472,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D4DD6F21B8DE2B0078F23E /* contentScript.css in Resources */,
 				0E1D45D2218CE4E00079BB2A /* LoginStoryboard.storyboard in Resources */,
 				0E261D0F219A1C770048E91B /* Main.storyboard in Resources */,
 				0E1D45BD218CE1370079BB2A /* script.js in Resources */,
+				F9D4DD7121B8E3070078F23E /* icon-a.png in Resources */,
 				0E1D45D7218CF35A0079BB2A /* Media.xcassets in Resources */,
+				F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

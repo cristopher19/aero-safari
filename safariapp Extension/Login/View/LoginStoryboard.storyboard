@@ -205,6 +205,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logoAeropost" width="619" height="105"/>
+        <image name="logoAeropost" width="150" height="33"/>
     </resources>
 </document>
