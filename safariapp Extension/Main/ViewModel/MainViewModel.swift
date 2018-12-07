@@ -26,6 +26,7 @@ class MainViewModel{
     var preAlertList: [PreAlert]?
     var trackingList: [PackageOrderView]?
     var cartObject: CartModel?
+    var prealertStatusList: [PrealertStatus]?
     init() {
         dataService = MainDataManager.shared
     }
@@ -35,6 +36,15 @@ class MainViewModel{
         didSet {
             guard let p = prealert else { return }
             self.setupPrealertList(with: p)
+            self.didFinishFetch?()
+        }
+    }
+    
+    // MARK: - Properties
+    private var prealertStatus: PrealertStatusModel? {
+        didSet {
+            guard let p = prealertStatus else { return }
+            self.setupPrealertStatusList(with: p)
             self.didFinishFetch?()
         }
     }
@@ -55,6 +65,18 @@ class MainViewModel{
             self.setupCart(with: p)
             self.didFinishFetch?()
         }
+    }
+    func getPrealertStatusByTracking(trackingList: [[String:Any]]){
+        self.dataService?.getPrealertStatusByTracking(trackingList: trackingList, completionHandler: { (prealertStatus, error) in
+            if let error = error {
+                self.error = error
+                self.isLoading = false
+                return
+            }
+            self.error = nil
+            self.isLoading = false
+            self.prealertStatus = prealertStatus
+        })
     }
     
     func getOrderPackagesList(){
@@ -139,6 +161,10 @@ class MainViewModel{
             }
         }
         self.trackingList = trackingOrderList
+    }
+    
+    private func setupPrealertStatusList(with prealertStatus: PrealertStatusModel){
+        self.prealertStatusList = prealertStatus.trackingList
     }
     
     private func setupCart(with cart: CartModel) {

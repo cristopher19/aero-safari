@@ -81,7 +81,7 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
             messagesLoginLabel.isHidden = false
         }else{
             //viewModel.userAuth(self.accountNumberText.stringValue,self.passwordText.stringValue,country.gateway!)
-            viewModel.userAuth("9","aeropost","SJO")
+            viewModel.userAuth("164018","plenitud28","SJO")
             viewModel.updateLoadingStatus = {
                 let _ = self.viewModel.isLoading ? self.activityIndicatorStart() : self.activityIndicatorStop()
             }

@@ -44,6 +44,7 @@
 		0E2ADBEA21AEF5F30095BC18 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADBE921AEF5F30095BC18 /* CartModel.swift */; };
 		0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45D1218CE4E00079BB2A /* LoginStoryboard.storyboard */; };
 		0E2CD61B21B5A381007C0AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E261D0E219A1C770048E91B /* Main.storyboard */; };
+		0E2DC24421BAD25900D1ADD0 /* PrealertStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */; };
 		0E2E68FE21B973E2001CFE81 /* amazonContentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */; };
 		0E2E690021B99C21001CFE81 /* locales.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E68FF21B99C21001CFE81 /* locales.js */; };
 		0E2E690221B99DAE001CFE81 /* PropertyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2E690121B99DAE001CFE81 /* PropertyHelper.swift */; };
@@ -123,6 +124,7 @@
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
 		0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertItemView.swift; sourceTree = "<group>"; };
 		0E2ADBE921AEF5F30095BC18 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrealertStatusModel.swift; sourceTree = "<group>"; };
 		0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = amazonContentScript.js; sourceTree = "<group>"; };
 		0E2E68FF21B99C21001CFE81 /* locales.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = locales.js; sourceTree = "<group>"; };
 		0E2E690121B99DAE001CFE81 /* PropertyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyHelper.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				0E261D15219A3A970048E91B /* PreAlertModel.swift */,
 				0E261D17219A3AA20048E91B /* TrackModel.swift */,
 				0E2ADBE921AEF5F30095BC18 /* CartModel.swift */,
+				0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2DC24421BAD25900D1ADD0 /* PrealertStatusModel.swift in Sources */,
 				0E2A6070219C927700DA51C6 /* UtilConstraint.swift in Sources */,
 				0E261D18219A3AA20048E91B /* TrackModel.swift in Sources */,
 				0E1D45CC218CE47F0079BB2A /* LoginViewController.swift in Sources */,

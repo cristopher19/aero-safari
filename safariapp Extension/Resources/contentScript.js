@@ -130,6 +130,75 @@ COLORBOX_WIDTH: 600,
                            }
                         }
                    break;
+                       case "checkedPreAlert":
+                       var info = msgEvent.message;
+                       var targetButton =
+                       $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
+                       if (info.preAlerted && targetButton.length > 0) {
+                           $(targetButton).addClass("disabled");
+                           $(targetButton).removeClass("cboxElement");
+                           $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_prealerted_label"));
+                       }
+                       // the package has a MIA
+                       // make sure the button is no there already
+                       if (info.mia) {
+                           if (targetButton.length == 1) {
+                           $(targetButton).addClass("disabled");
+                           $(targetButton).removeClass("cboxElement");
+                           $(targetButton).replaceWith(ContentScript._createPackageButton(info.mia));
+                           }
+                       }else if (!info.preAlerted) {
+                           if (info.delivered == "true") {
+                               // in this case, we remove the button because the package is
+                               // already delivered but the user didn't prealert it and wasn't
+                               // handled by Aeropost
+                               //$(targetButton).remove();
+                               // now we show the NOT PREALERTABLE button
+                               $(targetButton).addClass("disabled");
+                               $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
+                               $(targetButton).removeClass("cboxElement");
+                           } else {
+                               var invoiceUrl = info.invoiceUrl;
+                               var firstItemDescription = info.firstItemDescription;
+                               var storedInvoice = info.storedInvoice;
+                               if (storedInvoice.length == 0) {
+                               // if the package hasn't been prealerted and the invoiceUrl
+                               // and item description are present, get the invoiceHtml
+                               if (invoiceUrl && firstItemDescription) {
+                                       ContentScript._loadOrderInvoice(info.courierNumber, invoiceUrl, firstItemDescription, info.shipper, info.orderIndex);
+                               } else {
+                                   if (info.generateInvoice) {
+                                   // this means we should have had the info to load the order
+                                   // invoice but we didn't
+                                   // notify sentry that we couldn't load the invoice due to missing data
+                                   safari.extension.dispatchMessage("reportError",
+                                                                   {error : {
+                                                                   message: "Unable to load order invoice due to missing data.",
+                                                                   extra : {
+                                                                   invoiceUrl: invoiceUrl,
+                                                                   firstItemDescription: firstItemDescription,
+                                                                   courierNumber: info.courierNumber,
+                                                                   shipper: info.shipper
+                                                                   }
+                                                                   }});
+                                   }
+                               }
+                               } else {
+                                   // get value from stored invoice and update the button info
+                                   // this is for orders using gift cards
+                                   var storedInvoice = JSON.parse(storedInvoice);
+                                   if (firstItemDescription) {
+                                   ContentScript._checkInvoiceForGiftCards(
+                                                                           storedInvoice.invoiceHtml, firstItemDescription, info.courierNumber, info.orderIndex);
+                                   }
+                               }
+                               if (ContentScript._showGuide && ContentScript._page) {
+                                   ContentScript._showGuide = false;
+                                   ContentScript._showFirstRunGuide(targetButton, ContentScript._page);
+                               }
+                           }
+                       }
+                       break;
                }
            }
           },false)
@@ -459,15 +528,191 @@ COLORBOX_WIDTH: 600,
                                            $.colorbox.resize();
                                            } else {
                                            $.colorbox.close();
-                                           safari.self.tab.dispatchMessage("preAlert", preAlertInfo);
+                                           safari.extension.dispatchMessage("preAlert", preAlertInfo);
                                            }
                                            
                                            }
                                            });
         $("#aero-colorbox-cancel").click(function(event) {
                                          $.colorbox.close();
-                                         safari.self.tab.dispatchMessage("preAlertCanceled",{});
+                                         safari.extension.dispatchMessage("preAlertCanceled",{});
                                          });
+    },
+    
+    /**
+     * Loads the order invoice html and sends it over for storage
+     * @param aCourierNumber the courier number
+     * @param aInvoiceUrl the order invoice url
+     * @param aFirstItemDescription the first item description in the order
+     * @param aShipper the shipper of the package (Amazon, eBay, etc)
+     * @param aOrderIndex the order index for pages with multiple orders
+     */
+    _loadOrderInvoice : function(aCourierNumber, aInvoiceUrl, aFirstItemDescription, aShipper, aOrderIndex) {
+        var getInvoiceHtmlCallback = function(aHtml) {
+            var finalHtml = AmazonContentScript.generateAmazonInvoice(aHtml, aFirstItemDescription, aCourierNumber, aInvoiceUrl);
+            if (finalHtml) {
+                safari.extension.dispatchMessage("processInvoiceHtml", {courierNumber : aCourierNumber,
+                                                firstItemDescription: aFirstItemDescription,
+                                                invoiceHtml : finalHtml});
+            }
+            // check if the order is using a gift card and update the order value
+            // accordingly
+            ContentScript._checkInvoiceForGiftCards(finalHtml, aFirstItemDescription, aCourierNumber, aOrderIndex);
+        };
+        ContentScript._getInvoiceHTML(aInvoiceUrl, getInvoiceHtmlCallback);
+    },
+    
+    /**
+     * Gets the invoice html
+     * @param aUrl the invoice url
+     * @param aCallback the callback to be called on return
+     */
+    _getInvoiceHTML : function(aUrl, aCallback) {
+        var request =
+        $.ajax({
+               type: "GET",
+               url: aUrl,
+               jsonp: false,
+               timeout: 60 * 1000,
+               }).done(function(aData) {
+                       aCallback(aData);
+                       }).fail(function(aXHR, aTextStatus, aError) {
+                               console.log("Error retrieving the invoice HTML: Status: " +
+                                           aTextStatus + " /Error: " + aError);
+                               // notify sentry that we couldn't load the invoice
+                               safari.extension.dispatchMessage("reportError",
+                                                               {error : {
+                                                               message: "Error loading invoice HTML",
+                                                               extra : {
+                                                               invoiceUrl: aUrl,
+                                                               }
+                                                               }});
+                               
+                               aCallback();
+                               });
+    },
+    
+    /**
+     * Checks an invoice to see if it contains gift cards and updates the respective
+     * prealert info accordingly.
+     * @param aInvoiceHtml the invoice html to be reviewed
+     * @param aFirstItemDescription the description of the first item in the order
+     * (for orders with multiple packages)
+     * @param aCourierNumber the courier number to update the respective button
+     * if necessary
+     * @param aOrderIndex the order index for pages with multiple orders
+     */
+    _checkInvoiceForGiftCards : function(aInvoiceHtml, aFirstItemDescription, aCourierNumber, aOrderIndex) {
+        var html = $(aInvoiceHtml);
+        var orderValue = ContentScript._getValueFromInvoice(aInvoiceHtml, aFirstItemDescription);
+        if (orderValue) {
+            // search for the respective button and update the value accordingly
+            var targetButton =
+            $("[buttonId='aero-prealert-" + aCourierNumber + (aOrderIndex != null ? "-" + aOrderIndex : "") + "']");
+            if (targetButton.length > 0) {
+                var packageInfo = $(targetButton).attr("packageInfo");
+                
+                packageInfo = JSON.parse(packageInfo);
+                packageInfo.value = orderValue.totalValue;
+                packageInfo.subTotalCost = orderValue.subTotalCost;
+                
+                $(targetButton).attr("packageInfo", JSON.stringify(packageInfo));
+            }
+        }
+    },
+    /**
+      * Generates the received package button
+      * @return the button to be injected
+      */
+    _createPackageButton : function(aMIA) {
+        //outer div
+        var button = $("<button type='button' class='btn aero-injected-button preAlertButton'>" +
+                       "<img />" +
+                       "<span id='aero-injected-button-text'>" + $.i18n.getString("content_script_received_label") + aMIA.aeroTrack + "</span>" +
+                       "</button>");
+        
+        var url = location.href.toLowerCase();
+        if (url.indexOf("amazon") != -1 &&
+            url.indexOf("order-history") != -1) {
+            $(button).addClass("aero-amazon-button");
+        } else if (url.indexOf("amazon") != -1 &&
+                   url.indexOf("summary/edit.html") != -1) {
+            $(button).addClass("aero-amazon-order-details-button");
+        } else if (url.indexOf("amazon") != -1 &&
+                   url.indexOf("order-details") != -1) {
+            $(button).addClass("aero-amazon-order-details-button");
+        } else if(url.indexOf("ebay") != -1 &&
+                  url.indexOf("fetchorderdetails") != -1) {
+            $(button).addClass("aero-ebay-order-details-button");
+        } else if(url.indexOf("my.ebay") != -1 ||
+                  (url.indexOf("www.ebay") != -1 &&
+                   url.indexOf("purchasehistory") != -1) ||
+                  url.indexOf("summary") != -1) {
+            $(button).addClass("aero-ebay-order-list-button");
+        } else if(url.indexOf("rakuten") != -1 &&
+                  url.indexOf("orderhistory") != -1) {
+            $(button).addClass("aero-rakuten-order-list-button");
+        } else if(url.indexOf("aeropostale") != -1 &&
+                  url.indexOf("ordertrackingdetail") != -1) {
+            $(button).addClass("aero-aeropostale-order-details-button");
+        } else if(url.indexOf("aeropostale") != -1 &&
+                  url.indexOf("ordertracking") != -1) {
+            $(button).addClass("aero-aeropostale-order-list-button");
+        } else if(url.indexOf("forever21") != -1 &&
+                  url.indexOf("pastorders") != -1) {
+            $(button).addClass("aero-forever21-order-list-button");
+        } else if(url.indexOf("forever21") != -1 &&
+                  url.indexOf("vieworder") != -1) {
+            $(button).addClass("aero-forever21-order-details-button");
+        }
+        
+        $(button).attr("mia", aMIA.aeroTrack);
+        $(button).attr("packageInfo", JSON.stringify(aMIA));
+        $(button).click(function(event) {
+                        var packageInfo = JSON.parse($(this).attr("packageInfo"));
+                        safari.extension.dispatchMessage("viewPackage", packageInfo);
+                        });
+        
+        return button;
+    },
+    
+    /**
+     * Shows the first run colorbox that will be displayed on the supported pages
+     * the first time they are opened
+     * @param aTargetButton the target button to link the guide to
+     * @param aPage the page for which the colorbox will be displayed
+     */
+    _showFirstRunGuide : function(aTargetButton, aPage) {
+        
+        var floatingDiv = "<div class='col-xs-12 col-sm-12 col-md-12 aero-first-run-guide'>" +
+        "<p class='text-center'>" +
+        "<img />" +
+        "</p>" +
+        "<p class='leadBlue text-center'>" + $.i18n.getString("content_script_first_run_colorbox_msg") + "</p>" +
+        "<p class='text-center'>" +
+        "<a id='aero-colorbox-first-run-link'>" + $.i18n.getString("content_script_first_run_colorbox_hide") + "</a>" +
+        "</p>" +
+        "</div>";
+        
+        $(aTargetButton).popover({placement : "right",
+                                 html : "true",
+                                 content : floatingDiv});
+        
+        $(aTargetButton).appear();
+        $(aTargetButton).on('appear', function(event, $all_appeared_elements) {
+                            // this element is now inside browser viewport
+                            if ($(aTargetButton).next('div.popover:visible').length == 0){
+                            $(aTargetButton).popover("show");
+                            $("#aero-colorbox-first-run-link").click(function(event) {
+                                                                     $(aTargetButton).popover("destroy");
+                                                                     safari.extension.dispatchMessage("stopShowingGuide", {page: aPage});
+                                                                     });
+                            }
+                            });
+        
+        $("body").click(function(event) {
+                        $(aTargetButton).popover("destroy");
+                        });
     }
 };
 ContentScript.init();

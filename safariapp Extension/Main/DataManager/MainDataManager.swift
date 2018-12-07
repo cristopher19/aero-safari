@@ -126,4 +126,37 @@ struct MainDataManager{
             })
     }
     
+    /*
+     * MARK: - Prealert list
+     * retrieve prealert list
+     * @params ->
+     */
+    func getPrealertStatusByTracking(trackingList: [[String:Any]],completionHandler: @escaping (_ Result:PrealertStatusModel?, _ Error:NSError?) -> Void) {
+        let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
+     
+        var parametersBody = [ String : Any]()
+        var parametersClientInformation = [ String : Any]()
+        parametersClientInformation["gateway"] = getUserInformationInStorage()?.gateway ?? ""
+        parametersClientInformation["account"] = getUserInformationInStorage()?.accountNumber ?? ""
+        parametersClientInformation["lang"] =  "en"
+        parametersClientInformation["showOnlyLocalAmount"] = false
+        
+        parametersBody["clientInformation"] = parametersClientInformation
+        parametersBody["trackingList"] = trackingList
+        parametersBody["token"] = getUserInformationInStorage()?.token ?? ""
+        
+        sessionManager.request(Endpoints.Posts.getPrealerStatus.url,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
+            .validate().responseObject(completionHandler: {(response: DataResponse<PrealertStatusModel>) in
+                switch response.result {
+                case .success(let posts):
+                    completionHandler(posts, nil)
+                case .failure( let error):
+                    print("Request failed with error:\(error)")
+                    completionHandler(nil, error as NSError?)
+                    
+                }
+                
+            })
+    }
+    
 }

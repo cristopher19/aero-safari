@@ -9,25 +9,68 @@
 import SafariServices
 import SwiftyJSON
 class SafariExtensionHandler: SFSafariExtensionHandler {
-    
+    let viewModel = MainViewModel()
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         page.getPropertiesWithCompletionHandler { properties in
             NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
         }
-        if (messageName == "processPage") {
-            //pasa el mensaje al script
-            var firstRunColorboxArray = [String]()
-            firstRunColorboxArray.append(PropertyHelper.PROP_COLORBOX_FIRST_RUN_AMAZON)
-           
+        switch messageName {
+        case "processPage":
+            processPageAction(from: page, userInfo: userInfo)
+        case "checkPreAlert":
+            checkPreAlertAction(from: page, userInfo: userInfo)
+        default:
+            print("")
+        }
+        
+    }
+    /*
+     * logic for processPage message
+     */
+    private func processPageAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        //pasa el mensaje al script
+        var firstRunColorboxArray = [String]()
+        firstRunColorboxArray.append(PropertyHelper.PROP_COLORBOX_FIRST_RUN_AMAZON)
+        
+        var processPageMessage = [String:Any]()
+        processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
+        processPageMessage["clientAllowed"] = true
+        processPageMessage["checkRecipient"] = false
+        processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
+        
+        page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
+    }
+    
+    /*
+     * logic for checkPreAlert message
+     */
+    private func checkPreAlertAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        //pasa el mensaje al script
+        if (userInfo != nil && userInfo!["courierNumber"] != nil){
+            var trackingList  = [[String: Any]]()
+            var trackingObject = [String:Any]()
+            trackingObject["trackingNumber"] = userInfo!["courierNumber"]
+            trackingObject["address"] = userInfo!["shippingAddress"]
+            trackingList.append(trackingObject)
             
-            var processPageMessage = [String:Any]()
-            processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
-            processPageMessage["clientAllowed"] = true
-            processPageMessage["checkRecipient"] = false
-            processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
-            
-            page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
+            viewModel.getPrealertStatusByTracking(trackingList: trackingList)
+            viewModel.didFinishFetch = {
+               
+                var statusResponse = [String:Any]()
+                statusResponse["courierNumber"] = userInfo!["courierNumber"]
+                statusResponse["preAlerted"] = !(self.viewModel.prealertStatusList?.first?.isPrealertable)!
+                statusResponse["mia"] = self.viewModel.prealertStatusList?.first?.mia
+                statusResponse["delivered"] = userInfo!["delivered"]
+                statusResponse["storedInvoice"] = ""
+                statusResponse["invoiceUrl"] = userInfo!["invoiceUrl"]
+                statusResponse["firstItemDescription"] = userInfo!["firstItemDescription"]
+                statusResponse["shipper"] = userInfo!["shipper"]
+                statusResponse["generateInvoice"] = userInfo!["generateInvoice"]
+                statusResponse["orderIndex"] = userInfo!["orderIndex"]
+                
+                page.dispatchMessageToScript(withName: "checkedPreAlert", userInfo: statusResponse)
+            }
         }
     }
     

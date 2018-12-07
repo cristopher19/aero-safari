@@ -25,6 +25,7 @@ enum Endpoints {
         case getTracking
         case getCart
         case deleteItemCart
+        case getPrealerStatus
         public var path: String {
             switch self {
             case .getCountries: return "/country/GetCountries?ip=&lang="
@@ -32,6 +33,7 @@ enum Endpoints {
             case .getTracking: return "/order/GetNewOrdersPackagesByAccount"
             case .getCart: return "/shoppingcart/GetShoppingCart?"
             case .deleteItemCart: return "/shoppingcart/deleteshoppingcartproduct?"
+            case .getPrealerStatus: return "/PackagePrealert/GetPrealertStatusByTracking"
             }
         }
         
@@ -42,10 +44,12 @@ enum Endpoints {
             case .getTracking:return "\(API.baseUrl)\(path)"
             case .getCart:return "\(API.baseUrl)\(path)"
             case .deleteItemCart:return "\(API.baseUrl)\(path)"
+            case .getPrealerStatus:return "\(API.baseUrl)\(path)"
             }
         }
     }
 }
+/** url redirect to page in web **/
 protocol UrlPage {
     var urlPages: Int { get }
 }
