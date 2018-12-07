@@ -47,18 +47,16 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
     
     override func popoverViewController() -> SFSafariExtensionViewController {
-        var viewResult: SFSafariExtensionViewController = LoginViewController.shared
-        
         if(getUserInformationInStorage() != nil && getUserInformationInStorage()?.token != nil){
-            viewResult = MainViewController.shared
+            return MainViewController.shared
+        }else{
+            return LoginViewController.shared
         }
-        
-        return viewResult
     }
     
     override func popoverWillShow(in window: SFSafariWindow) {
         NSLog("VAMOS A ABRIR")
-        
+      
     }
     
     override func popoverDidClose(in window: SFSafariWindow) {

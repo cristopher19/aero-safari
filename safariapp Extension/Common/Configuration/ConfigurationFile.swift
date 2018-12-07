@@ -51,6 +51,7 @@ protocol UrlPage {
 }
 enum UrlPages{
     case checkOut
+    case prealert
     case cart
     case profile
     case editProfile
@@ -70,6 +71,8 @@ enum UrlPages{
             return 1005
         case .editProfileAddress:
             return 1006
+        case .prealert:
+            return 1007
         }
     }
     public var url: String {
@@ -85,6 +88,8 @@ enum UrlPages{
         case .editProfile:
             return "https://aeropost.com/site/en"
         case .editProfileAddress:
+            return "https://aeropost.com/site/en"
+        case .prealert:
             return "https://aeropost.com/site/en"
         }
     }

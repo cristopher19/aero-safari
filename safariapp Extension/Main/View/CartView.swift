@@ -16,18 +16,22 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showCartView() {
+        self.profileContentBox?.isHidden = true
+        self.prealertContentBox?.isHidden = true
+        self.trackContentBox?.isHidden = true
+         if (self.contentBox.viewWithTag(903) == nil ){
         // - 12 del scroll / - 30 de la section bottom
-        self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
+        self.cartContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
                                                         contentBox.frame.size.width, contentBox.frame.size.height))
-        self.trackContentBox!.wantsLayer = true
-        //self.trackContentBox!.borderType = .lineBorder
-        //self.trackContentBox!.boxType = .custom
+        self.cartContentBox!.wantsLayer = true
+        //self.cartContentBox!.borderType = .lineBorder
+        //self.cartContentBox!.boxType = .custom
         
-        self.contentBox.addSubview(self.trackContentBox!)
-        trackContentBox!.leftAnchor.constraint(equalTo: self.trackContentBox!.leftAnchor, constant: 0.0).isActive = true
-        trackContentBox!.topAnchor.constraint(equalTo: self.trackContentBox!.topAnchor, constant: 0.0).isActive = true
-        trackContentBox!.rightAnchor.constraint(equalTo: self.trackContentBox!.rightAnchor, constant: 0.0).isActive = true
-        trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
+        self.contentBox.addSubview(self.cartContentBox!)
+        cartContentBox!.leftAnchor.constraint(equalTo: self.cartContentBox!.leftAnchor, constant: 0.0).isActive = true
+        cartContentBox!.topAnchor.constraint(equalTo: self.cartContentBox!.topAnchor, constant: 0.0).isActive = true
+        cartContentBox!.rightAnchor.constraint(equalTo: self.cartContentBox!.rightAnchor, constant: 0.0).isActive = true
+        cartContentBox!.bottomAnchor.constraint(equalTo: self.cartContentBox!.bottomAnchor, constant: 0.0).isActive = true
         
         viewModel.getCart()
         viewModel.didFinishFetch = {
@@ -35,7 +39,10 @@ extension MainViewController{
             self.createCartView()
         }
         
-      
+        }else{
+            self.cartContentBox?.isHidden = false
+        }
+        
     }
     
     func createCartView(){
@@ -45,16 +52,16 @@ extension MainViewController{
         profileBox.wantsLayer = true
         profileBox.layer?.backgroundColor = NSColor.white.cgColor
         
-        self.trackContentBox?.addSubview(profileBox)
-        profileBox.addConstraintTop(topOffset: 0, toItem: self.trackContentBox!, firstAttribute: .top, secondAttribute: .top)
-        profileBox.addConstraintRight(rightOffset: 0, toItem: self.trackContentBox!)
-        profileBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
-        profileBox.addConstraintHeight(height: self.trackContentBox!.frame.size.height)
+        self.cartContentBox?.addSubview(profileBox)
+        profileBox.addConstraintTop(topOffset: 0, toItem: self.cartContentBox!, firstAttribute: .top, secondAttribute: .top)
+        profileBox.addConstraintRight(rightOffset: 0, toItem: self.cartContentBox!)
+        profileBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.cartContentBox!)
+        profileBox.addConstraintHeight(height: self.cartContentBox!.frame.size.height)
         //create text count items
         let accountTitleTextField = TextFieldStyle()
         accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
         accountTitleTextField.sizeToFit()
-        
+        accountTitleTextField.tag = 903
         // add items to trackbox
         profileBox.addSubview(accountTitleTextField)
      
@@ -91,9 +98,7 @@ extension MainViewController{
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
-        let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = .center
-        buttonLogOut.attributedTitle = NSAttributedString(string: "Visit Aeropost.com", attributes: [ NSAttributedString.Key.foregroundColor : NSColor.white, NSAttributedString.Key.paragraphStyle : pstyle ])
+        buttonLogOut.title = "Visit Aeropost.com"
         buttonLogOut.tag = UrlPages.checkOut.idPage
         buttonLogOut.action = #selector(MainViewController.openUrlInWeb(_:))
         
@@ -166,7 +171,7 @@ extension MainViewController{
                 let removeClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
                 removeClick.action = #selector(MainViewController.deleteItemCart(_:))
                 removeTextField.addGestureRecognizer(removeClick)
-                removeTextField.tag = index
+               
                 productItemBox.addSubview(imageRefresh)
                 productItemBox.addSubview(descriptionTextField)
                 productItemBox.addSubview(itemAmountTextField)

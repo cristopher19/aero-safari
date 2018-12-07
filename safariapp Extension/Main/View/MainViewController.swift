@@ -10,9 +10,6 @@ import SafariServices
 
 class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     
-    //var sfWindow: SFSafariWindow?
-    let sfPage: SFSafariPage? = nil
-    
     static let shared = getInstance()
     
     var mutableData:NSMutableData  = NSMutableData()
@@ -27,7 +24,10 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     @IBOutlet weak var userNameLabel: NSTextField!
     @IBOutlet weak var userAccountLabel: NSTextField!
     @IBOutlet weak var userImage: NSImageView!
-    var trackContentBox: NSView? 
+    var trackContentBox: NSView?
+    var cartContentBox: NSView?
+    var profileContentBox: NSView?
+    var prealertContentBox: NSView?
     var lastTrackBox: NSView?
     var lastPrealertBox: NSView?
     var lastProfileBox: NSView?
@@ -39,7 +39,6 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
         self.view.wantsLayer = true
-        self.showTrackingView()
         userInformation = getUserInformationInStorage()
         customHeaderView.wantsLayer = true
         customHeaderView.layer?.backgroundColor = NSColor.white.cgColor
@@ -55,6 +54,8 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
         trackingTabLabel.drawsBackground = false
         trackingTabLabel.isBezeled = false
         trackingTabLabel.textColor = NSColor.white
+        
+        self.showTrackingView()
     }
 
     
@@ -71,15 +72,17 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
        
     }
     @IBAction func btnShowProfileSectionAction(_ sender: Any) {
+       
         self.showProfileView()
     }
     
     @IBAction func trackingBtnAction(_ sender: Any) {
-        
+       
         self.showTrackingView()
     }
     
     @IBAction func cartBtnAction(_ sender: Any) {
+       
         self.showCartView()
     }
     

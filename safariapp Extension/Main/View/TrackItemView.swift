@@ -14,37 +14,44 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showTrackingView() {
-        // - 12 del scroll / - 30 de la section bottom
-        self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
-                                                        contentBox.frame.size.width, contentBox.frame.size.height))
-        self.trackContentBox!.wantsLayer = true
-        //self.trackContentBox!.borderType = .lineBorder
-        //self.trackContentBox!.boxType = .custom
-        
-        self.contentBox.addSubview(self.trackContentBox!)
-        trackContentBox!.leftAnchor.constraint(equalTo: self.trackContentBox!.leftAnchor, constant: 0.0).isActive = true
-        trackContentBox!.topAnchor.constraint(equalTo: self.trackContentBox!.topAnchor, constant: 0.0).isActive = true
-        trackContentBox!.rightAnchor.constraint(equalTo: self.trackContentBox!.rightAnchor, constant: 0.0).isActive = true
-        trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
-        
-        lastTrackBox = self.trackContentBox
-        self.createBottomSection()
-        
-        viewModel.getOrderPackagesList()
-        viewModel.didFinishFetch = {
-            self.createTrackingView()
+        self.cartContentBox?.isHidden = true
+        self.prealertContentBox?.isHidden = true
+        self.profileContentBox?.isHidden = true
+        if (self.contentBox.viewWithTag(900) == nil ){
+            // - 12 del scroll / - 30 de la section bottom
+            self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
+                                                contentBox.frame.size.width, contentBox.frame.size.height))
+            self.trackContentBox!.wantsLayer = true
+            //self.trackContentBox!.borderType = .lineBorder
+            //self.trackContentBox!.boxTyßpe = .custom
+            
+            self.contentBox.addSubview(self.trackContentBox!)
+            trackContentBox!.leftAnchor.constraint(equalTo: self.trackContentBox!.leftAnchor, constant: 0.0).isActive = true
+            trackContentBox!.topAnchor.constraint(equalTo: self.trackContentBox!.topAnchor, constant: 0.0).isActive = true
+            trackContentBox!.rightAnchor.constraint(equalTo: self.trackContentBox!.rightAnchor, constant: 0.0).isActive = true
+            trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
+            
+            lastTrackBox = self.trackContentBox
+            self.createBottomSection(parentSection: self.trackContentBox!)
+            
+            viewModel.getOrderPackagesList()
+            viewModel.didFinishFetch = {
+                self.createTrackingView()
+            }
+        }else{
+            self.trackContentBox?.isHidden = false
         }
     }
     
     //section tracking - prealert
-    func createBottomSection(){
+    func createBottomSection(parentSection: NSView){
         /** track box **/
         let trackBox = NSBox()
         trackBox.wantsLayer = true
         trackBox.borderType = .lineBorder
         trackBox.boxType = .custom
         trackBox.fillColor = NSColor(hex: ColorPalette.BackgroundColor.bgTabGray)
-        
+       
         //create text tracking
         let trackingTextField = NSTextField()
         trackingTextField.stringValue = "Tracking"
@@ -52,7 +59,7 @@ extension MainViewController{
         trackingTextField.drawsBackground = false
         trackingTextField.isBezeled = false
         trackingTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
-        
+        trackingTextField.tag = 900
         /** prealert box **/
         let prealertBox = NSBox()
         prealertBox.wantsLayer = true
@@ -73,8 +80,8 @@ extension MainViewController{
         trackBox.addSubview(trackingTextField)
         prealertBox.addSubview(prealertTextField)
         
-        self.trackContentBox!.addSubview(trackBox)
-        self.trackContentBox!.addSubview(prealertBox)
+        parentSection.addSubview(trackBox)
+        parentSection.addSubview(prealertBox)
         
          /** add constraint  box **/
         trackBox.addConstraintHeight(height: 30)
@@ -139,8 +146,11 @@ extension MainViewController{
         trackBox.wantsLayer = true
         trackBox.layer?.backgroundColor = NSColor.white.cgColor
         
+      
         
         self.trackContentBox?.addSubview(trackBox)
+      
+        
         trackBox.addConstraintTop(topOffset: 0, toItem: self.trackContentBox!, firstAttribute: .top, secondAttribute: .top)
         trackBox.addConstraintRight(rightOffset: 0, toItem: self.trackContentBox!)
         trackBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
@@ -193,6 +203,12 @@ extension MainViewController{
         trackItemBox.layer?.backgroundColor = NSColor.white.cgColor
         trackItemBox.layer?.borderWidth = 1
         trackItemBox.layer!.borderColor = NSColor(hex: ColorPalette.BorderColor.bgMidGray).cgColor
+        
+        let buttonTrackClick = NSButton()
+        buttonTrackClick.isTransparent = true
+        buttonTrackClick.title = ""
+        buttonTrackClick.tag = UrlPages.checkOut.idPage
+        buttonTrackClick.action = #selector(MainViewController.openUrlInWeb(_:))
         
         //create text date
         let dateTextField =  TextFieldStyle()
@@ -251,7 +267,7 @@ extension MainViewController{
         trackItemBox.addSubview(dateValueTextField)
         trackItemBox.addSubview(aeroTrackValueTextField)
         trackItemBox.addSubview(statusValueTextField)
-        
+        trackItemBox.addSubview(buttonTrackClick)
         /** bottom section **/
         descriptionSectionBox.addSubview(imageRefresh)
         descriptionSectionBox.addSubview(itemDescriptionTextField)
@@ -265,6 +281,11 @@ extension MainViewController{
         trackItemBox.addConstraintRight(rightOffset: -20, toItem: parentBox)
         trackItemBox.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: parentBox)
         trackItemBox.addConstraintHeight(height: 80)
+        
+        buttonTrackClick.addConstraintTop(topOffset: 15, toItem: self.lastTrackBox, firstAttribute: .top, secondAttribute: .bottom)
+        buttonTrackClick.addConstraintRight(rightOffset: -20, toItem: parentBox)
+        buttonTrackClick.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: parentBox)
+        buttonTrackClick.addConstraintHeight(height: 80)
         
         //constraint fields
         dateTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .leading, toItem: trackItemBox)

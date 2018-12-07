@@ -15,43 +15,46 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showPrealertView() {
-        self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
-                                                        contentBox.frame.size.width, contentBox.frame.size.height))
-        self.trackContentBox!.wantsLayer = true
-        //self.trackContentBox!.borderType = .lineBorder
-        //self.trackContentBox!.boxType = .custom
-        
-        self.contentBox.addSubview(self.trackContentBox!)
-        trackContentBox!.leftAnchor.constraint(equalTo: self.trackContentBox!.leftAnchor, constant: 0.0).isActive = true
-        trackContentBox!.topAnchor.constraint(equalTo: self.trackContentBox!.topAnchor, constant: 0.0).isActive = true
-        trackContentBox!.rightAnchor.constraint(equalTo: self.trackContentBox!.rightAnchor, constant: 0.0).isActive = true
-        trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
-        
-        lastPrealertBox = self.trackContentBox
-        self.createBottomSection()
-        
-        viewModel.getPrealertList()
-        viewModel.didFinishFetch = {
-            self.createPrealertView()
+        self.cartContentBox?.isHidden = true
+        self.profileContentBox?.isHidden = true
+        self.trackContentBox?.isHidden = true
+        if (self.contentBox.viewWithTag(901) == nil ){
+            self.prealertContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
+                                                            contentBox.frame.size.width, contentBox.frame.size.height))
+            self.prealertContentBox!.wantsLayer = true
+            //self.prealertContentBox!.borderType = .lineBorder
+            //self.prealertContentBox!.boxType = .custom
+            
+            self.contentBox.addSubview(self.prealertContentBox!)
+            prealertContentBox!.leftAnchor.constraint(equalTo: self.prealertContentBox!.leftAnchor, constant: 0.0).isActive = true
+            prealertContentBox!.topAnchor.constraint(equalTo: self.prealertContentBox!.topAnchor, constant: 0.0).isActive = true
+            prealertContentBox!.rightAnchor.constraint(equalTo: self.prealertContentBox!.rightAnchor, constant: 0.0).isActive = true
+            prealertContentBox!.bottomAnchor.constraint(equalTo: self.prealertContentBox!.bottomAnchor, constant: 0.0).isActive = true
+            
+            lastPrealertBox = self.prealertContentBox
+            self.createBottomSection(parentSection: self.prealertContentBox!)
+            
+            viewModel.getPrealertList()
+            viewModel.didFinishFetch = {
+                self.createPrealertView()
+            }
+        }else{
+            self.prealertContentBox?.isHidden = false
         }
     }
     
     func createPrealertView(){
-        
-        //if let trackView = self.contentBox.viewWithTag(1001) as? NSBox {
-        // trackView.isHidden = false
-        // }else{
         //create content box  prealert info
         let prealertBox = NSView()
         prealertBox.viewWithTag(1001)
         prealertBox.wantsLayer = true
         prealertBox.layer?.backgroundColor = NSColor.white.cgColor
         
-        self.trackContentBox?.addSubview(prealertBox)
-        prealertBox.addConstraintTop(topOffset: 0, toItem: self.trackContentBox!, firstAttribute: .top, secondAttribute: .top)
-        prealertBox.addConstraintRight(rightOffset: 0, toItem: self.trackContentBox!)
-        prealertBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
-        prealertBox.addConstraintHeight(height: self.trackContentBox!.frame.size.height - 30)
+        self.prealertContentBox?.addSubview(prealertBox)
+        prealertBox.addConstraintTop(topOffset: 0, toItem: self.prealertContentBox!, firstAttribute: .top, secondAttribute: .top)
+        prealertBox.addConstraintRight(rightOffset: 0, toItem: self.prealertContentBox!)
+        prealertBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.prealertContentBox!)
+        prealertBox.addConstraintHeight(height: self.prealertContentBox!.frame.size.height - 30)
         //create text count items
         let countItemsTextField = NSTextField()
         countItemsTextField.stringValue = "Last 10 prealert shown"
@@ -60,16 +63,18 @@ extension MainViewController{
         countItemsTextField.isBezeled = false
         countItemsTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
         countItemsTextField.sizeToFit()
+        countItemsTextField.tag = 901
         //create image refresh
         let imageRefresh = NSImageView.init(frame:NSMakeRect(countItemsTextField.frame.size.width + 15, 8, 10, 10))
         imageRefresh.image = NSImage(named:"icon_refresh")
         
         let buttonPrealert = NSButton()
         buttonPrealert.wantsLayer = true
-        buttonPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightBlue).cgColor
+        buttonPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonPrealert.isBordered = true
         buttonPrealert.title = "New Prealert"
-        buttonPrealert.action = #selector(MainViewController.showPrealertView)
+        buttonPrealert.tag = UrlPages.prealert.idPage
+        buttonPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
         
         // add items to trackbox
         prealertBox.addSubview(countItemsTextField)
@@ -144,7 +149,8 @@ extension MainViewController{
         editPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightBlue).cgColor
         editPrealert.isBordered = true
         editPrealert.title = "Edit"
-        editPrealert.action = #selector(MainViewController.showPrealertView)
+        editPrealert.tag = UrlPages.prealert.idPage
+        editPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
         
         prealertItemBox.addSubview(imageRefresh)
         prealertItemBox.addSubview(descriptionTextField)
@@ -155,8 +161,8 @@ extension MainViewController{
         /** section constraints **/
         //add constraint
         prealertItemBox.addConstraintTop(topOffset: 15, toItem: self.lastPrealertBox, firstAttribute: .top, secondAttribute: .bottom)
-        prealertItemBox.addConstraintRight(rightOffset: -20, toItem: self.trackContentBox)
-        prealertItemBox.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox)
+        prealertItemBox.addConstraintRight(rightOffset: -20, toItem: self.prealertContentBox)
+        prealertItemBox.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: self.prealertContentBox)
         prealertItemBox.addConstraintHeight(height: CGFloat(prealertItemBoxHeight))
         
         imageRefresh.addConstraintWidth(width: 30)
@@ -166,17 +172,17 @@ extension MainViewController{
       
         descriptionTextField.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
         descriptionTextField.addConstraintTop(topOffset: 0, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
-        descriptionTextField.addConstraintWidth(width: ((self.trackContentBox!.frame.size.width - 40) * 50) / 100)
+        descriptionTextField.addConstraintWidth(width: ((self.prealertContentBox!.frame.size.width - 40) * 50) / 100)
         descriptionTextField.addConstraintHeight(height: CGFloat((prealertItemBoxHeight / 3)))
         
         courierTrackingTextField.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
         courierTrackingTextField.addConstraintTop(topOffset: 0, toItem: descriptionTextField, firstAttribute: .top, secondAttribute: .bottom)
-        courierTrackingTextField.addConstraintWidth(width: ((self.trackContentBox!.frame.size.width - 40) * 50) / 100)
+        courierTrackingTextField.addConstraintWidth(width: ((self.prealertContentBox!.frame.size.width - 40) * 50) / 100)
         courierTrackingTextField.addConstraintHeight(height: CGFloat((prealertItemBoxHeight / 3) ))
         
         courierNameTextField.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
         courierNameTextField.addConstraintTop(topOffset: 0, toItem: courierTrackingTextField, firstAttribute: .top, secondAttribute: .bottom)
-        courierNameTextField.addConstraintWidth(width: ((self.trackContentBox!.frame.size.width - 40) * 50) / 100)
+        courierNameTextField.addConstraintWidth(width: ((self.prealertContentBox!.frame.size.width - 40) * 50) / 100)
         courierNameTextField.addConstraintHeight(height: CGFloat((prealertItemBoxHeight / 3) ))
         
         editPrealert.addConstraintRight(rightOffset: -15, toItem: prealertItemBox)

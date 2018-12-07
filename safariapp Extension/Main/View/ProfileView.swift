@@ -14,20 +14,27 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showProfileView() {
+        self.cartContentBox?.isHidden = true
+        self.prealertContentBox?.isHidden = true
+        self.trackContentBox?.isHidden = true
+        if (self.contentBox.viewWithTag(902) == nil ){
         // - 12 del scroll / - 30 de la section bottom
-        self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
+        self.profileContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
                                                         contentBox.frame.size.width, contentBox.frame.size.height))
-        self.trackContentBox!.wantsLayer = true
-        //self.trackContentBox!.borderType = .lineBorder
-        //self.trackContentBox!.boxType = .custom
+        self.profileContentBox!.wantsLayer = true
+        //self.profileContentBox!.borderType = .lineBorder
+        //self.profileContentBox!.boxType = .custom
         
-        self.contentBox.addSubview(self.trackContentBox!)
-        trackContentBox!.leftAnchor.constraint(equalTo: self.trackContentBox!.leftAnchor, constant: 0.0).isActive = true
-        trackContentBox!.topAnchor.constraint(equalTo: self.trackContentBox!.topAnchor, constant: 0.0).isActive = true
-        trackContentBox!.rightAnchor.constraint(equalTo: self.trackContentBox!.rightAnchor, constant: 0.0).isActive = true
-        trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
+        self.contentBox.addSubview(self.profileContentBox!)
+        profileContentBox!.leftAnchor.constraint(equalTo: self.profileContentBox!.leftAnchor, constant: 0.0).isActive = true
+        profileContentBox!.topAnchor.constraint(equalTo: self.profileContentBox!.topAnchor, constant: 0.0).isActive = true
+        profileContentBox!.rightAnchor.constraint(equalTo: self.profileContentBox!.rightAnchor, constant: 0.0).isActive = true
+        profileContentBox!.bottomAnchor.constraint(equalTo: self.profileContentBox!.bottomAnchor, constant: 0.0).isActive = true
         
         self.createProfileView()
+        }else{
+            self.profileContentBox?.isHidden =  false
+        }
         
     }
     
@@ -37,13 +44,14 @@ extension MainViewController{
         profileBox.wantsLayer = true
         profileBox.layer?.backgroundColor = NSColor.white.cgColor
         
-        self.trackContentBox?.addSubview(profileBox)
-        profileBox.addConstraintTop(topOffset: 0, toItem: self.trackContentBox!, firstAttribute: .top, secondAttribute: .top)
-        profileBox.addConstraintRight(rightOffset: 0, toItem: self.trackContentBox!)
-        profileBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
-        profileBox.addConstraintHeight(height: self.trackContentBox!.frame.size.height)
+        self.profileContentBox?.addSubview(profileBox)
+        profileBox.addConstraintTop(topOffset: 0, toItem: self.profileContentBox!, firstAttribute: .top, secondAttribute: .top)
+        profileBox.addConstraintRight(rightOffset: 0, toItem: self.profileContentBox!)
+        profileBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.profileContentBox!)
+        profileBox.addConstraintHeight(height: self.profileContentBox!.frame.size.height)
         //create text count items
         let accountTitleTextField = NSTextField()
+        accountTitleTextField.tag = 902
         accountTitleTextField.stringValue = "Account"
         accountTitleTextField.isEditable = false
         accountTitleTextField.drawsBackground = false
@@ -54,7 +62,7 @@ extension MainViewController{
         
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
-        buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightBlue).cgColor
+        buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonLogOut.isBordered = true
         buttonLogOut.title = "LogOut"
         buttonLogOut.action = #selector(MainViewController.logOutPressed)
@@ -81,24 +89,24 @@ extension MainViewController{
     
     func createProfileOptions(parent: NSView){
         //agrega el haeder de profile info
-        let userInfoheaderView = self.createProfileHeaderBox(icon: "icon_profile", title: "Profile Information", editUrl: UrlPages.editProfile.url, parent: parent)
+        let userInfoheaderView = self.createProfileHeaderBox(icon: "icon_profile", title: "Profile Information", editUrl: UrlPages.editProfile.idPage, parent: parent)
         self.createProfileInformation(parent: userInfoheaderView)
         
         //agrega el haeder del addres information
-        let addresInfoheaderView = self.createProfileHeaderBox(icon: "profile_address", title: "Address Information", editUrl: UrlPages.editProfileAddress.url, parent: parent)
+        let addresInfoheaderView = self.createProfileHeaderBox(icon: "profile_address", title: "Address Information", editUrl: UrlPages.editProfileAddress.idPage, parent: parent)
         self.createAddresInformation(parent: addresInfoheaderView)
         
         
     }
-    func createProfileHeaderBox(icon: String,title: String, editUrl: String, parent: NSView) -> NSView{
+    func createProfileHeaderBox(icon: String,title: String, editUrl: Int, parent: NSView) -> NSView{
         /** Profile Information **/
         let profileInformationItemBoxHeight: CGFloat = 100
         let profileInformationHeaderBoxHeight: CGFloat = 40
         let imageWidth: CGFloat = 25
         let imageHeight: CGFloat = 25
         //create content box  del track item
-        let profileInformationItemBox = NSView(frame: NSMakeRect(trackContentBox!.frame.origin.x,trackContentBox!.frame.origin.y  ,
-                                                                  trackContentBox!.frame.size.width - 30, trackContentBox!.frame.size.height))
+        let profileInformationItemBox = NSView(frame: NSMakeRect(profileContentBox!.frame.origin.x,profileContentBox!.frame.origin.y  ,
+                                                                  profileContentBox!.frame.size.width - 30, profileContentBox!.frame.size.height))
         profileInformationItemBox.wantsLayer = true
         profileInformationItemBox.layer?.borderWidth = 1
         profileInformationItemBox.layer!.borderColor = NSColor(hex: ColorPalette.BorderColor.bgMidGray).cgColor
@@ -108,7 +116,7 @@ extension MainViewController{
         headerProfileItemBox.wantsLayer = true
         headerProfileItemBox.layer?.borderWidth = 1
         headerProfileItemBox.layer!.borderColor = NSColor(hex: ColorPalette.BorderColor.bgMidGray).cgColor
-        headerProfileItemBox.layer!.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgMidGray).cgColor
+        headerProfileItemBox.layer!.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgTabGray).cgColor
         
         /** items del header **/
         let imageRefresh = NSImageView.init()
@@ -129,8 +137,14 @@ extension MainViewController{
         editInformationTextField.drawsBackground = false
         editInformationTextField.isBezeled = false
         editInformationTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
-        editInformationTextField.action = #selector(MainViewController.showPrealertView)
         editInformationTextField.sizeToFit()
+        editInformationTextField.tag = editUrl
+        
+        let editInformationTextFieldClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
+        editInformationTextFieldClick.action = #selector(MainViewController.openUrlInWeb(_:))
+        editInformationTextField.addGestureRecognizer(editInformationTextFieldClick)
+        
+       
         
         headerProfileItemBox.addSubview(imageRefresh)
         headerProfileItemBox.addSubview(profileInformationTitleTextField)
@@ -140,8 +154,8 @@ extension MainViewController{
         parent.addSubview(profileInformationItemBox)
         /** Constraint **/
         profileInformationItemBox.addConstraintTop(topOffset: 15, toItem: lastProfileBox, firstAttribute: .top, secondAttribute: .bottom)
-        profileInformationItemBox.addConstraintRight(rightOffset: -15, toItem: self.trackContentBox!)
-        profileInformationItemBox.addConstraintLeft(leftOffset: 15, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
+        profileInformationItemBox.addConstraintRight(rightOffset: -15, toItem: self.profileContentBox!)
+        profileInformationItemBox.addConstraintLeft(leftOffset: 15, firstAttribute: .leading, secondAttribute: .leading, toItem: self.profileContentBox!)
         profileInformationItemBox.addConstraintHeight(height: profileInformationItemBoxHeight)
         
         headerProfileItemBox.addConstraintHeight(height: profileInformationHeaderBoxHeight)
