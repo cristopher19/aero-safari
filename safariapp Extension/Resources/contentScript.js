@@ -527,8 +527,29 @@ COLORBOX_WIDTH: 600,
                                            $("[class='aero-colorbox-error-msg']").show();
                                            $.colorbox.resize();
                                            } else {
-                                           $.colorbox.close();
-                                           safari.extension.dispatchMessage("preAlert", preAlertInfo);
+                                           
+                                           setTimeout(function() {
+                                                      var invoices = [];
+                                                      preAlertInfo.invoiceData = invoices;
+                                                      
+                                                      preAlertInfo.descriptions = [];
+                                                      preAlertInfo.descriptions[0] = preAlertInfo.packageDescription.substring(0, 100);
+                                                      //Se obtienen todas las facturas para enviarlas
+                                                      for(var i = 0; i < preAlertInfo.ordersUrl.length; i++){
+                                                          var inv = ContentScript._getInvoiceHTML(preAlertInfo.ordersUrl[i]);
+                                                          var decoded  = ContentScript._decodeHTMLEntities(inv);
+                                                          preAlertInfo.invoiceData[i] = $.base64.btoa(decoded, true);
+                                                          if(preAlertInfo.ordersUrl.length > 1){
+                                                              var description = $("div[class='a-fixed-left-grid-inner']", inv).find("a[class='a-link-normal']");
+                                                              preAlertInfo.descriptions[i] = $(description[0]).text();
+                                                          }
+                                                      }
+                                                      $.colorbox.close();
+                                                      safari.extension.dispatchMessage("preAlert", preAlertInfo);
+                                                      }, 0 | Math.random() * 100);
+                                           
+                                           
+                                          
                                            }
                                            
                                            }
@@ -537,6 +558,68 @@ COLORBOX_WIDTH: 600,
                                          $.colorbox.close();
                                          safari.extension.dispatchMessage("preAlertCanceled",{});
                                          });
+    },
+    
+    /**
+     * Gets the invoice html
+     * @param aUrl the invoice url
+     * @param aCallback the callback to be called on return
+     */
+    _getInvoiceHTML : function(aUrl) {
+        var cleanHtml = null;
+        
+        var request =
+        $.ajax({
+               async:false,
+               type: "GET",
+               url: aUrl,
+               jsonp: false,
+               timeout: 60 * 1000,
+               contentType: "application/x-javascript; charset:ISO-8859-1",
+               }).done(function(aData) {
+                       cleanHtml = ContentScript._cleanHTML(aData);
+                       cleanHtml = ContentScript._trimHTML(cleanHtml)
+                       }).fail(function(aXHR, aTextStatus, aError) {
+                               console.log("Error retrieving the invoice HTML: Status: " +
+                                           aTextStatus + " /Error: " + aError);
+                               
+                               });
+        
+        return cleanHtml;
+    },
+    
+    /**
+     * Removes all the \n\r and white spaces from an HTML string
+     * @param aHTMLString the html string to be trimmed
+     * @returns the trimmed HTML
+     */
+    _trimHTML : function (aHTMLString) {
+        var n = new RegExp("\\n", 'g');
+        var r = new RegExp("\\r", 'g');
+        var t = new RegExp("\\t", 'g');
+        aHTMLString = aHTMLString.replace(n, "");
+        aHTMLString = aHTMLString.replace(r, "");
+        aHTMLString = aHTMLString.replace(t, "");
+        aHTMLString = aHTMLString.replace("  ", "");
+        aHTMLString = aHTMLString.trim();
+        
+        return aHTMLString;
+    },
+    
+    /**
+     * Removes unnecesary pieces of code from the html
+     * @param aHtml the html to be cleaned
+     * @returns the cleaned html
+     */
+    _cleanHTML : function(aHtml) {
+        $("script", aHtml).remove();
+        return aHtml;
+    },
+    
+    _decodeHTMLEntities : function(html) {
+        var txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
     },
     
     /**

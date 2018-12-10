@@ -282,6 +282,7 @@
 		0E2504F02190B01F00159CB0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */,
 				0E2A606E219C8C6800DA51C6 /* Utils */,
 				0E2504F22190B1DF00159CB0 /* Configuration */,
 				0E1D45CD218CE4C20079BB2A /* ModalAnimator.swift */,
@@ -294,7 +295,6 @@
 			children = (
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
-				0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
 				0E2E690521B9C04D001CFE81 /* colorbox.css */,
 				F9D4DD7021B8E3070078F23E /* icon-a.png */,

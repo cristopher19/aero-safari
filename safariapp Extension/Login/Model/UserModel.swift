@@ -79,6 +79,9 @@ class AuthenticateMyAeroUserResult: XMLMappable {
     var packageState: String?
     var packageZipCode: String?
     var isValid: Bool?
+    var lang: Int?
+    var owner: Bool?
+
     required init(map: XMLMap) {
         
     }
@@ -102,6 +105,8 @@ class AuthenticateMyAeroUserResult: XMLMappable {
         packageState <- map ["a:Packages_State"]
         packageZipCode <- map ["a:Packages_ZipCode"]
         isValid <- map ["a:IsValid"]
+        owner <- map ["a:IsOwner"]
+        lang <- map ["a:Language"]
     }
 }
 

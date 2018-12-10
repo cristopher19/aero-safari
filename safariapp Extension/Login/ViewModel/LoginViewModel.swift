@@ -85,7 +85,8 @@ class LoginViewModel{
             userView.packageState = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.packageState
             userView.packageZipCode = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.packageZipCode
             userView.personId = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.personId
-         
+            userView.lang = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.lang
+            userView.owner = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.owner
         }
         
     }

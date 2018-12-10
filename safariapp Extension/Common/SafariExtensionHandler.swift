@@ -15,15 +15,36 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         page.getPropertiesWithCompletionHandler { properties in
             NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
         }
-        switch messageName {
-        case "processPage":
-            processPageAction(from: page, userInfo: userInfo)
-        case "checkPreAlert":
-            checkPreAlertAction(from: page, userInfo: userInfo)
-        default:
-            print("")
+        if let data = userInfo {
+            switch messageName {
+            case "processPage":
+                processPageAction(from: page, userInfo: data)
+            case "checkPreAlert":
+                checkPreAlertAction(from: page, userInfo: data)
+            case "reportError":
+                print(data["error"] ?? "")
+                break;
+            case "preAlertCanceled":
+                print("report analytics")
+                break;
+            case "processInvoiceHtml":
+                print("save invoice service")
+                break;
+            case "viewPackage":
+                if let url = data["aeroTrackUrl"]{
+                    (url as! String).openUrlInWebWithUrlString
+                }
+                break;
+            case "stopShowingGuide":
+                print("property helper")
+                break;
+            case "preAlert":
+                preAlertAction(from: page, userInfo: data)
+                break;
+            default:
+                print("")
+            }
         }
-        
     }
     /*
      * logic for processPage message
@@ -56,7 +77,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             
             viewModel.getPrealertStatusByTracking(trackingList: trackingList)
             viewModel.didFinishFetch = {
-               
+                
                 var statusResponse = [String:Any]()
                 statusResponse["courierNumber"] = userInfo!["courierNumber"]
                 statusResponse["preAlerted"] = !(self.viewModel.prealertStatusList?.first?.isPrealertable)!
@@ -72,6 +93,29 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 page.dispatchMessageToScript(withName: "checkedPreAlert", userInfo: statusResponse)
             }
         }
+    }
+    
+    /*
+     * prealert package
+     */
+    private func preAlertAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        //pasa el mensaje al script
+        
+        let gateway = getUserInformationInStorage()?.gateway ?? ""
+        var prealertDictionary = [String:Any]()
+        prealertDictionary["courierNumber"] = userInfo!["courierNumber"]
+        prealertDictionary["shipperName"] = userInfo!["shipperName"]
+        prealertDictionary["value"] = userInfo!["value"]
+        
+        if (gateway.lowercased() == "bog") {
+            prealertDictionary["value"] = userInfo!["subTotalCost"]
+        }
+     
+        viewModel.packagePrealert(prealertDictionary: prealertDictionary)
+        viewModel.didFinishFetch = {
+            
+        }
+        
     }
     
     override func toolbarItemClicked(in window: SFSafariWindow) {
@@ -90,16 +134,14 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
     
     override func popoverViewController() -> SFSafariExtensionViewController {
-        if(getUserInformationInStorage() != nil && getUserInformationInStorage()?.token != nil){
-            return MainViewController.shared
-        }else{
-            return LoginViewController.shared
-        }
+        
+        return LoginViewController.shared
+        
     }
     
     override func popoverWillShow(in window: SFSafariWindow) {
         NSLog("VAMOS A ABRIR")
-      
+        
     }
     
     override func popoverDidClose(in window: SFSafariWindow) {

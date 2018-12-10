@@ -29,6 +29,14 @@ extension Int{
 }
 //validate empty field
 extension String {
+    
+    var openUrlInWebWithUrlString: Void{
+        if let urlResult = URL(string: self),
+            NSWorkspace.shared.open(urlResult) {
+            print("default browser was successfully opened")
+        }
+    }
+    
     var fieldTextBlank: Bool{
         if(self == ""){
             return true

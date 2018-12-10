@@ -26,4 +26,6 @@ struct UserView:Codable{
     var packageState: String?
     var packageZipCode: String?
     var isValid: Bool?
+    var lang: Int?
+    var owner: Bool?
 }

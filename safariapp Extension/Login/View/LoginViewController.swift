@@ -51,7 +51,10 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     }
     
     override func viewWillAppear() {
-        
+        if(getUserInformationInStorage() != nil && getUserInformationInStorage()?.token != nil){
+            let mainView = MainViewController.getInstance()
+            self.present(mainView, animator: ModalAnimator())
+        }
         messagesLoginLabel.isHidden = true
     }
     

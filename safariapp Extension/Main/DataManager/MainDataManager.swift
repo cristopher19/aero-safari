@@ -159,4 +159,52 @@ struct MainDataManager{
             })
     }
     
+    /*
+     * MARK: - Prealert list
+     * retrieve prealert list
+     * @params ->
+     */
+    func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PrealertStatusModel?, _ Error:NSError?) -> Void) {
+        let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
+        let endPoint: String = prealertDictionary["prealertEndPoint"] as! String
+        var parametersBody = [ String : Any]()
+        //info user
+        parametersBody["token"] = getUserInformationInStorage()?.token ?? ""
+        parametersBody["gateway"] = getUserInformationInStorage()?.gateway ?? ""
+        parametersBody["accountId"] = getUserInformationInStorage()?.accountNumber ?? ""
+        parametersBody["clientFullName"] = getUserInformationInStorage()?.fullName ?? ""
+        parametersBody["clientEmail"] = getUserInformationInStorage()?.emailAccount ?? ""
+        parametersBody["lang"] = getUserInformationInStorage()?.lang ?? ""
+        parametersBody["owner"] = getUserInformationInStorage()?.owner ?? ""
+        
+        //info prealert
+        parametersBody["courierNumber"] = prealertDictionary["courierNumber"]
+        parametersBody["courierName"] = prealertDictionary["courierName"]
+        parametersBody["shipperName"] = prealertDictionary["shipperName"]
+        parametersBody["invoiceData"] = prealertDictionary["invoiceData"]
+        parametersBody["value"] = prealertDictionary["value"]
+        parametersBody["consignee"] = getUserInformationInStorage()?.fullName ?? ""
+        parametersBody["descriptions"] = prealertDictionary["descriptions"]
+        parametersBody["taxDescription"] = ""
+        parametersBody["taxCode"] = ""
+        parametersBody["exonerate"] = false
+        parametersBody["intranetUserEmail"] = "browser-extensions@aeropost.com"
+        parametersBody["aeroShopOrderNumber"] = "-1"
+        parametersBody["ip"] = "0"
+        
+        sessionManager.request(endPoint,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
+            .validate().responseObject(completionHandler: {(response: DataResponse<PrealertStatusModel>) in
+                switch response.result {
+                case .success(let posts):
+                    completionHandler(posts, nil)
+                case .failure( let error):
+                    print("Request failed with error:\(error)")
+                    completionHandler(nil, error as NSError?)
+                    
+                }
+                
+            })
+    }
+    
+    
 }
