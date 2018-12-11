@@ -43,6 +43,7 @@ COLORBOX_WIDTH: 600,
                  $("#allInclusiveBarId").show();
              }
             });
+                                 
           //var topUrl = window.top.location.href;
           var url = location.href.toLowerCase();
           // XXX: safari hack to prevent multiple processing of the same page due
@@ -56,6 +57,8 @@ COLORBOX_WIDTH: 600,
            if (url.indexOf("about:blank") == -1) {
                var signedIn = msgEvent.message.signedIn;
                var clientAllowed = msgEvent.message.clientAllowed;
+                                       
+                                      
                switch (msgEvent.name) {
                    case "processPage":
                         console.log(msgEvent.message)
@@ -145,7 +148,7 @@ COLORBOX_WIDTH: 600,
                            if (targetButton.length == 1) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
-                           $(targetButton).replaceWith(ContentScript._createPackageButton(info.mia));
+                           $(targetButton).replaceWith(ContentScript._createPackageButton(info));
                            }
                        }else if (!info.preAlerted) {
                            if (info.delivered == "true") {
@@ -198,6 +201,10 @@ COLORBOX_WIDTH: 600,
                                }
                            }
                        }
+                       break;
+                       case "showNotification":
+                           var info = msgEvent.message;
+                            ContentScript.showNotification(info)
                        break;
                }
            }
@@ -711,7 +718,7 @@ COLORBOX_WIDTH: 600,
         //outer div
         var button = $("<button type='button' class='btn aero-injected-button preAlertButton'>" +
                        "<img />" +
-                       "<span id='aero-injected-button-text'>" + $.i18n.getString("content_script_received_label") + aMIA.aeroTrack + "</span>" +
+                       "<span id='aero-injected-button-text'>" + $.i18n.getString("content_script_received_label") + aMIA.mia + "</span>" +
                        "</button>");
         
         var url = location.href.toLowerCase();
@@ -749,7 +756,8 @@ COLORBOX_WIDTH: 600,
             $(button).addClass("aero-forever21-order-details-button");
         }
         
-        $(button).attr("mia", aMIA.aeroTrack);
+        $(button).attr("mia", aMIA.mia);
+        
         $(button).attr("packageInfo", JSON.stringify(aMIA));
         $(button).click(function(event) {
                         var packageInfo = JSON.parse($(this).attr("packageInfo"));
@@ -796,6 +804,80 @@ COLORBOX_WIDTH: 600,
         $("body").click(function(event) {
                         $(aTargetButton).popover("destroy");
                         });
+    },
+    
+    /**
+     * Shows a notification
+     * @param aNotification the notification to be shown
+     * @param aClickable whether the notification should be clickable or not
+     * @param aType the notification type so we know where to take the user on click
+     */
+    showNotification : function(aNotification, aClickable, aType) {
+        var options = {};
+        options.iconUrl = safari.extension.baseURI + "/Resources/logo_32_32.png";
+        
+        options.title = $.i18n.getString(aNotification.title);
+        options.message = $.i18n.getString(aNotification.msg, [aNotification.id]);
+        options.type = aNotification.type;
+        options.isClickable = true;
+        if (aNotification.point) {
+            switch (aNotification.point) {
+                case "start":
+                    options.progress = 10;
+                    break;
+                case "invoice":
+                    options.progress = 60;
+                    break;
+            }
+        }
+        options.priority = 2;
+        var id = aNotification.id + "" + this._notificationCounter;
+        this._notificationCounter++;
+        
+        var optionsNotification = {
+        body: options.message,
+        icon: options.iconUrl
+        }
+        
+        // Comprobamos si el navegador soporta las notificaciones
+        if (!("Notification" in window)) {
+            alert("Este navegador no soporta las notificaciones del sistema");
+        }
+        
+        // Comprobamos si ya nos habían dado permiso
+        else if (Notification.permission === "granted") {
+            // Si esta correcto lanzamos la notificación
+            var notification = new Notification(options.title, optionsNotification);
+        }
+        
+        // Si no, tendremos que pedir permiso al usuario
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                                           // Si el usuario acepta, lanzamos la notificación
+                                           if (permission === "granted") {
+                                           var notification = new Notification(options.title, optionsNotification);
+                                           }
+                                           });
+        }
+        
+        
+        if (aClickable) {
+            notification.onclick = function() {
+                var target = null;
+                switch (aType) {
+                    case 0:
+                        target = "newPreAlert";
+                        break;
+                    case 1:
+                        target = "viewCart";
+                        break;
+                }
+                
+                if (target != null) {
+                    //Background.openPage(target);
+                }
+            };
+        }
     }
 };
 ContentScript.init();

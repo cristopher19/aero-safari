@@ -51,6 +51,9 @@
 		0E2E690421B9C03E001CFE81 /* jquery.colorbox-min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */; };
 		0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690521B9C04D001CFE81 /* colorbox.css */; };
 		0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690721B9C102001CFE81 /* jquery.i18n.js */; };
+		0E2F90F921C017AA0019118B /* notification.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90F821C017AA0019118B /* notification.js */; };
+		0E2F90FB21C023900019118B /* logo_32_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90FA21C023900019118B /* logo_32_32.png */; };
+		0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F90FC21C0242F0019118B /* NotificationObject.swift */; };
 		0E30B6D821A36B7300662A34 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30B6D721A36B7300662A34 /* ColorPalette.swift */; };
 		84428F4BB20E7FFC3C8A647F /* Pods_safariapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */; };
 		9CB894D69239C1606EB24F81 /* Pods_safariapp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E13290951B41B9A5D8C24B /* Pods_safariapp_Extension.framework */; };
@@ -131,6 +134,9 @@
 		0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.colorbox-min.js"; sourceTree = "<group>"; };
 		0E2E690521B9C04D001CFE81 /* colorbox.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = colorbox.css; sourceTree = "<group>"; };
 		0E2E690721B9C102001CFE81 /* jquery.i18n.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.i18n.js; sourceTree = "<group>"; };
+		0E2F90F821C017AA0019118B /* notification.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = notification.js; sourceTree = "<group>"; };
+		0E2F90FA21C023900019118B /* logo_32_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_32_32.png; sourceTree = "<group>"; };
+		0E2F90FC21C0242F0019118B /* NotificationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObject.swift; sourceTree = "<group>"; };
 		0E30B6D721A36B7300662A34 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safariapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE3BD78068C3E509B61FC2A /* Pods-safariapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp/Pods-safariapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 				0E2A606E219C8C6800DA51C6 /* Utils */,
 				0E2504F22190B1DF00159CB0 /* Configuration */,
 				0E1D45CD218CE4C20079BB2A /* ModalAnimator.swift */,
+				0E2F90FC21C0242F0019118B /* NotificationObject.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -296,11 +303,13 @@
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				0E2F90FA21C023900019118B /* logo_32_32.png */,
 				0E2E690521B9C04D001CFE81 /* colorbox.css */,
 				F9D4DD7021B8E3070078F23E /* icon-a.png */,
 				F9D4DD6C21B8757E0078F23E /* jquery.js */,
 				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
 				0E1D45BC218CE1370079BB2A /* contentScript.js */,
+				0E2F90F821C017AA0019118B /* notification.js */,
 				0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */,
 				0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */,
 				0E2E68FF21B99C21001CFE81 /* locales.js */,
@@ -504,6 +513,8 @@
 				F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */,
 				0E2E690021B99C21001CFE81 /* locales.js in Resources */,
 				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
+				0E2F90F921C017AA0019118B /* notification.js in Resources */,
+				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
 				0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */,
 			);
@@ -611,6 +622,7 @@
 				0E261D18219A3AA20048E91B /* TrackModel.swift in Sources */,
 				0E1D45CC218CE47F0079BB2A /* LoginViewController.swift in Sources */,
 				0E2504FA2190F4E500159CB0 /* LoginViewModel.swift in Sources */,
+				0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */,
 				0E25E402219F609E005DA808 /* PackageOrderView.swift in Sources */,
 				0E2504F82190DF9600159CB0 /* UserModel.swift in Sources */,
 				0E29215921AF4B6100A8275D /* CartView.swift in Sources */,

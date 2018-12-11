@@ -46,7 +46,10 @@
                 <key>Script</key>
                 <string>jquery.colorbox-min.js</string>
             </dict>
-            
+            <dict>
+                <key>Script</key>
+                <string>notification.js</string>
+            </dict>
 			<dict>
 				<key>Script</key>
 				<string>contentScript.js</string>

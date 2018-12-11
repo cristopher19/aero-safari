@@ -29,7 +29,7 @@ var AmazonContentScript = {
                 var orderDetails = $(order).parent().find("div[class~='shipment']");
                 // massive hack to solve a problem where amazon duplicates the previous package
                 // shipping info in packages that don't have any
-                var trackingButtonEnabled = $(orderDetails).find("span[class~='track-package-button'][class~='a-button-primary']");
+                var trackingButtonEnabled = $(orderDetails).find("span[class~='track-package-button']");
                 
                 if (trackingButtonEnabled.length > 0 &&
                     ContentScript._isPackageForUser("Amazon", order, false)) {
@@ -68,7 +68,7 @@ var AmazonContentScript = {
                 var orderDetails = $(order).find("div[class~='shipment']");
                 // massive hack to solve a problem where amazon duplicates the previous package
                 // shipping info in packages that don't have any
-                var trackingButtonEnabled = $(orderDetails).find("span[class~='track-package-button'][class~='a-button-primary']");
+                var trackingButtonEnabled = $(orderDetails).find("span[class~='track-package-button']");
                 
                 if (trackingButtonEnabled.length > 0 &&
                     ContentScript._isPackageForUser("Amazon", order, false)) {
@@ -901,11 +901,18 @@ _getShippingAddres: function(aContext){
                                                      shippingAddress = shippingAddress + $( this ).text() + " ";
                                                      });
     
-    if(shippingAddress == ""){
+    if (shippingAddress == "") {
         $("#shippingAddress-container", aContext).find("p").each(function( index ) {
                                                                  shippingAddress = shippingAddress + $( this ).text() + " ";
                                                                  });
     }
+    
+    if (shippingAddress == "") {
+        $("#deliveredAddress-container", aContext).find("p").each(function( index ) {
+                                                                  shippingAddress = shippingAddress + $( this ).text() + " ";
+                                                                  });
+    }
+    
     
     return shippingAddress;
 }

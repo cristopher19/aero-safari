@@ -61,6 +61,8 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
         
         page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
+        
+      
     }
     
     /*
@@ -114,14 +116,29 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         viewModel.packagePrealert(prealertDictionary: prealertDictionary)
         viewModel.didFinishFetch = {
             if(nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && self.viewModel.packagePrealertResult?.errorCodes?.first?.value as! String == "0013") {
-                
+                var notification = NotificationObject(id:userInfo!["courierNumber"] as! String)
+                notification.type = "basic"
+                notification.point = ""
+                notification.title = "extension.prealert.error.title"
+                notification.msg = "extension.prealert.exists.msg"
+                page.dispatchMessageToScript(withName: "showNotification", userInfo: notification.dictionary)
             }else{
                 if((nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && (self.viewModel.packagePrealertResult?.errorCodes?.count)! > 0) ||
                     (self.viewModel.packagePrealertResult?.status != nil && self.viewModel.packagePrealertResult?.status != 200)){
-                    
+                    var notification = NotificationObject(id:userInfo!["courierNumber"] as! String)
+                    notification.type = "basic"
+                    notification.point = ""
+                    notification.title = "extension.prealert.error.title"
+                    notification.msg = "extension.prealert.error.msg"
+                    page.dispatchMessageToScript(withName: "showNotification", userInfo: notification.dictionary)
                 }
                 else{
-                   
+                    var notification = NotificationObject(id:userInfo!["courierNumber"] as! String)
+                    notification.type = "basic"
+                    notification.point = ""
+                    notification.title = "extension.prealert.congratulations.title"
+                    notification.msg = "extension.prealert.congratulations.msg"
+                    page.dispatchMessageToScript(withName: "showNotification", userInfo: notification.dictionary)
                 }
                 
             }
