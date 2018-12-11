@@ -27,14 +27,14 @@ class MainViewModel{
     var trackingList: [PackageOrderView]?
     var cartObject: CartModel?
     var prealertStatusList: [PrealertStatus]?
-    var packagePrealertResult: PreAlertModel?
+    var packagePrealertResult: PreAlertResponseModel?
     init() {
         dataService = MainDataManager.shared
     }
     
     
     // MARK: - Properties
-    private var packagePrealert: PreAlertModel? {
+    private var packagePrealert: PreAlertResponseModel? {
         didSet {
             guard let p = packagePrealert else { return }
             self.setupPackagePrealert(with: p)
@@ -86,7 +86,7 @@ class MainViewModel{
             }
             self.error = nil
             self.isLoading = false
-            self.prealertStatus = prealertStatus
+            self.packagePrealert = prealertStatus
         })
     }
     
@@ -195,7 +195,7 @@ class MainViewModel{
         self.cartObject = cart
     }
     
-    private func setupPackagePrealert(with packagePrealert: PreAlertModel){
+    private func setupPackagePrealert(with packagePrealert: PreAlertResponseModel){
         self.packagePrealertResult = packagePrealert
     }
 }

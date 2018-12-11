@@ -164,7 +164,7 @@ struct MainDataManager{
      * retrieve prealert list
      * @params ->
      */
-    func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PrealertStatusModel?, _ Error:NSError?) -> Void) {
+    func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PreAlertResponseModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         let endPoint: String = prealertDictionary["prealertEndPoint"] as! String
         var parametersBody = [ String : Any]()
@@ -193,7 +193,7 @@ struct MainDataManager{
         parametersBody["ip"] = "0"
         
         sessionManager.request(endPoint,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
-            .validate().responseObject(completionHandler: {(response: DataResponse<PrealertStatusModel>) in
+            .validate().responseObject(completionHandler: {(response: DataResponse<PreAlertResponseModel>) in
                 switch response.result {
                 case .success(let posts):
                     completionHandler(posts, nil)

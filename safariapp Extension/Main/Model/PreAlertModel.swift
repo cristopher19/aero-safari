@@ -35,3 +35,20 @@ class PreAlert: Mappable{
         
     }
 }
+
+/** Create Prealert Response **/
+class PreAlertResponseModel: Mappable{
+    var status: Int?
+    var noteId: Int?
+    var errorDescriptions:Dictionary<String, Any>?
+    var errorCodes: Dictionary<String, Any>?
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        status <- map["status"]
+        noteId <- map["results.noteId"]
+        errorDescriptions <- map["results.errorDescriptions"]
+        errorCodes <- map["results.errorCodes"]
+    }
+}

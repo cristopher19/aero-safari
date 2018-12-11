@@ -113,7 +113,18 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      
         viewModel.packagePrealert(prealertDictionary: prealertDictionary)
         viewModel.didFinishFetch = {
-            
+            if(nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && self.viewModel.packagePrealertResult?.errorCodes?.first?.value as! String == "0013") {
+                
+            }else{
+                if((nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && (self.viewModel.packagePrealertResult?.errorCodes?.count)! > 0) ||
+                    (self.viewModel.packagePrealertResult?.status != nil && self.viewModel.packagePrealertResult?.status != 200)){
+                    
+                }
+                else{
+                   
+                }
+                
+            }
         }
         
     }
