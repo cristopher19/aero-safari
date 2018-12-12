@@ -38,6 +38,7 @@
 		0E261D16219A3A970048E91B /* PreAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D15219A3A970048E91B /* PreAlertModel.swift */; };
 		0E261D18219A3AA20048E91B /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D17219A3AA20048E91B /* TrackModel.swift */; };
 		0E261D1C219A3ABC0048E91B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D1B219A3ABC0048E91B /* MainViewModel.swift */; };
+		0E28920721C1697C00B35C95 /* jquery.base64.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E28920621C1697C00B35C95 /* jquery.base64.js */; };
 		0E29215921AF4B6100A8275D /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29215821AF4B6100A8275D /* CartView.swift */; };
 		0E2A6070219C927700DA51C6 /* UtilConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A606F219C927700DA51C6 /* UtilConstraint.swift */; };
 		0E2A840321A4CA2F00748658 /* PreAlertItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */; };
@@ -123,6 +124,7 @@
 		0E261D15219A3A970048E91B /* PreAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertModel.swift; sourceTree = "<group>"; };
 		0E261D17219A3AA20048E91B /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		0E261D1B219A3ABC0048E91B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		0E28920621C1697C00B35C95 /* jquery.base64.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.base64.js; sourceTree = "<group>"; };
 		0E29215821AF4B6100A8275D /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
 		0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertItemView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				0E246C162194AA8000781970 /* safariapp Extension.entitlements */,
 				0E2504F12190B03800159CB0 /* Resources */,
+				0E2504F22190B1DF00159CB0 /* Configuration */,
 				0E2504F02190B01F00159CB0 /* Common */,
 				0E1D45CA218CE3270079BB2A /* Login */,
 				0E1D45D3218CEAAE0079BB2A /* Main */,
@@ -290,7 +293,6 @@
 			children = (
 				0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */,
 				0E2A606E219C8C6800DA51C6 /* Utils */,
-				0E2504F22190B1DF00159CB0 /* Configuration */,
 				0E1D45CD218CE4C20079BB2A /* ModalAnimator.swift */,
 				0E2F90FC21C0242F0019118B /* NotificationObject.swift */,
 			);
@@ -303,6 +305,7 @@
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				0E28920621C1697C00B35C95 /* jquery.base64.js */,
 				0E2F90FA21C023900019118B /* logo_32_32.png */,
 				0E2E690521B9C04D001CFE81 /* colorbox.css */,
 				F9D4DD7021B8E3070078F23E /* icon-a.png */,
@@ -516,6 +519,7 @@
 				0E2F90F921C017AA0019118B /* notification.js in Resources */,
 				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
+				0E28920721C1697C00B35C95 /* jquery.base64.js in Resources */,
 				0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

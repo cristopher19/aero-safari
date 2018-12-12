@@ -166,10 +166,10 @@ struct MainDataManager{
      */
     func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PreAlertResponseModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
-        let endPoint: String = prealertDictionary["prealertEndPoint"] as! String
+        let endPoint: String = Endpoints.Posts.prealertPackageAmazon.url
         var parametersBody = [ String : Any]()
         //info user
-        parametersBody["token"] = getUserInformationInStorage()?.token ?? ""
+        parametersBody["Token"] = getUserInformationInStorage()?.token ?? ""
         parametersBody["gateway"] = getUserInformationInStorage()?.gateway ?? ""
         parametersBody["accountId"] = getUserInformationInStorage()?.accountNumber ?? ""
         parametersBody["clientFullName"] = getUserInformationInStorage()?.fullName ?? ""

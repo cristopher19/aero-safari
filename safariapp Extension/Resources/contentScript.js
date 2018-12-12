@@ -137,29 +137,29 @@ COLORBOX_WIDTH: 600,
                        var info = msgEvent.message;
                        var targetButton =
                        $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
-                       if (info.preAlerted && targetButton.length > 0) {
+                       /*if (info.preAlerted && targetButton.length > 0) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
                            $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_prealerted_label"));
-                       }
+                       }*/
                        // the package has a MIA
                        // make sure the button is no there already
-                       if (info.mia) {
+                      /* if (info.mia) {
                            if (targetButton.length == 1) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
                            $(targetButton).replaceWith(ContentScript._createPackageButton(info));
                            }
-                       }else if (!info.preAlerted) {
+                       }else*/ if (!info.preAlerted) {
                            if (info.delivered == "true") {
                                // in this case, we remove the button because the package is
                                // already delivered but the user didn't prealert it and wasn't
                                // handled by Aeropost
                                //$(targetButton).remove();
                                // now we show the NOT PREALERTABLE button
-                               $(targetButton).addClass("disabled");
-                               $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
-                               $(targetButton).removeClass("cboxElement");
+                              // $(targetButton).addClass("disabled");
+                              // $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
+                              // $(targetButton).removeClass("cboxElement");
                            } else {
                                var invoiceUrl = info.invoiceUrl;
                                var firstItemDescription = info.firstItemDescription;
@@ -543,7 +543,7 @@ COLORBOX_WIDTH: 600,
                                                       preAlertInfo.descriptions[0] = preAlertInfo.packageDescription.substring(0, 100);
                                                       //Se obtienen todas las facturas para enviarlas
                                                       for(var i = 0; i < preAlertInfo.ordersUrl.length; i++){
-                                                          var inv = ContentScript._getInvoiceHTML(preAlertInfo.ordersUrl[i]);
+                                                          var inv = ContentScript._getInvoiceByUrlHTML(preAlertInfo.ordersUrl[i]);
                                                           var decoded  = ContentScript._decodeHTMLEntities(inv);
                                                           preAlertInfo.invoiceData[i] = $.base64.btoa(decoded, true);
                                                           if(preAlertInfo.ordersUrl.length > 1){
@@ -572,7 +572,7 @@ COLORBOX_WIDTH: 600,
      * @param aUrl the invoice url
      * @param aCallback the callback to be called on return
      */
-    _getInvoiceHTML : function(aUrl) {
+    _getInvoiceByUrlHTML : function(aUrl) {
         var cleanHtml = null;
         
         var request =

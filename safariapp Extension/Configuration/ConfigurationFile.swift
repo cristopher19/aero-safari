@@ -8,7 +8,9 @@
 
 import Foundation
 struct API {
-    static let baseUrl = "https://marketplace-api.aeropost.com/api"
+    //static let baseUrl = "https://marketplace-api.aeropost.com/api"
+    static let baseUrl = "http://marketplace-dev.api.int.aeropost.com/api"
+    //static let baseUrl = "http://marketplace-stage.api.int.aeropost.com/api"
 }
 
 protocol Endpoint {

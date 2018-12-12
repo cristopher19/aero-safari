@@ -135,11 +135,7 @@ extension MainViewController{
     
     func createTrackingView(){
        
-        //if let trackView = self.contentBox.viewWithTag(1001) as? NSBox {
-        // trackView.isHidden = false
-        // }else{
-        //create content box  track info
-    
+   
 
         let trackBox = NSView()
         trackBox.viewWithTag(1001)
@@ -172,8 +168,6 @@ extension MainViewController{
         trackBox.addSubview(imageRefresh)
         
         
-        //track content constrains
-        //trackBox.addConstraintsToItem(leftOffset: 0, rightOffset: 0, topOffset: 0, height: contentBox.frame.size.height, toItem: contentBox)
         //textfield constrains
         countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: trackBox)
         countItemsTextField.addConstraintTop(topOffset: 10, toItem: trackBox, firstAttribute: .top, secondAttribute: .top)
@@ -184,15 +178,57 @@ extension MainViewController{
         imageRefresh.addConstraintTop(topOffset: 10, toItem: trackBox, firstAttribute: .top, secondAttribute: .top)
         imageRefresh.addConstraintWidth(width: 20.0)
         imageRefresh.addConstraintHeight(height: 20.0)
-        
+        /*
         self.lastTrackBox = countItemsTextField
         if let trackingList = self.viewModel.trackingList{
             for trackItem in trackingList{
                 self.listOfTracking(parentBox: trackBox,labelcount: countItemsTextField,trackItem:trackItem)
             }
            
-        }
-        // }
+        }*/
+        
+        // Initial scrollview
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.borderType = .noBorder
+        scrollView.backgroundColor = NSColor.gray
+        scrollView.hasVerticalScroller = true
+        
+        trackBox.addSubview(scrollView)
+        trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+        trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+        
+        // Initial clip view
+        let clipView = NSClipView()
+        clipView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentView = clipView
+        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
+        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
+        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
+        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
+        
+        // Initial document view
+        let documentView = NSView()
+        documentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = documentView
+        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
+        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
+        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
+        
+        // Subview1
+        let view1 = NSView()
+        view1.translatesAutoresizingMaskIntoConstraints = false
+        view1.wantsLayer = true
+        view1.layer?.backgroundColor = NSColor.red.cgColor
+        documentView.addSubview(view1)
+        documentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view1]|", options: [], metrics: nil, views: ["view1": view1]))
+        
+        
+        
+        // Vertical autolayout
+        documentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view1(==800)]", options: [], metrics: nil, views: ["view1": view1]))
+        documentView.addConstraint(NSLayoutConstraint(item: documentView, attribute: .bottom, relatedBy: .equal, toItem: view1, attribute: .bottom, multiplier: 1.0, constant: 0))
+        
     }
     
     private func listOfTracking(parentBox:NSView,labelcount: NSTextField,trackItem: PackageOrderView){

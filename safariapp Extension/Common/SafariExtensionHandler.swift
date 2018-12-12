@@ -107,7 +107,11 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         var prealertDictionary = [String:Any]()
         prealertDictionary["courierNumber"] = userInfo!["courierNumber"]
         prealertDictionary["shipperName"] = userInfo!["shipperName"]
+        prealertDictionary["courierName"] = userInfo!["courierName"]
         prealertDictionary["value"] = userInfo!["value"]
+        prealertDictionary["packageDescription"] = userInfo!["packageDescription"]
+        prealertDictionary["descriptions"] = userInfo!["descriptions"]
+        prealertDictionary["invoiceData"] = userInfo!["invoiceData"]
         
         if (gateway.lowercased() == "bog") {
             prealertDictionary["value"] = userInfo!["subTotalCost"]
@@ -115,7 +119,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      
         viewModel.packagePrealert(prealertDictionary: prealertDictionary)
         viewModel.didFinishFetch = {
-            if(nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && self.viewModel.packagePrealertResult?.errorCodes?.first?.value as! String == "0013") {
+            if(nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && self.viewModel.packagePrealertResult?.errorCodes?.first  == "0013") {
                 var notification = NotificationObject(id:userInfo!["courierNumber"] as! String)
                 notification.type = "basic"
                 notification.point = ""

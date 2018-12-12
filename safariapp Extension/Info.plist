@@ -40,6 +40,10 @@
             </dict>
             <dict>
                 <key>Script</key>
+                <string>jquery.base64.js</string>
+            </dict>
+            <dict>
+                <key>Script</key>
                 <string>jquery.i18n.js</string>
             </dict>
             <dict>

@@ -40,8 +40,8 @@ class PreAlert: Mappable{
 class PreAlertResponseModel: Mappable{
     var status: Int?
     var noteId: Int?
-    var errorDescriptions:Dictionary<String, Any>?
-    var errorCodes: Dictionary<String, Any>?
+    var errorDescriptions:[String]?
+    var errorCodes:[String]?
     required init?(map: Map) {
     }
     
