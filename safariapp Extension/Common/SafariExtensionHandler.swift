@@ -116,7 +116,6 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         if (gateway.lowercased() == "bog") {
             prealertDictionary["value"] = userInfo!["subTotalCost"]
         }
-     
         viewModel.packagePrealert(prealertDictionary: prealertDictionary)
         viewModel.didFinishFetch = {
             if(nil != self.viewModel.packagePrealertResult && self.viewModel.packagePrealertResult?.errorCodes != nil && self.viewModel.packagePrealertResult?.errorCodes?.first  == "0013") {

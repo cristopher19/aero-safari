@@ -134,15 +134,10 @@ extension MainViewController{
     
     
     func createTrackingView(){
-        
-        
-        
         let trackBox = NSView()
         trackBox.viewWithTag(1001)
         trackBox.wantsLayer = true
         trackBox.layer?.backgroundColor = NSColor.white.cgColor
-        
-        
         
         self.trackContentBox?.addSubview(trackBox)
         
@@ -156,7 +151,7 @@ extension MainViewController{
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.borderType = .noBorder
-        scrollView.backgroundColor = NSColor.white
+        scrollView.layer?.backgroundColor = NSColor.red.cgColor
         scrollView.hasVerticalScroller = true
         
         trackBox.addSubview(scrollView)

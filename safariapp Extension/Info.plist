@@ -52,6 +52,22 @@
             </dict>
             <dict>
                 <key>Script</key>
+                <string>   jquery.appear.js</string>
+            </dict>
+            <dict>
+                <key>Script</key>
+                <string>bootstrap.min.js</string>
+            </dict>
+            <dict>
+                <key>Script</key>
+                <string>popover.js</string>
+            </dict>
+            <dict>
+                <key>Script</key>
+                <string>tooltip.js</string>
+            </dict>
+            <dict>
+                <key>Script</key>
                 <string>notification.js</string>
             </dict>
 			<dict>

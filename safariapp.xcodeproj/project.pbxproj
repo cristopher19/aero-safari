@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E06101021C2DBA600640CBB /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E06100D21C2DBA400640CBB /* bootstrap.min.js */; };
+		0E06101121C2DBA600640CBB /* popover.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E06100E21C2DBA400640CBB /* popover.js */; };
+		0E06101221C2DBA600640CBB /* tooltip.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E06100F21C2DBA400640CBB /* tooltip.js */; };
+		0E06101421C2F7B700640CBB /* jquery.appear.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E06101321C2F7B700640CBB /* jquery.appear.js */; };
 		0E1D459D218CE1360079BB2A /* safariapp.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D459C218CE1360079BB2A /* safariapp.entitlements */; };
 		0E1D459F218CE1360079BB2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D459E218CE1360079BB2A /* AppDelegate.swift */; };
 		0E1D45A2218CE1360079BB2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A0218CE1360079BB2A /* Main.storyboard */; };
@@ -88,6 +92,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E06100D21C2DBA400640CBB /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
+		0E06100E21C2DBA400640CBB /* popover.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = popover.js; sourceTree = "<group>"; };
+		0E06100F21C2DBA400640CBB /* tooltip.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = tooltip.js; sourceTree = "<group>"; };
+		0E06101321C2F7B700640CBB /* jquery.appear.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.appear.js; sourceTree = "<group>"; };
 		0E1D4599218CE1360079BB2A /* safariapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safariapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1D459C218CE1360079BB2A /* safariapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = safariapp.entitlements; sourceTree = "<group>"; };
 		0E1D459E218CE1360079BB2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -305,12 +313,16 @@
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				0E06101321C2F7B700640CBB /* jquery.appear.js */,
 				0E28920621C1697C00B35C95 /* jquery.base64.js */,
 				0E2F90FA21C023900019118B /* logo_32_32.png */,
 				0E2E690521B9C04D001CFE81 /* colorbox.css */,
 				F9D4DD7021B8E3070078F23E /* icon-a.png */,
 				F9D4DD6C21B8757E0078F23E /* jquery.js */,
 				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
+				0E06100D21C2DBA400640CBB /* bootstrap.min.js */,
+				0E06100E21C2DBA400640CBB /* popover.js */,
+				0E06100F21C2DBA400640CBB /* tooltip.js */,
 				0E1D45BC218CE1370079BB2A /* contentScript.js */,
 				0E2F90F821C017AA0019118B /* notification.js */,
 				0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */,
@@ -515,10 +527,14 @@
 				0E1D45D7218CF35A0079BB2A /* Media.xcassets in Resources */,
 				F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */,
 				0E2E690021B99C21001CFE81 /* locales.js in Resources */,
+				0E06101421C2F7B700640CBB /* jquery.appear.js in Resources */,
+				0E06101221C2DBA600640CBB /* tooltip.js in Resources */,
+				0E06101121C2DBA600640CBB /* popover.js in Resources */,
 				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
 				0E2F90F921C017AA0019118B /* notification.js in Resources */,
 				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
+				0E06101021C2DBA600640CBB /* bootstrap.min.js in Resources */,
 				0E28920721C1697C00B35C95 /* jquery.base64.js in Resources */,
 				0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */,
 			);

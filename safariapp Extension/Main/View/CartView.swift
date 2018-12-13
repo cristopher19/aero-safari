@@ -19,26 +19,26 @@ extension MainViewController{
         self.profileContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.trackContentBox?.isHidden = true
-         if (self.contentBox.viewWithTag(903) == nil ){
-        // - 12 del scroll / - 30 de la section bottom
-        self.cartContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
-                                                        contentBox.frame.size.width, contentBox.frame.size.height))
-        self.cartContentBox!.wantsLayer = true
-        //self.cartContentBox!.borderType = .lineBorder
-        //self.cartContentBox!.boxType = .custom
-        
-        self.contentBox.addSubview(self.cartContentBox!)
-        cartContentBox!.leftAnchor.constraint(equalTo: self.cartContentBox!.leftAnchor, constant: 0.0).isActive = true
-        cartContentBox!.topAnchor.constraint(equalTo: self.cartContentBox!.topAnchor, constant: 0.0).isActive = true
-        cartContentBox!.rightAnchor.constraint(equalTo: self.cartContentBox!.rightAnchor, constant: 0.0).isActive = true
-        cartContentBox!.bottomAnchor.constraint(equalTo: self.cartContentBox!.bottomAnchor, constant: 0.0).isActive = true
-        
-        viewModel.getCart()
-        viewModel.didFinishFetch = {
-            UserDefaults.standard.set(self.viewModel.cartObject?.cartId, forKey: "cartID")
-            self.createCartView()
-        }
-        
+        if (self.contentBox.viewWithTag(903) == nil ){
+            // - 12 del scroll / - 30 de la section bottom
+            self.cartContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
+                                                           contentBox.frame.size.width, contentBox.frame.size.height))
+            self.cartContentBox!.wantsLayer = true
+            //self.cartContentBox!.borderType = .lineBorder
+            //self.cartContentBox!.boxType = .custom
+            
+            self.contentBox.addSubview(self.cartContentBox!)
+            cartContentBox!.leftAnchor.constraint(equalTo: self.cartContentBox!.leftAnchor, constant: 0.0).isActive = true
+            cartContentBox!.topAnchor.constraint(equalTo: self.cartContentBox!.topAnchor, constant: 0.0).isActive = true
+            cartContentBox!.rightAnchor.constraint(equalTo: self.cartContentBox!.rightAnchor, constant: 0.0).isActive = true
+            cartContentBox!.bottomAnchor.constraint(equalTo: self.cartContentBox!.bottomAnchor, constant: 0.0).isActive = true
+            
+            viewModel.getCart()
+            viewModel.didFinishFetch = {
+                UserDefaults.standard.set(self.viewModel.cartObject?.cartId, forKey: "cartID")
+                self.createCartView()
+            }
+            
         }else{
             self.cartContentBox?.isHidden = false
         }
@@ -57,32 +57,84 @@ extension MainViewController{
         profileBox.addConstraintRight(rightOffset: 0, toItem: self.cartContentBox!)
         profileBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.cartContentBox!)
         profileBox.addConstraintHeight(height: self.cartContentBox!.frame.size.height)
-        //create text count items
-        let accountTitleTextField = TextFieldStyle()
-        accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
-        accountTitleTextField.sizeToFit()
-        accountTitleTextField.tag = 903
-        // add items to trackbox
-        profileBox.addSubview(accountTitleTextField)
-     
-        /** constraint **/
-        accountTitleTextField.addConstraintLeft(leftOffset: 15.0, firstAttribute: .leading, secondAttribute: .leading, toItem: profileBox)
-        accountTitleTextField.addConstraintTop(topOffset: 10, toItem: profileBox, firstAttribute: .top, secondAttribute: .top)
-        accountTitleTextField.addConstraintWidth(width: accountTitleTextField.frame.width)
-        accountTitleTextField.addConstraintHeight(height: 20.0)
         
-        lastCartBox = accountTitleTextField
-        
+
         if(cartObjects == 0){
+            //create text count items
+            let accountTitleTextField = TextFieldStyle()
+            accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
+            accountTitleTextField.sizeToFit()
+            accountTitleTextField.tag = 903
+            // add items to trackbox
+            profileBox.addSubview(accountTitleTextField)
+            
+            /** constraint **/
+            accountTitleTextField.addConstraintLeft(leftOffset: 15.0, firstAttribute: .leading, secondAttribute: .leading, toItem: profileBox)
+            accountTitleTextField.addConstraintTop(topOffset: 10, toItem: profileBox, firstAttribute: .top, secondAttribute: .top)
+            accountTitleTextField.addConstraintWidth(width: accountTitleTextField.frame.width)
+            accountTitleTextField.addConstraintHeight(height: 20.0)
+            
+            lastCartBox = accountTitleTextField
             self.createCartEmpty(parent: profileBox)
         }else{
-            self.createCartListItems(parent: profileBox)
+            // Initial scrollview
+            let scrollView = NSScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.borderType = .noBorder
+            scrollView.backgroundColor = NSColor.white
+            scrollView.hasVerticalScroller = true
+            
+            profileBox.addSubview(scrollView)
+            profileBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            profileBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            
+            // Initial clip view
+            let clipView = NSClipView()
+            clipView.layer?.backgroundColor = NSColor.white.cgColor
+            clipView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.contentView = clipView
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
+            
+            // Initial document view
+            let documentView = NSView()
+            documentView.translatesAutoresizingMaskIntoConstraints = false
+            documentView.wantsLayer = true
+            documentView.layer?.backgroundColor = NSColor.white.cgColor
+            
+            scrollView.documentView = documentView
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
+            
+            
+            //create text count items
+            let accountTitleTextField = TextFieldStyle()
+            accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
+            accountTitleTextField.sizeToFit()
+            accountTitleTextField.tag = 903
+            // add items to trackbox
+            documentView.addSubview(accountTitleTextField)
+            
+            /** constraint **/
+            accountTitleTextField.addConstraintLeft(leftOffset: 15.0, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
+            accountTitleTextField.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            accountTitleTextField.addConstraintWidth(width: accountTitleTextField.frame.width)
+            accountTitleTextField.addConstraintHeight(height: 20.0)
+            
+            lastCartBox = accountTitleTextField
+            
+            self.createCartListItems(parent: documentView)
+             scrollView.documentView = documentView
         }
+       
         
     }
     func createCartEmpty(parent: NSView){
-         let imageRefresh = NSImageView.init(frame:NSMakeRect(15, 8, 10, 10))
-         imageRefresh.image = NSImage(named: "icon_cart")
+        let imageRefresh = NSImageView.init(frame:NSMakeRect(15, 8, 10, 10))
+        imageRefresh.image = NSImage(named: "icon_cart")
         
         //create text desc items
         let cartEmptyTextField = TextFieldStyle()
@@ -120,7 +172,7 @@ extension MainViewController{
         descriptionTextField.addConstraintLeft(leftOffset: (contentBox.frame.size.width / 2) - (descriptionTextField.frame.size.width / 2), firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
         descriptionTextField.addConstraintTop(topOffset: 25.0, toItem: cartEmptyTextField, firstAttribute: .top, secondAttribute: .bottom)
         
-
+        
         buttonLogOut.addConstraintHeight(height: 40.0)
         buttonLogOut.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
         buttonLogOut.addConstraintRight(rightOffset: -30, toItem: parent)
@@ -152,7 +204,7 @@ extension MainViewController{
                 //create text desc items
                 let descriptionTextField = TextFieldStyle()
                 descriptionTextField.stringValue = itemCart.title ?? ""
-             
+                
                 //create text courier items
                 let itemAmountTextField = TextFieldStyle()
                 itemAmountTextField.stringValue = String(format: "%.2f", Double(itemCart.price ?? 0))
@@ -171,7 +223,7 @@ extension MainViewController{
                 let removeClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
                 removeClick.action = #selector(MainViewController.deleteItemCart(_:))
                 removeTextField.addGestureRecognizer(removeClick)
-               
+                
                 productItemBox.addSubview(imageRefresh)
                 productItemBox.addSubview(descriptionTextField)
                 productItemBox.addSubview(itemAmountTextField)
@@ -192,7 +244,7 @@ extension MainViewController{
                 imageRefresh.addConstraintLeft(leftOffset: 15.0, firstAttribute: .leading, secondAttribute: .leading, toItem: productItemBox)
                 imageRefresh.addConstraintTop(topOffset: (itemCartHeight / 2) - 20, toItem: productItemBox, firstAttribute: .top, secondAttribute: .top)
                 
-               
+                
                 descriptionTextField.addConstraintHeight(height: 15.0)
                 descriptionTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
                 descriptionTextField.addConstraintRight(rightOffset: -15, toItem: productItemBox)
@@ -321,16 +373,14 @@ extension MainViewController{
         orderTotalValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.totalPrice ?? 0))
         orderTotalValueTextField.sizeToFit()
         
+   
         /** btn checkout **/
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
-        let pstyle = NSMutableParagraphStyle()
-        pstyle.alignment = .center
-        buttonLogOut.attributedTitle = NSAttributedString(string: "Continue to checkout", attributes: [ NSAttributedString.Key.foregroundColor : NSColor.white, NSAttributedString.Key.paragraphStyle : pstyle ])
+        buttonLogOut.title = "Continue to checkout"
         buttonLogOut.tag = UrlPages.checkOut.idPage
         buttonLogOut.action = #selector(MainViewController.openUrlInWeb(_:))
-        
         
         /** add to view **/
         orderSummaryItemBox.addSubview(titleTextField)
@@ -409,11 +459,11 @@ extension MainViewController{
         buttonLogOut.addConstraintTop(topOffset: 15, toItem: priceDescriptionTextField, firstAttribute: .top, secondAttribute: .bottom)
         buttonLogOut.addConstraintRight(rightOffset: -30, toItem: orderSummaryItemBox)
         buttonLogOut.addConstraintHeight(height: 40)
-        
+        buttonLogOut.addConstraintBottom(topOffset: -30, toItem: parent, firstAttribute: .bottom, secondAttribute: .bottom)
         /** constraint  values **/
         /** titulo **/
-  
-    
+        
+        
         subtotalValueTextField.addConstraintTop(topOffset: 5, toItem: titleTextField, firstAttribute: .top, secondAttribute: .bottom)
         subtotalValueTextField.addConstraintWidth(width: contentBox.frame.size.width * 0.40)
         subtotalValueTextField.addConstraintHeight(height: subTotalTextField.frame.size.height)

@@ -137,20 +137,20 @@ COLORBOX_WIDTH: 600,
                        var info = msgEvent.message;
                        var targetButton =
                        $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
-                       /*if (info.preAlerted && targetButton.length > 0) {
+                       if (info.preAlerted && targetButton.length > 0) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
                            $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_prealerted_label"));
-                       }*/
+                       }
                        // the package has a MIA
                        // make sure the button is no there already
-                      /* if (info.mia) {
+                       if (info.mia) {
                            if (targetButton.length == 1) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
                            $(targetButton).replaceWith(ContentScript._createPackageButton(info));
                            }
-                       }else*/ if (!info.preAlerted) {
+                       }else if (!info.preAlerted) {
                            if (info.delivered == "true") {
                                // in this case, we remove the button because the package is
                                // already delivered but the user didn't prealert it and wasn't
