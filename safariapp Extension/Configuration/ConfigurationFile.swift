@@ -106,5 +106,26 @@ enum UrlPages{
         }
     }
 }
-
+extension Int{
+    var checkUrl: String{
+        switch self {
+        case UrlPages.aero.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.checkOut.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.cart.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.profile.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.editProfile.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.editProfileAddress.idPage:
+            return UrlPages.checkOut.url
+        case UrlPages.prealert.idPage:
+            return UrlPages.checkOut.url
+        default:
+            return ""
+        }
+    }
+}
 

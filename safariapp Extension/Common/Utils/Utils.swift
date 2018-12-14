@@ -11,22 +11,7 @@ import SafariServices
 struct UtilsAeropost {
     
 }
-extension Int{
-    var checkUrl: String{
-        switch self {
-        case UrlPages.checkOut.idPage:
-            return UrlPages.checkOut.url
-        case UrlPages.cart.idPage:
-            return UrlPages.checkOut.url
-        case UrlPages.profile.idPage:
-            return UrlPages.checkOut.url
-        case UrlPages.editProfile.idPage:
-            return UrlPages.checkOut.url
-        default:
-            return ""
-        }
-    }
-}
+
 //validate empty field
 extension String {
     

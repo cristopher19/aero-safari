@@ -82,7 +82,7 @@ extension MainViewController{
         scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
        
         // Initial document view
-        let documentView = NSView()
+        let documentView = FlippedView()
         documentView.translatesAutoresizingMaskIntoConstraints = false
         documentView.wantsLayer = true
         documentView.layer?.backgroundColor = NSColor.white.cgColor
@@ -235,9 +235,8 @@ extension MainViewController{
             self.lastPrealertBox = prealertItemBox
             
             if(index == (prealertList.count - 1)){
-                var vlau = parentBox.frame.size.height - (prealertItemBox.frame.size.height + prealertItemBox.frame.origin.y)
-                parentBox.addConstraint(NSLayoutConstraint(item: parentBox, attribute: .bottom, relatedBy: .equal, toItem: prealertItemBox, attribute: .bottom, multiplier: 1.0, constant: vlau))
-               // prealertItemBox.addConstraintBottom(topOffset: -40, toItem: parentBox, firstAttribute: .bottom, secondAttribute: .bottom)
+                
+                prealertItemBox.addConstraintBottom(topOffset: -40, toItem: parentBox, firstAttribute: .bottom, secondAttribute: .bottom)
             }
         }
     }

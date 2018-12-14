@@ -8,7 +8,7 @@ target 'safariapp' do
   # Pods for safariapp
 
 end
-
+platform :osx, '10.14'
 target 'safariapp Extension' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -22,5 +22,5 @@ target 'safariapp Extension' do
   pod 'CryptoSwift'
   pod 'XMLMapper'
   pod 'XMLMapper/Requests'
-
+  pod 'ProgressKit'
 end

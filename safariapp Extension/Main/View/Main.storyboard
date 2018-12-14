@@ -17,13 +17,6 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Okd-Y8-h8o">
                                 <rect key="frame" x="0.0" y="451" width="400" height="49"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-gZ-5cM">
-                                        <rect key="frame" x="10" y="0.0" width="89" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="89" id="ZQN-Xd-tKK"/>
-                                        </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logoAeropost" id="VFB-Gh-1Ti"/>
-                                    </imageView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="beB-QV-r5a">
                                         <rect key="frame" x="280" y="0.0" width="120" height="40"/>
                                         <subviews>
@@ -79,15 +72,26 @@
                                             <constraint firstAttribute="bottom" secondItem="jSL-kg-CXZ" secondAttribute="bottom" id="pZ9-d4-mdb"/>
                                         </constraints>
                                     </customView>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="goG-O8-ASD">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="5ae-y2-JtM"/>
+                                            <constraint firstAttribute="width" constant="121" id="r5d-LP-094"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="logoAeropost" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="CYv-8d-jks">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="goG-O8-ASD" secondAttribute="bottom" id="6Dz-Sk-uiz"/>
                                     <constraint firstAttribute="trailing" secondItem="beB-QV-r5a" secondAttribute="trailing" id="CEl-gd-uBP"/>
                                     <constraint firstAttribute="height" constant="49" id="CTZ-YJ-4Rn"/>
                                     <constraint firstAttribute="bottom" secondItem="beB-QV-r5a" secondAttribute="bottom" id="LTy-MP-wJW"/>
-                                    <constraint firstItem="hiG-gZ-5cM" firstAttribute="leading" secondItem="Okd-Y8-h8o" secondAttribute="leading" constant="10" id="Nzp-vR-Soc"/>
-                                    <constraint firstItem="hiG-gZ-5cM" firstAttribute="top" secondItem="Okd-Y8-h8o" secondAttribute="top" constant="9" id="gU2-Cn-KSx"/>
-                                    <constraint firstAttribute="bottom" secondItem="hiG-gZ-5cM" secondAttribute="bottom" id="obn-Gw-Nz9"/>
+                                    <constraint firstItem="goG-O8-ASD" firstAttribute="top" secondItem="Okd-Y8-h8o" secondAttribute="top" constant="5" id="R0g-hK-ES0"/>
                                     <constraint firstItem="beB-QV-r5a" firstAttribute="top" secondItem="Okd-Y8-h8o" secondAttribute="top" constant="9" id="wOm-LO-J18"/>
+                                    <constraint firstItem="goG-O8-ASD" firstAttribute="leading" secondItem="Okd-Y8-h8o" secondAttribute="leading" id="wdy-AJ-7pB"/>
                                 </constraints>
                             </customView>
                             <box boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="cfn-vo-71g">
@@ -244,6 +248,6 @@
         <image name="icon_cart" width="24" height="24"/>
         <image name="icon_profile" width="21" height="21"/>
         <image name="icon_tracking" width="24" height="24"/>
-        <image name="logoAeropost" width="150" height="33"/>
+        <image name="logoAeropost" width="240" height="52"/>
     </resources>
 </document>

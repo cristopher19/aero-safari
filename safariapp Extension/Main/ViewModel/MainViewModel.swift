@@ -199,3 +199,10 @@ class MainViewModel{
         self.packagePrealertResult = packagePrealert
     }
 }
+class FlippedView: NSView {
+    override var isFlipped:Bool {
+        get {
+            return true
+        }
+    }
+}

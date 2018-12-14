@@ -35,6 +35,9 @@ extension MainViewController{
             self.createBottomSection(parentSection: self.trackContentBox!)
             
             viewModel.getOrderPackagesList()
+            viewModel.updateLoadingStatus = {
+                let _ = self.viewModel.isLoading ? self.activityIndicatorStart() : self.activityIndicatorStop()
+            }
             viewModel.didFinishFetch = {
                 self.createTrackingView()
             }
@@ -42,7 +45,18 @@ extension MainViewController{
             self.trackContentBox?.isHidden = false
         }
     }
+    // MARK: - UI Setup
+    private func activityIndicatorStart() {
+        // Code for show activity indicator view
+        // ...
+        print("start loading")
+    }
     
+    private func activityIndicatorStop() {
+        // Code for stop activity indicator view
+        // ...
+        print("stop loading")
+    }
     //section tracking - prealert
     func createBottomSection(parentSection: NSView){
         /** track box **/
@@ -169,7 +183,7 @@ extension MainViewController{
         scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
         
         // Initial document view
-        let documentView = NSView()
+        let documentView = FlippedView()
         documentView.translatesAutoresizingMaskIntoConstraints = false
         documentView.wantsLayer = true
         documentView.layer?.backgroundColor = NSColor.white.cgColor

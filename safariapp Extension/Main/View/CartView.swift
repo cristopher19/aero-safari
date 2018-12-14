@@ -99,7 +99,7 @@ extension MainViewController{
             scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
             
             // Initial document view
-            let documentView = NSView()
+            let documentView = FlippedView()
             documentView.translatesAutoresizingMaskIntoConstraints = false
             documentView.wantsLayer = true
             documentView.layer?.backgroundColor = NSColor.white.cgColor
@@ -186,7 +186,7 @@ extension MainViewController{
         if let cartList = viewModel.cartObject?.cartItemList{
             for (index, itemCart) in cartList.enumerated(){
                 let productItemBox = NSView()
-                productItemBox.viewWithTag(1001)
+                productItemBox.viewWithTag(index + 100)
                 productItemBox.wantsLayer = true
                 productItemBox.layer?.backgroundColor = NSColor.white.cgColor
                 productItemBox.layer?.borderWidth = 1
@@ -247,7 +247,7 @@ extension MainViewController{
                 
                 descriptionTextField.addConstraintHeight(height: 15.0)
                 descriptionTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
-                descriptionTextField.addConstraintRight(rightOffset: -15, toItem: productItemBox)
+                descriptionTextField.addConstraintRight(rightOffset: -25, toItem: productItemBox)
                 //17 = 15 del tamaño de textfield 2 del espacio
                 descriptionTextField.addConstraintTop(topOffset: (itemCartHeight / 2) - 20, toItem: productItemBox, firstAttribute: .top, secondAttribute: .top)
                 
@@ -263,7 +263,7 @@ extension MainViewController{
                 
                 removeTextField.addConstraintWidth(width: removeTextField.frame.size.width)
                 removeTextField.addConstraintHeight(height: 12.0)
-                removeTextField.addConstraintRight(rightOffset: -15, toItem: productItemBox)
+                removeTextField.addConstraintRight(rightOffset: -25, toItem: productItemBox)
                 removeTextField.addConstraintTop(topOffset: 2, toItem: itemAmountTextField, firstAttribute: .top, secondAttribute: .bottom)
                 
                 itemCartSpace = 0.0
@@ -280,7 +280,10 @@ extension MainViewController{
             
             viewModel.deleteCartItem(productId: product.productId!)
             viewModel.didFinishFetch = {
-                self.createCartView()
+                
+                self.cartContentBox!.subviews.forEach({ $0.removeFromSuperview() })
+                self.showCartView()
+               
             }
         }
     }
