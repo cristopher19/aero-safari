@@ -41,6 +41,9 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             case "preAlert":
                 preAlertAction(from: page, userInfo: data)
                 break;
+            case "quoteMoreProducts":
+                quoteMoreProductsAction(from: page, userInfo: data)
+                break;
             default:
                 print("")
             }
@@ -63,6 +66,77 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
         
       
+    }
+    
+    /*
+     * logic for checkPreAlert message
+     */
+    private func quoteMoreProductsAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        //pasa el mensaje al script
+        if (userInfo != nil){
+            
+            var itemDescriptions: String  = userInfo!["itemsDescription"] as! String
+            itemDescriptions = itemDescriptions.replacingOccurrences(of: "&", with: "and", options: .literal, range: nil)
+            var products = [EbayProductObject()]
+            
+            let countDescription =  itemDescriptions.components(separatedBy: "|%|")
+            
+            for (index, count) in  countDescription.enumerated(){
+                
+                var productObj = EbayProductObject()
+                productObj.description = countDescription[index]
+                productObj.quantity = 1;
+                products.append(productObj)
+                var description = ""
+                //Se ordena los articulos repetidos
+                orderProducts(aProducts: &products)
+                
+                //Se ordena en relacion a la cantidad de producto
+                while (0 < products.count) {
+                    let prodObj = getMajor(aProducts: &products);
+                    description = description + prodObj.description
+                    if(0 < products.count){
+                        description = description + ","
+                    }
+                }
+            }
+            var trackingDescription = [String:Any]()
+            trackingDescription["description"] = userInfo!["itemsDescription"]
+            trackingDescription["courierNumber"] = userInfo!["courierNumber"]
+            trackingDescription["orderIndex"] = userInfo!["orderIndex"]
+             page.dispatchMessageToScript(withName: "changeTrackingDescription", userInfo: trackingDescription)
+            
+        }
+    }
+    
+    private func orderProducts(aProducts: inout [EbayProductObject]){
+        for (index, _) in aProducts.enumerated() {
+            let obj = aProducts[index];
+            for(indexY, _) in aProducts.enumerated(){
+                var xCount = indexY
+                let obj2 = aProducts[xCount + 1];
+                if(obj.description == obj2.description){
+                    aProducts[index].quantity = aProducts[index].quantity + 1
+                    aProducts.splice(range: xCount...1)
+                    xCount = xCount - 1
+                }
+            }
+        }
+    }
+    
+    private func getMajor(aProducts: inout [EbayProductObject]) -> EbayProductObject{
+        var obj = EbayProductObject();
+        obj.quantity = 0;
+        var position = 0;
+        for (index, _) in aProducts.enumerated() {
+            if(obj.quantity < aProducts[index].quantity){
+                obj = aProducts[index];
+                position = index;
+            }
+        }
+        
+         aProducts.splice(range: position...1)
+        return obj;
     }
     
     /*

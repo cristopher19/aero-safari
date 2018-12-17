@@ -34,6 +34,8 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     var lastCartBox: NSView?
     let viewModel = MainViewModel()
     var userInformation: UserView?
+    var trackRemoveView = false
+    var prealertRemoveView = false
     override func viewDidLoad() {
         // THIS IS ABSOLUTELY CRICITAL FOR THE POPUP TO ACTUALLY SHOW UP
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP

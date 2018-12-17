@@ -47,6 +47,8 @@
 		0E2A6070219C927700DA51C6 /* UtilConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A606F219C927700DA51C6 /* UtilConstraint.swift */; };
 		0E2A840321A4CA2F00748658 /* PreAlertItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */; };
 		0E2ADBEA21AEF5F30095BC18 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADBE921AEF5F30095BC18 /* CartModel.swift */; };
+		0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2BC13421C4006A002301E1 /* ebayContentScript.js */; };
+		0E2BC13721C41E49002301E1 /* ebayProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BC13621C41E49002301E1 /* ebayProductObject.swift */; };
 		0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45D1218CE4E00079BB2A /* LoginStoryboard.storyboard */; };
 		0E2CD61B21B5A381007C0AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E261D0E219A1C770048E91B /* Main.storyboard */; };
 		0E2DC24421BAD25900D1ADD0 /* PrealertStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */; };
@@ -137,6 +139,8 @@
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
 		0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertItemView.swift; sourceTree = "<group>"; };
 		0E2ADBE921AEF5F30095BC18 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		0E2BC13421C4006A002301E1 /* ebayContentScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebayContentScript.js; sourceTree = "<group>"; };
+		0E2BC13621C41E49002301E1 /* ebayProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ebayProductObject.swift; sourceTree = "<group>"; };
 		0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrealertStatusModel.swift; sourceTree = "<group>"; };
 		0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = amazonContentScript.js; sourceTree = "<group>"; };
 		0E2E68FF21B99C21001CFE81 /* locales.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = locales.js; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
 				0E06101321C2F7B700640CBB /* jquery.appear.js */,
+				0E2BC13421C4006A002301E1 /* ebayContentScript.js */,
 				0E28920621C1697C00B35C95 /* jquery.base64.js */,
 				0E2F90FA21C023900019118B /* logo_32_32.png */,
 				0E2E690521B9C04D001CFE81 /* colorbox.css */,
@@ -359,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				0E261D1B219A3ABC0048E91B /* MainViewModel.swift */,
+				0E2BC13621C41E49002301E1 /* ebayProductObject.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -530,6 +536,7 @@
 				0E06101421C2F7B700640CBB /* jquery.appear.js in Resources */,
 				0E06101221C2DBA600640CBB /* tooltip.js in Resources */,
 				0E06101121C2DBA600640CBB /* popover.js in Resources */,
+				0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */,
 				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
 				0E2F90F921C017AA0019118B /* notification.js in Resources */,
 				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
@@ -646,6 +653,7 @@
 				0E2504FA2190F4E500159CB0 /* LoginViewModel.swift in Sources */,
 				0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */,
 				0E25E402219F609E005DA808 /* PackageOrderView.swift in Sources */,
+				0E2BC13721C41E49002301E1 /* ebayProductObject.swift in Sources */,
 				0E2504F82190DF9600159CB0 /* UserModel.swift in Sources */,
 				0E29215921AF4B6100A8275D /* CartView.swift in Sources */,
 				0E261D1C219A3ABC0048E91B /* MainViewModel.swift in Sources */,

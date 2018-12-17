@@ -30,54 +30,58 @@
 		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
 		<key>SFSafariContentScript</key>
 		<array>
-            <dict>
-                <key>Script</key>
-                <string>jquery.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>locales.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>jquery.base64.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>jquery.i18n.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>jquery.colorbox-min.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>   jquery.appear.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>bootstrap.min.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>popover.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>tooltip.js</string>
-            </dict>
-            <dict>
-                <key>Script</key>
-                <string>notification.js</string>
-            </dict>
+			<dict>
+				<key>Script</key>
+				<string>jquery.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>locales.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>jquery.base64.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>jquery.i18n.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>jquery.colorbox-min.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>jquery.appear.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>bootstrap.min.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>popover.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>tooltip.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>notification.js</string>
+			</dict>
 			<dict>
 				<key>Script</key>
 				<string>contentScript.js</string>
 			</dict>
-            <dict>
-                <key>Script</key>
-                <string>amazonContentScript.js</string>
-            </dict>
+			<dict>
+				<key>Script</key>
+				<string>amazonContentScript.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
+				<string>ebayContentScript.js</string>
+			</dict>
 		</array>
 		<key>SFSafariStyleSheet</key>
 		<array>
@@ -85,10 +89,10 @@
 				<key>Style Sheet</key>
 				<string>contentScript.css</string>
 			</dict>
-            <dict>
-                <key>Style Sheet</key>
-                <string>colorbox.css</string>
-            </dict>
+			<dict>
+				<key>Style Sheet</key>
+				<string>colorbox.css</string>
+			</dict>
 		</array>
 		<key>SFSafariToolbarItem</key>
 		<dict>
@@ -105,6 +109,7 @@
 		<dict>
 			<key>Allowed Domains</key>
 			<array>
+				<string>*.ebay.com</string>
 				<string>*.amazon.com</string>
 			</array>
 			<key>Level</key>

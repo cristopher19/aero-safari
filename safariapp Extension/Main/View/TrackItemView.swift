@@ -17,7 +17,9 @@ extension MainViewController{
         self.cartContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.profileContentBox?.isHidden = true
-        if (self.contentBox.viewWithTag(900) == nil ){
+      print("joder\(trackRemoveView)")
+        if (self.contentBox.viewWithTag(900) == nil || trackRemoveView){
+            trackRemoveView = false
             // - 12 del scroll / - 30 de la section bottom
             self.trackContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
                                                             contentBox.frame.size.width, contentBox.frame.size.height))
@@ -175,6 +177,7 @@ extension MainViewController{
         // Initial clip view
         let clipView = NSClipView()
         clipView.layer?.backgroundColor = NSColor.white.cgColor
+        clipView.backgroundColor = NSColor.white
         clipView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.contentView = clipView
         scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
@@ -204,6 +207,11 @@ extension MainViewController{
         //create image refresh
         let imageRefresh = NSImageView.init(frame:NSMakeRect(countItemsTextField.frame.size.width + 15, 8, 10, 10))
         imageRefresh.image = NSImage(named:"icon_refresh")
+        
+        let refreshImageClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
+        refreshImageClick.action = #selector(MainViewController.refreshTrackList(_:))
+        imageRefresh.addGestureRecognizer(refreshImageClick)
+        
         documentView.addSubview(countItemsTextField)
         documentView.addSubview(imageRefresh)
         
@@ -224,49 +232,14 @@ extension MainViewController{
             self.listOfTracking(parentBox: documentView,trackList:trackingList)
             
         }
-        
-        /*
-         let trackItemBox = NSView()
-         trackItemBox.wantsLayer = true
-         trackItemBox.layer?.backgroundColor = NSColor.white.cgColor
-         trackItemBox.layer?.borderWidth = 1
-         trackItemBox.layer!.borderColor = NSColor(hex: ColorPalette.BorderColor.bgMidGray).cgColor
-         
-         // Subview1
-         let view1 = NSView()
-         view1.translatesAutoresizingMaskIntoConstraints = false
-         view1.wantsLayer = true
-         view1.layer?.backgroundColor = NSColor.red.cgColor
-         documentView.addSubview(view1)
-         
-         
-         let view2 = NSView()
-         view2.translatesAutoresizingMaskIntoConstraints = false
-         view2.wantsLayer = true
-         view2.layer?.backgroundColor = NSColor.red.cgColor
-         documentView.addSubview(view2)
-         
-         view1.addConstraintTop(topOffset: 15, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
-         view1.addConstraintRight(rightOffset: -20, toItem: clipView)
-         view1.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
-         view1.addConstraintHeight(height: 200)
-         
-         documentView.addSubview(trackItemBox)
-         trackItemBox.addConstraintTop(topOffset: 15, toItem: view1, firstAttribute: .top, secondAttribute: .bottom)
-         trackItemBox.addConstraintRight(rightOffset: -20, toItem: clipView)
-         trackItemBox.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
-         trackItemBox.addConstraintHeight(height: 200)
-         
-         
-         view2.addConstraintTop(topOffset: 15, toItem: trackItemBox, firstAttribute: .top, secondAttribute: .bottom)
-         view2.addConstraintRight(rightOffset: -20, toItem: clipView)
-         view2.addConstraintLeft(leftOffset: 20, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
-         view2.addConstraintHeight(height: 200)
-         view2.addConstraintBottom(topOffset: -40, toItem: documentView, firstAttribute: .bottom, secondAttribute: .bottom)
-         */
         scrollView.documentView = documentView
         
         
+    }
+    @objc func refreshTrackList(_ sender: Any){
+        trackContentBox?.removeFromSuperview()
+        trackRemoveView = true
+        self.showTrackingView()
     }
     
     private func listOfTracking(parentBox:NSView,trackList: [PackageOrderView]){

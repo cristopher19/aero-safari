@@ -11,7 +11,14 @@ import SafariServices
 struct UtilsAeropost {
     
 }
-
+extension RangeReplaceableCollection {
+    mutating func splice<R: RangeExpression>(range: R) -> SubSequence
+        where R.Bound == Index {
+            let result = self[range]
+            self.removeSubrange(range)
+            return result
+    }
+}
 //validate empty field
 extension String {
     

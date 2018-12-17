@@ -61,7 +61,6 @@ COLORBOX_WIDTH: 600,
                                       
                switch (msgEvent.name) {
                    case "processPage":
-                        console.log(msgEvent.message)
                        ContentScript._checkRecipient = msgEvent.message.checkRecipient;
                        var firstRunColorboxArray = msgEvent.message.firstRunColorboxArray;
                        if (signedIn && clientAllowed) {
@@ -123,7 +122,7 @@ COLORBOX_WIDTH: 600,
                            ContentScript._injectAutoCompleteLoginForm();
                            } else {
                            // check if a potential address page and fill it
-                           that.checkPage();
+                           //that.checkPage();
                            }
                            if (injectColorbox) {
                                var existingColorbox = $("#aero-colorbox-container");
@@ -205,6 +204,19 @@ COLORBOX_WIDTH: 600,
                        case "showNotification":
                            var info = msgEvent.message;
                             ContentScript.showNotification(info)
+                       break;
+                       case "changeTrackingDescription":
+                       var info = msgEvent.message;
+                       var targetButton = $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
+                       if (targetButton.length > 0) {
+                       if(null != info && null != info.description && info.description.length > 0){
+                       var packageInfo = JSON.parse($(targetButton).attr("packageInfo"));
+                       packageInfo.packageDescription = info.description;
+                       $(targetButton).attr("packageInfo", JSON.stringify(packageInfo));
+                       }
+                       
+                       }
+                       
                        break;
                }
            }

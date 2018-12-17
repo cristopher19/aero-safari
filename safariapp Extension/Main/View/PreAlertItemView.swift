@@ -18,10 +18,12 @@ extension MainViewController{
         self.cartContentBox?.isHidden = true
         self.profileContentBox?.isHidden = true
         self.trackContentBox?.isHidden = true
-        if (self.contentBox.viewWithTag(901) == nil ){
+        if (self.contentBox.viewWithTag(901) == nil || prealertRemoveView){
+            prealertRemoveView = false
             self.prealertContentBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y  ,
                                                                contentBox.frame.size.width, contentBox.frame.size.height))
             self.prealertContentBox!.wantsLayer = true
+            prealertContentBox?.viewWithTag(9001)
             //self.prealertContentBox!.borderType = .lineBorder
             //self.prealertContentBox!.boxType = .custom
             
@@ -72,8 +74,8 @@ extension MainViewController{
         
         // Initial clip view
         let clipView = NSClipView()
-        clipView.backgroundColor = NSColor.green
-        clipView.layer?.backgroundColor = NSColor.white.cgColor
+        clipView.backgroundColor = NSColor.white
+
         clipView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.contentView = clipView
         scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
@@ -107,6 +109,9 @@ extension MainViewController{
         //create image refresh
         let imageRefresh = NSImageView.init(frame:NSMakeRect(countItemsTextField.frame.size.width + 15, 8, 10, 10))
         imageRefresh.image = NSImage(named:"icon_refresh")
+        let preRefreshImageClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
+        preRefreshImageClick.action = #selector(MainViewController.refreshPrealertList(_:))
+        imageRefresh.addGestureRecognizer(preRefreshImageClick)
         
         let buttonPrealert = NSButton()
         buttonPrealert.wantsLayer = true
@@ -148,6 +153,16 @@ extension MainViewController{
         scrollView.documentView = documentView
         // }
     }
+    
+    @objc func refreshPrealertList(_ sender: Any){
+        
+        prealertContentBox?.removeFromSuperview()
+      
+        
+        prealertRemoveView = true
+        self.showPrealertView()
+    }
+    
     private func listOfPrealert(parentBox: NSView, prealertList: [PreAlert]){
         for (index,prealertItem) in prealertList.enumerated(){
             let prealertItemBoxHeight = 60
@@ -188,7 +203,7 @@ extension MainViewController{
             
             let editPrealert = NSButton()
             editPrealert.wantsLayer = true
-            editPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightBlue).cgColor
+            editPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
             editPrealert.isBordered = true
             editPrealert.title = "Edit"
             editPrealert.tag = UrlPages.prealert.idPage

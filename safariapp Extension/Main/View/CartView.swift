@@ -91,6 +91,7 @@ extension MainViewController{
             // Initial clip view
             let clipView = NSClipView()
             clipView.layer?.backgroundColor = NSColor.white.cgColor
+            clipView.backgroundColor = NSColor.white
             clipView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.contentView = clipView
             scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))

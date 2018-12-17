@@ -76,15 +76,15 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     }
     
     @IBAction func signInBtnAction(_ sender: Any) {
-        //let country: Country = countryComboBox!.objectValueOfSelectedItem as! Country
+        let country: Country = countryComboBox!.objectValueOfSelectedItem as! Country
         
-       // if((country.gateway.isBlank || self.accountNumberText.stringValue.isEmpty || self.passwordText.stringValue.isEmpty)){
-        if(false){
+        if((country.gateway.isBlank || self.accountNumberText.stringValue.isEmpty || self.passwordText.stringValue.isEmpty)){
+        //if(false){
             messagesLoginLabel.stringValue = "Campos en blanco"
             messagesLoginLabel.isHidden = false
         }else{
-            //viewModel.userAuth(self.accountNumberText.stringValue,self.passwordText.stringValue,country.gateway!)
-            viewModel.userAuth("9","aeropost","SJO")
+            viewModel.userAuth(self.accountNumberText.stringValue,self.passwordText.stringValue,country.gateway!)
+            //viewModel.userAuth("425544","Gael032018","SJO")
             viewModel.updateLoadingStatus = {
                 let _ = self.viewModel.isLoading ? self.activityIndicatorStart() : self.activityIndicatorStop()
             }
