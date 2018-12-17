@@ -5,7 +5,6 @@ PODS:
     - ObjectMapper (~> 3.3)
   - CryptoSwift (0.13.0)
   - ObjectMapper (3.3.0)
-  - ProgressKit (0.7)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
@@ -22,7 +21,6 @@ DEPENDENCIES:
   - AlamofireObjectMapper (~> 5.0)
   - CryptoSwift
   - ObjectMapper (~> 3.3)
-  - ProgressKit
   - SDWebImage (~> 4.0)
   - SwiftyJSON
   - XMLMapper
@@ -34,7 +32,6 @@ SPEC REPOS:
     - AlamofireObjectMapper
     - CryptoSwift
     - ObjectMapper
-    - ProgressKit
     - SDWebImage
     - SwiftyJSON
     - XMLMapper
@@ -44,11 +41,10 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
-  ProgressKit: 47145a4a267a9b4262c481d8c46e1d527dd9e024
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   XMLMapper: 40841d2d7d134715943c8bca42dabdbcfe03d354
 
-PODFILE CHECKSUM: 83d9dcdb48fe2fd48537b57cddfd1ecd9cebf4ad
+PODFILE CHECKSUM: b5581aee66f033bcf00ecebab43e76fac61f811d
 
 COCOAPODS: 1.5.3
