@@ -205,6 +205,10 @@ COLORBOX_WIDTH: 600,
                            var info = msgEvent.message;
                             ContentScript.showNotification(info)
                        break;
+                       case "reloadCurrentPage":
+                      
+                       ContentScript.reloadCurrentTab()
+                       break;
                        case "changeTrackingDescription":
                        var info = msgEvent.message;
                        var targetButton = $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
@@ -223,6 +227,13 @@ COLORBOX_WIDTH: 600,
           },false)
         //fin document ready
         });
+    },
+    
+    /**
+     * Reloads the current tab
+     */
+    reloadCurrentTab : function() {
+       location.reload();
     },
     
     /**

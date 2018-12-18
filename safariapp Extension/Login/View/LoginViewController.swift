@@ -17,7 +17,7 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     @IBOutlet weak var accountNumberLabel: NSTextField!
     @IBOutlet weak var accountNumberText: NSTextField!
     @IBOutlet weak var passwordLabel: NSTextField!
-    @IBOutlet weak var passwordText: NSTextField!
+  
     @IBOutlet weak var checkRememberMe: NSButton!
     @IBOutlet weak var signInBtn: NSButton!
     @IBOutlet weak var forgotPasswordLabel: NSTextField!
@@ -26,6 +26,7 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     @IBOutlet weak var messagesLoginLabel: NSTextField!
     @IBOutlet weak var countryComboBox: NSComboBox!
     @IBOutlet weak var customLoginBox: NSBox!
+    @IBOutlet weak var passwordText: NSSecureTextField!
     
     let viewModel = LoginViewModel()
     var mutableData:NSMutableData  = NSMutableData()
@@ -54,12 +55,16 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         if(getUserInformationInStorage() != nil && getUserInformationInStorage()?.token != nil){
             let mainView = MainViewController.getInstance()
             self.present(mainView, animator: ModalAnimator())
+        }else{
+                let loginView = LoginViewController.getInstance()
+                self.present(loginView, animator: ModalAnimator())
         }
         messagesLoginLabel.isHidden = true
     }
     
     static func getInstance() -> LoginViewController {
         let storyboard = NSStoryboard(name: "LoginStoryboard", bundle: nil)
+        
         return storyboard.instantiateController(withIdentifier: "LoginViewController") as! LoginViewController
     }
     

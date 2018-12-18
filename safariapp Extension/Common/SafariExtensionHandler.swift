@@ -62,7 +62,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         processPageMessage["clientAllowed"] = true
         processPageMessage["checkRecipient"] = false
         processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
-        
+       
         page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
         
       
@@ -216,6 +216,8 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     notification.title = "extension.prealert.congratulations.title"
                     notification.msg = "extension.prealert.congratulations.msg"
                     page.dispatchMessageToScript(withName: "showNotification", userInfo: notification.dictionary)
+                    page.dispatchMessageToScript(withName: "reloadCurrentPage", userInfo:nil)
+                    
                 }
                 
             }
@@ -245,6 +247,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
     
     override func popoverWillShow(in window: SFSafariWindow) {
+        
         NSLog("VAMOS A ABRIR")
         
     }

@@ -101,37 +101,40 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DV5-rL-pE9">
+                                        <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVm-Zo-7Wh">
                                             <rect key="frame" x="20" y="123" width="298" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" id="PIA-0k-WDH">
+                                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="OGM-lF-BsV">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
+                                                <allowedInputSourceLocales>
+                                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                                </allowedInputSourceLocales>
+                                            </secureTextFieldCell>
+                                        </secureTextField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Hvl-yJ-cD5" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="0ls-6T-SeG"/>
                                         <constraint firstItem="TMy-5m-I5c" firstAttribute="top" secondItem="4TI-aO-x1o" secondAttribute="bottom" constant="5" id="0up-oX-cxG"/>
-                                        <constraint firstItem="PtI-mT-aJF" firstAttribute="top" secondItem="DV5-rL-pE9" secondAttribute="bottom" constant="15" id="2Wl-yk-2eq"/>
                                         <constraint firstItem="4TI-aO-x1o" firstAttribute="top" secondItem="xal-zA-HFH" secondAttribute="top" constant="10" id="3oD-Qq-3To"/>
                                         <constraint firstAttribute="trailing" secondItem="Hfi-r7-GSh" secondAttribute="trailing" constant="20" id="6wA-wN-mqD"/>
                                         <constraint firstItem="O5w-IU-uDt" firstAttribute="top" secondItem="gc9-s0-D71" secondAttribute="bottom" constant="5" id="8v7-JB-xCH"/>
                                         <constraint firstItem="PtI-mT-aJF" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="AaF-IB-sdn"/>
+                                        <constraint firstAttribute="trailing" secondItem="LVm-Zo-7Wh" secondAttribute="trailing" constant="20" id="AjB-jd-d9s"/>
                                         <constraint firstAttribute="trailing" secondItem="TMy-5m-I5c" secondAttribute="trailing" constant="20" id="CZW-YH-0Bz"/>
                                         <constraint firstAttribute="trailing" secondItem="AZJ-dL-sBK" secondAttribute="trailing" constant="20" id="Cwj-W8-e8a"/>
                                         <constraint firstItem="O5w-IU-uDt" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="EAZ-1E-9TO"/>
-                                        <constraint firstAttribute="trailing" secondItem="DV5-rL-pE9" secondAttribute="trailing" constant="20" id="FQa-0F-POc"/>
                                         <constraint firstItem="4TI-aO-x1o" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="Fwm-6X-sdo"/>
+                                        <constraint firstItem="LVm-Zo-7Wh" firstAttribute="top" secondItem="AZJ-dL-sBK" secondAttribute="bottom" constant="5" id="GH6-3r-tr5"/>
                                         <constraint firstItem="Hvl-yJ-cD5" firstAttribute="top" secondItem="Hfi-r7-GSh" secondAttribute="bottom" constant="2" id="Hdd-bw-e08"/>
                                         <constraint firstItem="gc9-s0-D71" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="I35-7h-LyM"/>
                                         <constraint firstItem="AZJ-dL-sBK" firstAttribute="top" secondItem="O5w-IU-uDt" secondAttribute="bottom" constant="10" id="L4u-lz-D2b"/>
                                         <constraint firstAttribute="trailing" secondItem="Hvl-yJ-cD5" secondAttribute="trailing" constant="20" id="O3k-ac-g2v"/>
                                         <constraint firstAttribute="trailing" secondItem="gc9-s0-D71" secondAttribute="trailing" constant="20" id="POr-5c-1Sw"/>
+                                        <constraint firstItem="PtI-mT-aJF" firstAttribute="top" secondItem="LVm-Zo-7Wh" secondAttribute="bottom" constant="15" id="PUg-ox-52m"/>
                                         <constraint firstItem="TMy-5m-I5c" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="VW2-q3-l3F"/>
                                         <constraint firstAttribute="trailing" secondItem="PtI-mT-aJF" secondAttribute="trailing" constant="20" id="W96-Za-XoH"/>
                                         <constraint firstAttribute="trailing" secondItem="4TI-aO-x1o" secondAttribute="trailing" constant="20" id="X0X-ld-SEo"/>
-                                        <constraint firstItem="DV5-rL-pE9" firstAttribute="top" secondItem="AZJ-dL-sBK" secondAttribute="bottom" constant="5" id="a2s-AK-xkx"/>
                                         <constraint firstItem="Hfi-r7-GSh" firstAttribute="top" secondItem="PtI-mT-aJF" secondAttribute="bottom" constant="20" id="bas-CI-Cj1"/>
                                         <constraint firstAttribute="trailing" secondItem="Voa-rD-T29" secondAttribute="trailing" constant="20" id="cuw-Hc-4Rk"/>
                                         <constraint firstItem="Voa-rD-T29" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="e3w-9P-GCk"/>
@@ -140,7 +143,7 @@
                                         <constraint firstItem="Voa-rD-T29" firstAttribute="top" secondItem="Hvl-yJ-cD5" secondAttribute="bottom" constant="5" id="hUb-lc-mp2"/>
                                         <constraint firstItem="Hfi-r7-GSh" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="hWu-5e-yRW"/>
                                         <constraint firstItem="AZJ-dL-sBK" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="mQ0-k9-zMs"/>
-                                        <constraint firstItem="DV5-rL-pE9" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="ydb-wR-ntJ"/>
+                                        <constraint firstItem="LVm-Zo-7Wh" firstAttribute="leading" secondItem="xal-zA-HFH" secondAttribute="leading" constant="20" id="wOc-rg-6YR"/>
                                     </constraints>
                                 </view>
                                 <constraints>
@@ -193,7 +196,7 @@
                         <outlet property="forgotPasswordLabel" destination="Voa-rD-T29" id="LMh-3N-gnX"/>
                         <outlet property="messagesLoginLabel" destination="Hvl-yJ-cD5" id="6yl-6S-5sH"/>
                         <outlet property="passwordLabel" destination="AZJ-dL-sBK" id="Fjj-pA-yA4"/>
-                        <outlet property="passwordText" destination="DV5-rL-pE9" id="4ko-Ht-9xc"/>
+                        <outlet property="passwordText" destination="LVm-Zo-7Wh" id="OER-1n-hli"/>
                         <outlet property="pluginVersionLabel" destination="vte-u1-zCa" id="H04-02-ZVs"/>
                         <outlet property="signInBtn" destination="Hfi-r7-GSh" id="gmf-8m-YPY"/>
                         <outlet property="signInDescription" destination="yuz-9k-6hU" id="o8f-aK-SiE"/>

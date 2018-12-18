@@ -13,7 +13,7 @@
 		0E06101421C2F7B700640CBB /* jquery.appear.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E06101321C2F7B700640CBB /* jquery.appear.js */; };
 		0E1D459D218CE1360079BB2A /* safariapp.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D459C218CE1360079BB2A /* safariapp.entitlements */; };
 		0E1D459F218CE1360079BB2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D459E218CE1360079BB2A /* AppDelegate.swift */; };
-		0E1D45A2218CE1360079BB2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A0218CE1360079BB2A /* Main.storyboard */; };
+		0E1D45A2218CE1360079BB2A /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A0218CE1360079BB2A /* MainApp.storyboard */; };
 		0E1D45A4218CE1360079BB2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45A3218CE1360079BB2A /* ViewController.swift */; };
 		0E1D45A6218CE1370079BB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A5218CE1370079BB2A /* Assets.xcassets */; };
 		0E1D45AD218CE1370079BB2A /* safariapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -101,7 +101,7 @@
 		0E1D4599218CE1360079BB2A /* safariapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safariapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1D459C218CE1360079BB2A /* safariapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = safariapp.entitlements; sourceTree = "<group>"; };
 		0E1D459E218CE1360079BB2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E1D45A1218CE1360079BB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0E1D45A1218CE1360079BB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainApp.storyboard; sourceTree = "<group>"; };
 		0E1D45A3218CE1360079BB2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0E1D45A5218CE1370079BB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E1D45A7218CE1370079BB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 			children = (
 				0E1D459C218CE1360079BB2A /* safariapp.entitlements */,
 				0E1D459E218CE1360079BB2A /* AppDelegate.swift */,
-				0E1D45A0218CE1360079BB2A /* Main.storyboard */,
+				0E1D45A0218CE1360079BB2A /* MainApp.storyboard */,
 				0E1D45A3218CE1360079BB2A /* ViewController.swift */,
 				0E1D45A5218CE1370079BB2A /* Assets.xcassets */,
 				0E1D45A7218CE1370079BB2A /* Info.plist */,
@@ -515,7 +515,7 @@
 				0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */,
 				0E1D459D218CE1360079BB2A /* safariapp.entitlements in Resources */,
 				0E1D45A6218CE1370079BB2A /* Assets.xcassets in Resources */,
-				0E1D45A2218CE1360079BB2A /* Main.storyboard in Resources */,
+				0E1D45A2218CE1360079BB2A /* MainApp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,12 +688,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0E1D45A0218CE1360079BB2A /* Main.storyboard */ = {
+		0E1D45A0218CE1360079BB2A /* MainApp.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0E1D45A1218CE1360079BB2A /* Base */,
 			);
-			name = Main.storyboard;
+			name = MainApp.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -829,6 +829,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aeropost.safariapp-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -852,6 +853,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aeropost.safariapp-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -876,6 +878,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aeropost.safariapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -899,6 +902,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aeropost.safariapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

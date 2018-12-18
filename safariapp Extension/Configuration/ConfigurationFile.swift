@@ -96,13 +96,13 @@ enum UrlPages{
         case .cart:
             return "https://aeropost.com/site/en"
         case .profile:
-            return "https://aeropost.com/site/en"
+            return "https://myaccount.aeropost.com/en/Profile"
         case .editProfile:
-            return "https://aeropost.com/site/en"
+            return "https://myaccount.aeropost.com/en/Profile"
         case .editProfileAddress:
-            return "https://aeropost.com/site/en"
+            return "https://myaccount.aeropost.com/en/Profile"
         case .prealert:
-            return "https://aeropost.com/site/en"
+            return "https://myaccount.aeropost.com/en/Packages"
         }
     }
 }
@@ -114,15 +114,15 @@ extension Int{
         case UrlPages.checkOut.idPage:
             return UrlPages.checkOut.url
         case UrlPages.cart.idPage:
-            return UrlPages.checkOut.url
+            return UrlPages.cart.url
         case UrlPages.profile.idPage:
-            return UrlPages.checkOut.url
+            return UrlPages.profile.url
         case UrlPages.editProfile.idPage:
-            return UrlPages.checkOut.url
+            return UrlPages.editProfile.url
         case UrlPages.editProfileAddress.idPage:
-            return UrlPages.checkOut.url
+            return UrlPages.editProfileAddress.url
         case UrlPages.prealert.idPage:
-            return UrlPages.checkOut.url
+            return UrlPages.prealert.url
         default:
             return ""
         }
