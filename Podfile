@@ -22,5 +22,5 @@ target 'safariapp Extension' do
   pod 'CryptoSwift'
   pod 'XMLMapper'
   pod 'XMLMapper/Requests'
-  pod 'ProgressKit'
+
 end
