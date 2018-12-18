@@ -830,6 +830,46 @@ COLORBOX_WIDTH: 600,
     },
     
     /**
+     * Returns the carrier, using regular expressions, from a tracking #
+     * @param aTracking
+     * @returns the carrier
+     */
+    _getCarrier : function(aTracking) {
+        
+        var UPS = /(\b1[zZ][A-Za-z0-9]{16}\b)|(\b\d{9}\b)/;
+        if (UPS.test(aTracking)) {
+            return "UPS";
+        }
+        
+        var USPS = /(\b91\d{20}\b)|(\b94\d{20}\b)|(\b95\d{20}\b)|(\b\d{30}\b)/;
+        if (USPS.test(aTracking)) {
+            return "USPS";
+        }
+        
+        var FEDEX = /(\b96\d{20}\b)|(\b\d{32}\b)|(\b\d{20}\b)|(\b\d{11}\b)|(\b\d{12}\b)|(\b\d{15}\b)/;
+        if (FEDEX.test(aTracking)) {
+            return "FEDEX";
+        }
+        
+        var INTMAILCHINAPOST = /(\b[A-Za-z]{2}\d{9}[A-Za-z]{2}\b)/;
+        if (INTMAILCHINAPOST.test(aTracking)) {
+            return "INTMAILCHINAPOST";
+        }
+        
+        var LASERSHIP = /(\b[Ll][A-Za-z]\d{8}\b)|(\b[A-Za-z]{2}\d{9})|(\b[0-9][Ll][A-Za-z]\d{12}\b)/;
+        if (LASERSHIP.test(aTracking)) {
+            return "LASERSHIP";
+        }
+        
+        var DHL = /(\b\d{10}\b)|(\b\d{16}\b)|(\b\d{19}\b)|(\b\d{22}\b)|(\b\d{6}[A-Za-z]\d{4}\b)/;
+        if (DHL.test(aTracking)) {
+            return "DHL";
+        }
+        
+        return null;
+    },
+    
+    /**
      * Shows a notification
      * @param aNotification the notification to be shown
      * @param aClickable whether the notification should be clickable or not
