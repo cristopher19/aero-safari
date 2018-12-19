@@ -235,6 +235,48 @@ COLORBOX_WIDTH: 600,
     reloadCurrentTab : function() {
        location.reload();
     },
+    _loadingPrice : function(){
+        
+        
+        $("<div class='barNotification'>" +
+          "<div> " +
+          "<div class='aIconBluBar'>" +
+          "<div class='iconAeropost'></div>"+
+          "</div>" +
+          "<!-- the class apRightBubble makes visible the all inclusive cont -->" +
+          "<div id='allInclusiveBarId' class='allInclusiveContBar' ><span class='labelSm_new blueTextLabel_new'>" + $.i18n.getString("quote_script_quote_calculete_price") + "</span>" +
+          "<button id='quoteBtn' style='display:none'>" + $.i18n.getString("quote_script_quote_aeropost_com_button") + "</button>" +
+          "<div class='sk-fading-circle'>" +
+          "<div class='sk-circle1 sk-circle'></div>" +
+          "<div class='sk-circle2 sk-circle'></div>" +
+          "<div class='sk-circle3 sk-circle'></div>" +
+          "<div class='sk-circle4 sk-circle'></div>" +
+          "<div class='sk-circle5 sk-circle'></div>" +
+          "<div class='sk-circle6 sk-circle'></div>" +
+          "<div class='sk-circle7 sk-circle'></div>" +
+          "<div class='sk-circle8 sk-circle'></div>" +
+          "<div class='sk-circle9 sk-circle'></div>" +
+          "<div class='sk-circle10 sk-circle'></div>" +
+          "<div class='sk-circle11 sk-circle'></div>" +
+          "<div class='sk-circle12 sk-circle'></div>" +
+          "</div></div>" +
+          "<div id='chevronBar' class='chevronBarRight' style='display:none'></div>" +
+          "</div>" +
+          "</div>").insertBefore("body");
+        
+        $("#chevronBar").click(function(event){
+                               $("#barLeftViewID").remove();
+                               $(".barNotification").attr("class", "barNotification barLeft barOff");
+                               $("#chevronBar").attr("class", "chevronBarLeft");
+                               $("#allInclusiveBarId").show();
+                               });
+        
+        $("#quoteBtn").click(function(event){
+                             safari.extension.dispatchMessage("SearchURL", {url : window.location.href});
+                             });
+        
+        $("body").attr("style","margin-top:30px!important;");
+    },
     
     /**
      * Checks whether the package is being shipped to the currently signed in

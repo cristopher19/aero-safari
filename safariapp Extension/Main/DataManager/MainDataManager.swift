@@ -166,7 +166,7 @@ struct MainDataManager{
      */
     func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PreAlertResponseModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
-        let endPoint: String = Endpoints.Posts.prealertPackageAmazon.url
+        var endPoint: String = Endpoints.Posts.prealertPackageAmazon.url
         if(prealertDictionary["shipperName"] as! String != "amazon"){
             endPoint = Endpoints.Posts.prealertPackageEbay.url
         }

@@ -17,7 +17,7 @@ extension MainViewController{
         self.cartContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.profileContentBox?.isHidden = true
-      print("joder\(trackRemoveView)")
+   
         if (self.contentBox.viewWithTag(900) == nil || trackRemoveView){
             trackRemoveView = false
             // - 12 del scroll / - 30 de la section bottom

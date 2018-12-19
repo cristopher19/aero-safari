@@ -150,6 +150,7 @@ extension MainViewController{
         /** btn checkout **/
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
+        buttonLogOut.layer?.cornerRadius = 4
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonLogOut.title = "Visit Aeropost.com"
         buttonLogOut.tag = UrlPages.checkOut.idPage
@@ -263,7 +264,7 @@ extension MainViewController{
                 quantityTextField.addConstraintTop(topOffset: 2, toItem: itemAmountTextField, firstAttribute: .top, secondAttribute: .bottom)
                 
                 removeTextField.addConstraintWidth(width: removeTextField.frame.size.width)
-                removeTextField.addConstraintHeight(height: 12.0)
+                removeTextField.addConstraintHeight(height: 15.0)
                 removeTextField.addConstraintRight(rightOffset: -25, toItem: productItemBox)
                 removeTextField.addConstraintTop(topOffset: 2, toItem: itemAmountTextField, firstAttribute: .top, secondAttribute: .bottom)
                 
@@ -349,32 +350,35 @@ extension MainViewController{
         /** textfield Values **/
         //create text desc items
         let subtotalValueTextField = TextFieldStyle()
-        subtotalValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.subtotal ?? 0))
+        subtotalValueTextField.stringValue = "$" + String(format: "%.2f", Double(viewModel.cartObject?.subtotal ?? 0))
         subtotalValueTextField.sizeToFit()
         
         //create text desc items
         let admFeeValueTextField = TextFieldStyle()
-        admFeeValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.administrativeFee ?? 0))
+        admFeeValueTextField.stringValue = "$" + String(format: "%.2f", Double(viewModel.cartObject?.administrativeFee ?? 0))
         admFeeValueTextField.sizeToFit()
         
         //create text desc items
         let taxesValueTextField = TextFieldStyle()
-        taxesValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.taxes ?? 0))
+        taxesValueTextField.stringValue = "$" + String(format: "%.2f", Double(viewModel.cartObject?.taxes ?? 0))
         taxesValueTextField.sizeToFit()
         
         //create text desc items
         let shippingCostValueTextField = TextFieldStyle()
-        shippingCostValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.shippingCost ?? 0))
+        shippingCostValueTextField.stringValue = "$" + String(format: "%.2f", Double(viewModel.cartObject?.shippingCost ?? 0))
         shippingCostValueTextField.sizeToFit()
         
         //create text desc items
         let multipleProductValueTextField = TextFieldStyle()
-        multipleProductValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.discountMultipleItems ?? 0))
+        let discountValue = Double(viewModel.cartObject?.discountMultipleItems ?? 0)
+        let product = discountValue == 0  ? "$" + String(discountValue) : String("-$\(discountValue)")
+        multipleProductValueTextField.stringValue =   product
         multipleProductValueTextField.sizeToFit()
+        multipleProductValueTextField.textColor = NSColor.red
         
         //create text desc items
         let orderTotalValueTextField = TextFieldStyle()
-        orderTotalValueTextField.stringValue = String(format: "%.2f", Double(viewModel.cartObject?.totalPrice ?? 0))
+        orderTotalValueTextField.stringValue = "$" + String(format: "%.2f", Double(viewModel.cartObject?.totalPrice ?? 0))
         orderTotalValueTextField.sizeToFit()
         
    
@@ -382,6 +386,7 @@ extension MainViewController{
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
+        buttonLogOut.layer?.cornerRadius = 4
         buttonLogOut.title = "Continue to checkout"
         buttonLogOut.tag = UrlPages.checkOut.idPage
         buttonLogOut.action = #selector(MainViewController.openUrlInWeb(_:))

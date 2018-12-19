@@ -115,6 +115,7 @@ extension MainViewController{
         
         let buttonPrealert = NSButton()
         buttonPrealert.wantsLayer = true
+        buttonPrealert.layer?.cornerRadius = 4
         buttonPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonPrealert.isBordered = true
         buttonPrealert.title = "New Prealert"
@@ -204,6 +205,7 @@ extension MainViewController{
             let editPrealert = NSButton()
             editPrealert.wantsLayer = true
             editPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
+            editPrealert.layer?.cornerRadius = 4
             editPrealert.isBordered = true
             editPrealert.title = "Edit"
             editPrealert.tag = UrlPages.prealert.idPage

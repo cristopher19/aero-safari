@@ -62,6 +62,7 @@ extension MainViewController{
         
         let buttonLogOut = NSButton()
         buttonLogOut.wantsLayer = true
+        buttonLogOut.layer?.cornerRadius = 4
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonLogOut.isBordered = true
         buttonLogOut.title = "LogOut"
@@ -108,6 +109,7 @@ extension MainViewController{
         let profileInformationItemBox = NSView(frame: NSMakeRect(profileContentBox!.frame.origin.x,profileContentBox!.frame.origin.y  ,
                                                                   profileContentBox!.frame.size.width - 30, profileContentBox!.frame.size.height))
         profileInformationItemBox.wantsLayer = true
+        profileInformationItemBox.layer?.cornerRadius = 4
         profileInformationItemBox.layer?.borderWidth = 1
         profileInformationItemBox.layer!.borderColor = NSColor(hex: ColorPalette.BorderColor.bgMidGray).cgColor
         
