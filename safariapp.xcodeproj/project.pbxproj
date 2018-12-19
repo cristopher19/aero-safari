@@ -16,7 +16,6 @@
 		0E1D45A2218CE1360079BB2A /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A0218CE1360079BB2A /* MainApp.storyboard */; };
 		0E1D45A4218CE1360079BB2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45A3218CE1360079BB2A /* ViewController.swift */; };
 		0E1D45A6218CE1370079BB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45A5218CE1370079BB2A /* Assets.xcassets */; };
-		0E1D45AD218CE1370079BB2A /* safariapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E1D45B2218CE1370079BB2A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1D45B1218CE1370079BB2A /* Cocoa.framework */; };
 		0E1D45B5218CE1370079BB2A /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D45B4218CE1370079BB2A /* SafariExtensionHandler.swift */; };
 		0E1D45BD218CE1370079BB2A /* contentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45BC218CE1370079BB2A /* contentScript.js */; };
@@ -58,6 +57,7 @@
 		0E2E690421B9C03E001CFE81 /* jquery.colorbox-min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */; };
 		0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690521B9C04D001CFE81 /* colorbox.css */; };
 		0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690721B9C102001CFE81 /* jquery.i18n.js */; };
+		0E2EB02B21CA984900D3A556 /* safariapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E2F90F921C017AA0019118B /* notification.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90F821C017AA0019118B /* notification.js */; };
 		0E2F90FB21C023900019118B /* logo_32_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90FA21C023900019118B /* logo_32_32.png */; };
 		0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F90FC21C0242F0019118B /* NotificationObject.swift */; };
@@ -70,7 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E1D45AE218CE1370079BB2A /* PBXContainerItemProxy */ = {
+		0E2EB02C21CA984900D3A556 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E1D4591218CE1360079BB2A /* Project object */;
 			proxyType = 1;
@@ -80,13 +80,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0E1D45C6218CE1370079BB2A /* Embed App Extensions */ = {
+		0E2EB02E21CA984900D3A556 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0E1D45AD218CE1370079BB2A /* safariapp Extension.appex in Embed App Extensions */,
+				0E2EB02B21CA984900D3A556 /* safariapp Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,13 +428,13 @@
 				0E1D4595218CE1360079BB2A /* Sources */,
 				0E1D4596218CE1360079BB2A /* Frameworks */,
 				0E1D4597218CE1360079BB2A /* Resources */,
-				0E1D45C6218CE1370079BB2A /* Embed App Extensions */,
 				3C14FA159C743A6D1556BC27 /* [CP] Embed Pods Frameworks */,
+				0E2EB02E21CA984900D3A556 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0E1D45AF218CE1370079BB2A /* PBXTargetDependency */,
+				0E2EB02D21CA984900D3A556 /* PBXTargetDependency */,
 			);
 			name = safariapp;
 			productName = safariapp;
@@ -678,10 +678,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0E1D45AF218CE1370079BB2A /* PBXTargetDependency */ = {
+		0E2EB02D21CA984900D3A556 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0E1D45AB218CE1370079BB2A /* safariapp Extension */;
-			targetProxy = 0E1D45AE218CE1370079BB2A /* PBXContainerItemProxy */;
+			targetProxy = 0E2EB02C21CA984900D3A556 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -828,7 +828,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aeropost.safariapp-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aeropost.safariapp.safariextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -852,7 +852,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aeropost.safariapp-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aeropost.safariapp.safariextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

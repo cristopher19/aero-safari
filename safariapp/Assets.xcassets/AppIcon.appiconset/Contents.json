@@ -37,19 +37,21 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "Webp.net-resizeimage (1)-1.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Webp.net-resizeimage (1)-1.png",
+      "filename" : "Webp.net-resizeimage (1).png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "Webp.net-resizeimage (2).png",
       "scale" : "2x"
     }
   ],

@@ -19,7 +19,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.aeropost.safariapp-Extension") { error in
+        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.aeropost.safariapp.safariextension") { error in
             if let _ = error {
                 // Insert code to inform the user that something went wrong.
 
