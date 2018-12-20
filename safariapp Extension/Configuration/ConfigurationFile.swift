@@ -69,6 +69,7 @@ enum UrlPages{
     case editProfile
     case editProfileAddress
     case aero
+    case forgotPasswrod
     public var idPage: Int{
         switch self {
         case .aero:
@@ -85,12 +86,14 @@ enum UrlPages{
             return 1006
         case .prealert:
             return 1007
+        case .forgotPasswrod:
+            return 1008
         }
     }
     public var url: String {
         switch self {
         case .aero:
-            return " https://aeropost.com/site/en"
+            return "https://aeropost.com/site/en"
         case .checkOut:
             return "https://aeropost.com/site/en"
         case .cart:
@@ -103,6 +106,8 @@ enum UrlPages{
             return "https://myaccount.aeropost.com/en/Profile"
         case .prealert:
             return "https://myaccount.aeropost.com/en/Packages"
+        case .forgotPasswrod:
+            return "https://www.myaeropost.com/myaero/ForgotPassword.aspx?language=1"
         }
     }
 }
@@ -123,6 +128,8 @@ extension Int{
             return UrlPages.editProfileAddress.url
         case UrlPages.prealert.idPage:
             return UrlPages.prealert.url
+        case UrlPages.forgotPasswrod.idPage:
+            return UrlPages.forgotPasswrod.url
         default:
             return ""
         }

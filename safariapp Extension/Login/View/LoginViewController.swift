@@ -17,16 +17,18 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     @IBOutlet weak var accountNumberLabel: NSTextField!
     @IBOutlet weak var accountNumberText: NSTextField!
     @IBOutlet weak var passwordLabel: NSTextField!
-  
-    @IBOutlet weak var checkRememberMe: NSButton!
+    @IBOutlet weak var boxContentData: NSBox!
+    
+
     @IBOutlet weak var signInBtn: NSButton!
-    @IBOutlet weak var forgotPasswordLabel: NSTextField!
+  
     @IBOutlet weak var pluginVersionLabel: NSTextField!
     
     @IBOutlet weak var messagesLoginLabel: NSTextField!
     @IBOutlet weak var countryComboBox: NSComboBox!
     @IBOutlet weak var customLoginBox: NSBox!
     @IBOutlet weak var passwordText: NSSecureTextField!
+    @IBOutlet weak var forgotButton: NSButton!
     
     let viewModel = LoginViewModel()
     var mutableData:NSMutableData  = NSMutableData()
@@ -39,6 +41,26 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
         country.drawsBackground = false
 
+     
+        signInBtn.wantsLayer = true
+        signInBtn.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
+        signInBtn.isBordered = false
+        signInBtn.layer?.cornerRadius = 4
+        signInBtn.frame.size.height = 40
+        
+        customLoginBox.wantsLayer = true
+        customLoginBox.fillColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightGray2)
+        
+        passwordText.wantsLayer = true
+        passwordText.layer?.borderWidth = 0.5
+        passwordText.layer?.borderColor = NSColor(hex:ColorPalette.BorderColor.bgMidGray).cgColor
+        passwordText.layer?.cornerRadius = 4
+        
+        accountNumberText.wantsLayer = true
+        accountNumberText.layer?.borderWidth = 0.5
+        accountNumberText.layer?.borderColor = NSColor(hex:ColorPalette.BorderColor.bgMidGray).cgColor
+        accountNumberText.layer?.cornerRadius = 4
+     
         self.countryComboBox.dataSource = self
         viewModel.getCountries()
         viewModel.didFinishFetch = {
@@ -51,7 +73,13 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         }
     }
     
+    
+    @IBAction func forgotPasswordAction(_ sender: Any) {
+        UrlPages.forgotPasswrod.url.openUrlInWebWithUrlString
+    }
     override func viewWillAppear() {
+        
+        
         if(getUserInformationInStorage() != nil && getUserInformationInStorage()?.token != nil){
             let mainView = MainViewController.getInstance()
             self.present(mainView, animator: ModalAnimator())

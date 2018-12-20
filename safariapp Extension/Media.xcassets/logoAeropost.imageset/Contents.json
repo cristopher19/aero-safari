@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "aeropost-logo-head.png",
+      "filename" : "aeropost-logo-signin-1.png",
       "scale" : "1x"
     },
     {
@@ -12,7 +12,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "aeropost-logo-head-1.png",
+      "filename" : "aeropost-logo-signin-2.png",
       "scale" : "3x"
     }
   ],

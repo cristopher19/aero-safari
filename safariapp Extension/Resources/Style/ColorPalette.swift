@@ -11,6 +11,7 @@ struct ColorPalette {
     struct BackgroundColor {
         static let bgLightBlue = "8DC8E8"
         static let bgLightGray = "f6f6f6"
+        static let bgLightGray2 = "f5f5f5"
         static let bgMidGray = "999999"
         static let bgDarkBlue = "003594"
         static let bgTabGray = "dbdbdb"
