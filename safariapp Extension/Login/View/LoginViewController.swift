@@ -41,7 +41,13 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
         country.drawsBackground = false
 
-     
+        country.stringValue = "login_country".localized()
+        accountNumberLabel.stringValue = "login_account_number".localized()
+        passwordLabel.stringValue = "login_password".localized()
+        signInDescription.stringValue = "login_description".localized()
+        forgotButton.stringValue = "login_forgot_password".localized()
+        pluginVersionLabel.stringValue = "login_plugin_version".localized()
+        
         signInBtn.wantsLayer = true
         signInBtn.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         signInBtn.isBordered = false

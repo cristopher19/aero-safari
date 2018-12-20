@@ -8,9 +8,6 @@
 
 import Foundation
 import SafariServices
-struct UtilsAeropost {
-    
-}
 extension RangeReplaceableCollection {
     mutating func splice<R: RangeExpression>(range: R) -> SubSequence
         where R.Bound == Index {
@@ -21,6 +18,9 @@ extension RangeReplaceableCollection {
 }
 //validate empty field
 extension String {
+    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
+        return NSLocalizedString(self, tableName: tableName, value: "**\(self)**", comment: "")
+    }
     
     var openUrlInWebWithUrlString: Void{
         if let urlResult = URL(string: self),

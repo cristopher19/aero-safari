@@ -44,6 +44,9 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             case "quoteMoreProducts":
                 quoteMoreProductsAction(from: page, userInfo: data)
                 break;
+            case "quoteProduct":
+                quoteProductAction(from: page, userInfo: data)
+                break;
             default:
                 print("")
             }
@@ -137,6 +140,24 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         
          aProducts.splice(range: position...1)
         return obj;
+    }
+    /*
+     * logic for processPage message
+     */
+    private func quoteProductAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        //pasa el mensaje al script
+        var firstRunColorboxArray = [String]()
+        firstRunColorboxArray.append(PropertyHelper.PROP_COLORBOX_FIRST_RUN_AMAZON)
+        
+        var processPageMessage = [String:Any]()
+        processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
+        processPageMessage["clientAllowed"] = true
+        processPageMessage["checkRecipient"] = false
+        processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
+        
+        page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
+        
+        
     }
     
     /*

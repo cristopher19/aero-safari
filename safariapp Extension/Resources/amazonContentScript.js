@@ -18,7 +18,17 @@ var AmazonContentScript = {
         
         (document.body || document.head || document.documentElement).appendChild(script);
     },*/
-    
+    /**
+     * Injects the amazon script to get product info
+     */
+    injectAmazonScript : function() {
+        var amazonScript = safari.extension.baseURI + "amazonScript.js";
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = amazonScript;
+        
+        (document.body || document.head || document.documentElement).appendChild(script);
+    },
     modifyAmazonOrdersPage : function() {
         var orders = $("div[class~='order-info']");
         var ordersLength = orders.length;

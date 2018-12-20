@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  safariapp
+
+  Created by Centauro-mac on 12/20/18.
+  Copyright © 2018 Centauro-mac. All rights reserved.
+*/
+"login_country" = "Account number";
+"login_account_number" = "Account number";
+"login_password" = "Password";
+"login_description" = "Sing in with your aeropost.com credentials";
+"login_forgot_password" = "Forgot your password?";
+"login_plugin_version" = "This is the version of the Aeropost Plug In V.2.2.3";

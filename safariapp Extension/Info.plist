@@ -83,6 +83,10 @@
 				<key>Script</key>
 				<string>amazonContentScript.js</string>
 			</dict>
+            <dict>
+                <key>Script</key>
+                <string>quoteScript.js</string>
+            </dict>
 			<dict>
 				<key>Script</key>
 				<string>ebayContentScript.js</string>
