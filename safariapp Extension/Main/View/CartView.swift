@@ -16,6 +16,8 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showCartView() {
+        boxCart.fillColor = NSColor(hex:ColorPalette.BackgroundColor.bgLightBlue)
+        boxTrack.fillColor = NSColor.white
         self.profileContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.trackContentBox?.isHidden = true

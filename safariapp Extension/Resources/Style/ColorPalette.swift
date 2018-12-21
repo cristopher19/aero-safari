@@ -15,12 +15,14 @@ struct ColorPalette {
         static let bgMidGray = "999999"
         static let bgDarkBlue = "003594"
         static let bgTabGray = "dbdbdb"
+        static let bgTabMidGray = "f6f6f6"
        
     }
     
     struct TextColor {
         static let textLightBlue = "8DC8E8"
         static let textBlue = "003594"
+        static let textDarkGray = "999999"
     }
     
     struct BorderColor {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -170,7 +171,7 @@
                                             <rect key="frame" x="18" y="4" width="162" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Tracking" id="oH0-s0-sE8">
                                                 <font key="font" metaFont="smallSystem"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
@@ -202,7 +203,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Zyy-gm-bwJ"/>
                                 </constraints>
                                 <color key="borderColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </box>
                             <box boxType="custom" borderType="line" borderWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="scK-ND-JXJ">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="399"/>
@@ -233,6 +234,8 @@
                         <outlet property="boxTrack" destination="SAY-jE-nB5" id="P6V-DK-Vuk"/>
                         <outlet property="contentBox" destination="scK-ND-JXJ" id="CAt-DE-WJ1"/>
                         <outlet property="customHeaderView" destination="Okd-Y8-h8o" id="MjX-S9-gVe"/>
+                        <outlet property="shoppingCartLabel" destination="4IS-YJ-kPg" id="Yho-T0-aPa"/>
+                        <outlet property="trackingLabel" destination="vS6-Qv-a7M" id="4XT-ic-GEA"/>
                         <outlet property="trackingTabLabel" destination="vS6-Qv-a7M" id="wDM-yY-4I9"/>
                         <outlet property="userAccountLabel" destination="lnA-F8-JP7" id="R8a-9j-uob"/>
                         <outlet property="userImage" destination="6JA-ev-9sS" id="Ktb-RK-ifS"/>
@@ -248,6 +251,6 @@
         <image name="icon_cart" width="24" height="24"/>
         <image name="icon_profile" width="21" height="21"/>
         <image name="icon_tracking" width="24" height="24"/>
-        <image name="logoAeropost" width="150" height="33"/>
+        <image name="logoAeropost" width="240" height="52"/>
     </resources>
 </document>

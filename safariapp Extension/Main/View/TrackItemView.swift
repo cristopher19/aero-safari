@@ -14,6 +14,10 @@ extension MainViewController{
      * # tag for view = 1001
      */
     @objc func showTrackingView() {
+        
+        boxCart.fillColor = NSColor.white
+        boxTrack.fillColor = NSColor(hex:ColorPalette.BackgroundColor.bgLightBlue)
+        
         self.cartContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.profileContentBox?.isHidden = true
@@ -34,7 +38,7 @@ extension MainViewController{
             trackContentBox!.bottomAnchor.constraint(equalTo: self.trackContentBox!.bottomAnchor, constant: 0.0).isActive = true
             
             lastTrackBox = self.trackContentBox
-            self.createBottomSection(parentSection: self.trackContentBox!)
+            self.createBottomSection(parentSection: self.trackContentBox! ,isTrack: true)
             
             viewModel.getOrderPackagesList()
             viewModel.updateLoadingStatus = {
@@ -60,13 +64,13 @@ extension MainViewController{
         print("stop loading")
     }
     //section tracking - prealert
-    func createBottomSection(parentSection: NSView){
+    func createBottomSection(parentSection: NSView, isTrack: Bool){
         /** track box **/
         let trackBox = NSBox()
         trackBox.wantsLayer = true
         trackBox.borderType = .lineBorder
         trackBox.boxType = .custom
-        trackBox.fillColor = NSColor(hex: ColorPalette.BackgroundColor.bgTabGray)
+        trackBox.fillColor = isTrack ? NSColor(hex: ColorPalette.BackgroundColor.bgTabGray) : NSColor(hex: ColorPalette.BackgroundColor.bgTabMidGray)
         
         //create text tracking
         let trackingTextField = NSTextField()
@@ -74,14 +78,15 @@ extension MainViewController{
         trackingTextField.isEditable = false
         trackingTextField.drawsBackground = false
         trackingTextField.isBezeled = false
-        trackingTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+        trackingTextField.textColor = isTrack ? NSColor(hex: ColorPalette.TextColor.textBlue) : NSColor(hex: ColorPalette.TextColor.textDarkGray)
         trackingTextField.tag = 900
+        
         /** prealert box **/
         let prealertBox = NSBox()
         prealertBox.wantsLayer = true
         prealertBox.borderType = .lineBorder
         prealertBox.boxType = .custom
-        prealertBox.fillColor = NSColor(hex: ColorPalette.BackgroundColor.bgTabGray)
+        prealertBox.fillColor = isTrack ? NSColor(hex: ColorPalette.BackgroundColor.bgTabMidGray) : NSColor(hex: ColorPalette.BackgroundColor.bgTabGray)
         
         //create text prealert
         let prealertTextField = NSTextField()
@@ -89,7 +94,7 @@ extension MainViewController{
         prealertTextField.isEditable = false
         prealertTextField.drawsBackground = false
         prealertTextField.isBezeled = false
-        prealertTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+        prealertTextField.textColor = isTrack ? NSColor(hex: ColorPalette.TextColor.textDarkGray) : NSColor(hex: ColorPalette.TextColor.textBlue)
         prealertTextField.sizeToFit()
         
         /** add views **/

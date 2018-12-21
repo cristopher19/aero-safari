@@ -16,8 +16,10 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     var currentElementName:String = ""
     
    
+    @IBOutlet weak var shoppingCartLabel: NSTextField!
     @IBOutlet weak var customHeaderView: NSView!
-    @IBOutlet weak var trackingTabLabel: NSTextField!
+  
+    @IBOutlet weak var trackingLabel: NSTextField!
     @IBOutlet weak var boxCart: NSBox!
     @IBOutlet weak var boxTrack: NSBox!
     @IBOutlet weak var contentBox: NSBox!
@@ -41,6 +43,17 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
         self.view.wantsLayer = true
+        
+        boxCart.wantsLayer = true
+        boxTrack.wantsLayer = true
+        
+        shoppingCartLabel.wantsLayer = true
+        trackingLabel.wantsLayer = true
+        
+        shoppingCartLabel.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+        trackingLabel.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+      
+        
         userInformation = getUserInformationInStorage()
         customHeaderView.wantsLayer = true
         customHeaderView.layer?.backgroundColor = NSColor.white.cgColor
@@ -52,10 +65,9 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     
         userNameLabel.stringValue = getUserInformationInStorage()?.fullName ?? ""
         userAccountLabel.stringValue = gateway + "-" + account
-        trackingTabLabel.isEditable = false
-        trackingTabLabel.drawsBackground = false
-        trackingTabLabel.isBezeled = false
-        trackingTabLabel.textColor = NSColor.white
+        trackingLabel.isEditable = false
+        trackingLabel.drawsBackground = false
+        trackingLabel.isBezeled = false
         
         self.showTrackingView()
     }

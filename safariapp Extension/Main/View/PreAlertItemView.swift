@@ -34,7 +34,7 @@ extension MainViewController{
             prealertContentBox!.bottomAnchor.constraint(equalTo: self.prealertContentBox!.bottomAnchor, constant: 0.0).isActive = true
             
             lastPrealertBox = self.prealertContentBox
-            self.createBottomSection(parentSection: self.prealertContentBox!)
+            self.createBottomSection(parentSection: self.prealertContentBox!,isTrack: false)
             
             viewModel.getPrealertList()
             viewModel.didFinishFetch = {
