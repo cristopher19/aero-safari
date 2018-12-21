@@ -79,7 +79,7 @@ struct MainDataManager{
                     
                 }
                 
-            })
+            }) 
     }
    
     /*
@@ -109,19 +109,19 @@ struct MainDataManager{
      * delete item from cart
      * @params ->
      */
-    func deleteCartItem(productId:String,sourceType:String,variantLookup:String, completionHandler: @escaping (_ Result:CartModel?, _ Error:NSError?) -> Void) {
+    func itemLookUp(productId:String,sourceType:String,variantLookup:String, completionHandler: @escaping (_ Result:ItemLookUpModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         
         let userGateway = getUserInformationInStorage()?.gateway ?? ""
         let userLanguage = getUserInformationInStorage()?.lang ?? 1
         let sessionId = getUserInformationInStorage()?.token ?? ""
         let showLocalCurrency = false
-        let urlParams = "productid=\(productId)&gateway=\(userGateway)&lang=\(userLanguage)&sourcetype=\(sourceType)&quantity=1&cartTotal=0&sessionId=\(sessionId)&showLocalCurrency=\(showLocalCurrency)&variantLookup=\(variantLookup)"
+        let urlParams = "productid=\(productId)&gateway=\(userGateway)&lang=\(userLanguage)&sourcetype=\(sourceType)&quantity=1&cartTotal=0&sessionId=\(sessionId)&showLocalCurrency=\(showLocalCurrency)"
         
         let endpoint = Endpoints.Posts.itemLookUp.url + urlParams
         
         sessionManager.request(endpoint,method: .get, headers:headerParameters)
-            .validate().responseObject(completionHandler: {(response: DataResponse<CartModel>) in
+            .validate().responseObject(completionHandler: {(response: DataResponse<ItemLookUpModel>) in
                 switch response.result {
                 case .success(let posts):
                     completionHandler(posts, nil)

@@ -145,17 +145,14 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      * logic for processPage message
      */
     private func quoteProductAction(from page: SFSafariPage, userInfo: [String : Any]?){
-        //pasa el mensaje al script
-        var firstRunColorboxArray = [String]()
-        firstRunColorboxArray.append(PropertyHelper.PROP_COLORBOX_FIRST_RUN_AMAZON)
+        var statusResponse = [String:Any]()
         
-        var processPageMessage = [String:Any]()
-        processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
-        processPageMessage["clientAllowed"] = true
-        processPageMessage["checkRecipient"] = false
-        processPageMessage["firstRunColorboxArray"] = firstRunColorboxArray
-        
-        page.dispatchMessageToScript(withName: "processPage", userInfo: processPageMessage)
+      viewModel.getItemLoockUp(productId: "B075RXJ996", sourceType: "amz", variantLookup: "")
+        viewModel.didFinishFetch = {
+            self.viewModel.itemLoockUpResult?.itemLookUp?.first
+             page.dispatchMessageToScript(withName: "showQuoteData", userInfo: statusResponse)
+        }
+       
         
         
     }

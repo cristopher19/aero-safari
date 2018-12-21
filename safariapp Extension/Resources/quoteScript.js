@@ -105,7 +105,7 @@ var QuoteScript = {
       $("body").attr("style","margin-top:30px!important;");
 
       $("#addToCartBtn").click(function() {
-        safari.self.tab.dispatchMessage("addToCart", {productInfo : product});
+        safari.extension.dispatchMessage("addToCart", {productInfo : product});
       });
 
   },

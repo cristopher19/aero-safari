@@ -28,10 +28,20 @@ class MainViewModel{
     var cartObject: CartModel?
     var prealertStatusList: [PrealertStatus]?
     var packagePrealertResult: PreAlertResponseModel?
+    
+     var itemLoockUpResult: ItemLookUpModel?
     init() {
         dataService = MainDataManager.shared
     }
     
+    // MARK: - Properties
+    private var itemLookUp: ItemLookUpModel? {
+        didSet {
+            guard let p = itemLookUp else { return }
+            self.setupItemLookUp(with: p)
+            self.didFinishFetch?()
+        }
+    }
     
     // MARK: - Properties
     private var packagePrealert: PreAlertResponseModel? {
@@ -76,6 +86,19 @@ class MainViewModel{
             self.setupCart(with: p)
             self.didFinishFetch?()
         }
+    }
+    
+    func getItemLoockUp(productId: String, sourceType: String, variantLookup: String){
+        self.dataService?.itemLookUp(productId: productId, sourceType: sourceType, variantLookup: variantLookup, completionHandler: { (itemLoockUpResult, error) in
+            if let error = error {
+                self.error = error
+                self.isLoading = false
+                return
+            }
+            self.error = nil
+            self.isLoading = false
+            self.itemLoockUpResult = itemLoockUpResult
+        })
     }
     func packagePrealert(prealertDictionary: [String:Any]){
         self.dataService?.createPrealert(prealertDictionary: prealertDictionary, completionHandler: { (prealertStatus, error) in
@@ -197,6 +220,10 @@ class MainViewModel{
     
     private func setupPackagePrealert(with packagePrealert: PreAlertResponseModel){
         self.packagePrealertResult = packagePrealert
+    }
+    
+    private func setupItemLookUp(with itemLookup: ItemLookUpModel){
+        self.itemLoockUpResult = itemLookup
     }
 }
 class FlippedView: NSView {

@@ -58,8 +58,9 @@ COLORBOX_WIDTH: 600,
                var signedIn = msgEvent.message.signedIn;
                var clientAllowed = msgEvent.message.clientAllowed;
                                        
-                                      
+                           console.log("msg name" + msgEvent.name);
                switch (msgEvent.name) {
+                                      
                    case "processPage":
                        ContentScript._checkRecipient = msgEvent.message.checkRecipient;
                        var firstRunColorboxArray = msgEvent.message.firstRunColorboxArray;
@@ -210,17 +211,21 @@ COLORBOX_WIDTH: 600,
                        ContentScript.reloadCurrentTab()
                        break;
                        case "changeTrackingDescription":
-                       var info = msgEvent.message;
-                       var targetButton = $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
-                       if (targetButton.length > 0) {
-                       if(null != info && null != info.description && info.description.length > 0){
-                       var packageInfo = JSON.parse($(targetButton).attr("packageInfo"));
-                       packageInfo.packageDescription = info.description;
-                       $(targetButton).attr("packageInfo", JSON.stringify(packageInfo));
-                       }
-                       
-                       }
-                       
+                           var info = msgEvent.message;
+                           var targetButton = $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
+                           if (targetButton.length > 0) {
+                               if(null != info && null != info.description && info.description.length > 0){
+                                   var packageInfo = JSON.parse($(targetButton).attr("packageInfo"));
+                                   packageInfo.packageDescription = info.description;
+                                   $(targetButton).attr("packageInfo", JSON.stringify(packageInfo));
+                               }
+                           
+                           }
+                       break;
+                       case "showQuoteData":
+                                       console.log("entra aqui");
+                           var info = msgEvent.message;
+                           ContentScript.showQuoteData(info);
                        break;
                }
            }
@@ -228,7 +233,34 @@ COLORBOX_WIDTH: 600,
         //fin document ready
         });
     },
-    
+    /**
+     * Displays quote data returned by the API
+     * @param aQuoteData the quote data to be displayed
+     */
+    showQuoteData : function(aQuoteData) {
+        if (aQuoteData != null && aQuoteData.product != null && aQuoteData.product.hcInfo.hc != null) {
+            // if it already exists, update it
+            if ($("#aero-quote-main-container").length) {
+                QuoteScript._updateQuoteDiv(aQuoteData.product);
+                $("#aero-quote-main-container").removeClass("disabled");
+            } else {
+                // create quote node and inject it
+                var quoteDiv = QuoteScript._createQuoteDiv(aQuoteData.product);
+                $("body").append(quoteDiv);
+            }
+            
+        }  else {
+            // change top bar:
+            //remove loading gif
+            $(".sk-fading-circle").remove();
+            //Show new mesagge
+            $(".blueTextLabel_new").text($.i18n.getString("quote_script_quote_view_all_inclusive_price_message"));
+            $("#quoteBtn").show();
+            // no product, remove the quote div
+            $("#aero-quote-main-container").remove();
+            
+        }
+    },
     /**
      * Reloads the current tab
      */

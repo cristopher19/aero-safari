@@ -23,7 +23,7 @@ class ItemLookUpModel: Mappable{
 class ItemLookUp: Mappable{
     var price: Double?
     var priceTotal: Double?
-    var itemVariations: [ItemVariations]?
+    var itemVariations: [Any]?
     var size: String?
     var color: String?
     var selectedVariation: String?

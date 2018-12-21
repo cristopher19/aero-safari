@@ -361,6 +361,7 @@
 		0E261D0D219A1C5D0048E91B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E2BC13621C41E49002301E1 /* ebayProductObject.swift */,
 				0E261D0E219A1C770048E91B /* Main.storyboard */,
 				0E1D45D4218CEABE0079BB2A /* MainViewController.swift */,
 				0E25E3FF219F3361005DA808 /* TrackItemView.swift */,
@@ -376,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				0E261D1B219A3ABC0048E91B /* MainViewModel.swift */,
-				0E2BC13621C41E49002301E1 /* ebayProductObject.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
