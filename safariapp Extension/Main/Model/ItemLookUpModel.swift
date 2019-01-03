@@ -8,7 +8,7 @@
 
 import Foundation
 import ObjectMapper
-
+import SafariServices
 class ItemLookUpModel: Mappable{
     
     var itemLookUp: [ItemLookUp]?
@@ -23,10 +23,11 @@ class ItemLookUpModel: Mappable{
 class ItemLookUp: Mappable{
     var price: Double?
     var priceTotal: Double?
-    var itemVariations: [Any]?
+    //var itemVariations: Array<T> = Array<T>()
+    var itemVariations: [String: Dictionary<String, Any>]?
     var size: String?
     var color: String?
-    var selectedVariation: String?
+    var selectedVariation: Dictionary<String, Any>?
     required init?(map: Map) {
     }
     

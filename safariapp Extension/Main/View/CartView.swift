@@ -146,7 +146,7 @@ extension MainViewController{
         
         //create text desc items
         let descriptionTextField = TextFieldStyle()
-        descriptionTextField.stringValue = "You don't have any products aaded to your cart yet."
+        descriptionTextField.stringValue = "You don't have any products added to your cart yet."
         descriptionTextField.sizeToFit()
         
         /** btn checkout **/

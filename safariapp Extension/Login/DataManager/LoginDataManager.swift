@@ -43,10 +43,11 @@ struct LoginDataManager{
     * @params -> Account number, Gateway, Password
     */
     func retrieveUserSoap(_ accountNumber: String, _ password: String, _ gateWay: String, completionHandler: @escaping (_ Result:UserModel?, _ Error:NSError?) -> Void) {
-        let soapMessage = String(format: "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\"><soapenv:Header/><soapenv:Body><tem:AuthenticateMyAeroUser><tem:MyAeroGateway>%@</tem:MyAeroGateway><tem:MyAeroAccount>%@</tem:MyAeroAccount><tem:MyAeroPasswordMD5>%@</tem:MyAeroPasswordMD5><tem:remember>true</tem:remember><tem:DeviceID>02e114e7-b206-e3b9-e9d7-1640f9b6d313</tem:DeviceID><tem:MobileType>8</tem:MobileType><tem:OperatingSystemName>Mac</tem:OperatingSystemName><tem:OperatingSystemVersion>10.13</tem:OperatingSystemVersion><tem:DeviceBrand>Chrome</tem:DeviceBrand><tem:DeviceModel>71</tem:DeviceModel><tem:AppName>Aeropost Plug-in</tem:AppName><tem:AppVersion>2.2.3</tem:AppVersion><tem:WebServiceSecurity_User>MyAeroChromeBeta</tem:WebServiceSecurity_User><tem:WebServiceSecurity_Password>Pmc#0Mqc!4ZaV</tem:WebServiceSecurity_Password></tem:AuthenticateMyAeroUser></soapenv:Body></soapenv:Envelope>", gateWay, accountNumber, password.md5())
+        
+        let soapMessage = String(format: "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\"><soapenv:Header/><soapenv:Body><tem:AuthenticateMyAeroUser><tem:MyAeroGateway>%@</tem:MyAeroGateway><tem:MyAeroAccount>%@</tem:MyAeroAccount><tem:MyAeroPasswordMD5>%@</tem:MyAeroPasswordMD5><tem:remember>true</tem:remember><tem:DeviceID>6cfdb7a5-e907-ffe1-ff8c-b6038158ee8f</tem:DeviceID><tem:MobileType>8</tem:MobileType><tem:OperatingSystemName>Mac</tem:OperatingSystemName><tem:OperatingSystemVersion>10.13</tem:OperatingSystemVersion><tem:DeviceBrand>Chrome</tem:DeviceBrand><tem:DeviceModel>71</tem:DeviceModel><tem:AppName>Aeropost Plug-in</tem:AppName><tem:AppVersion>2.2.3</tem:AppVersion><tem:WebServiceSecurity_User>MyAeroChromeBeta</tem:WebServiceSecurity_User><tem:WebServiceSecurity_Password>Pmc#0Mqc!4ZaV</tem:WebServiceSecurity_Password></tem:AuthenticateMyAeroUser></soapenv:Body></soapenv:Envelope>", gateWay, accountNumber, password.md5())
         
         let msgLength = soapMessage.count
-        let urlString = "https://www2.myaeropost.com/WS_MyAero/Services.svc"
+        let urlString = SoapUrl.actionUrl
         let soapAction = "http://tempuri.org/IServices/AuthenticateMyAeroUser"
         
         let url = URL(string: urlString)!

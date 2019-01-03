@@ -145,12 +145,12 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      * logic for processPage message
      */
     private func quoteProductAction(from page: SFSafariPage, userInfo: [String : Any]?){
-        var statusResponse = [String:Any]()
-        
-      viewModel.getItemLoockUp(productId: "B075RXJ996", sourceType: "amz", variantLookup: "")
+      
+        var prealertDictionary = [String:Any]()
+      viewModel.getItemLoockUp(productId: "B07JHL5RYR", sourceType: "amz", variantLookup: false)
         viewModel.didFinishFetch = {
-            self.viewModel.itemLoockUpResult?.itemLookUp?.first
-             page.dispatchMessageToScript(withName: "showQuoteData", userInfo: statusResponse)
+            let response = self.viewModel.itemLoockUpResult
+             page.dispatchMessageToScript(withName: "showQuoteData", userInfo: prealertDictionary)
         }
        
         

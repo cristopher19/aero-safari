@@ -106,17 +106,17 @@ struct MainDataManager{
     
     /*
      * MARK: - Prealert list
-     * delete item from cart
+     * item look up
      * @params ->
      */
-    func itemLookUp(productId:String,sourceType:String,variantLookup:String, completionHandler: @escaping (_ Result:ItemLookUpModel?, _ Error:NSError?) -> Void) {
+    func itemLookUp(productId:String,sourceType:String,variantLookup:Bool, completionHandler: @escaping (_ Result:ItemLookUpModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         
         let userGateway = getUserInformationInStorage()?.gateway ?? ""
         let userLanguage = getUserInformationInStorage()?.lang ?? 1
         let sessionId = getUserInformationInStorage()?.token ?? ""
         let showLocalCurrency = false
-        let urlParams = "productid=\(productId)&gateway=\(userGateway)&lang=\(userLanguage)&sourcetype=\(sourceType)&quantity=1&cartTotal=0&sessionId=\(sessionId)&showLocalCurrency=\(showLocalCurrency)"
+        let urlParams = "productid=\(productId)&gateway=\(userGateway)&lang=\(userLanguage)&sourcetype=\(sourceType)&quantity=1&cartTotal=0&sessionId=\(sessionId)&showLocalCurrency=\(showLocalCurrency)&variantLookup=\(variantLookup)"
         
         let endpoint = Endpoints.Posts.itemLookUp.url + urlParams
         
@@ -235,9 +235,6 @@ struct MainDataManager{
                     completionHandler(nil, error as NSError?)
                     
                 }
-                
             })
     }
-    
-    
 }

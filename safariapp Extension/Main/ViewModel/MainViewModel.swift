@@ -29,7 +29,7 @@ class MainViewModel{
     var prealertStatusList: [PrealertStatus]?
     var packagePrealertResult: PreAlertResponseModel?
     
-     var itemLoockUpResult: ItemLookUpModel?
+     var itemLoockUpResult: ItemLookUp?
     init() {
         dataService = MainDataManager.shared
     }
@@ -88,7 +88,7 @@ class MainViewModel{
         }
     }
     
-    func getItemLoockUp(productId: String, sourceType: String, variantLookup: String){
+    func getItemLoockUp(productId: String, sourceType: String, variantLookup: Bool){
         self.dataService?.itemLookUp(productId: productId, sourceType: sourceType, variantLookup: variantLookup, completionHandler: { (itemLoockUpResult, error) in
             if let error = error {
                 self.error = error
@@ -97,7 +97,7 @@ class MainViewModel{
             }
             self.error = nil
             self.isLoading = false
-            self.itemLoockUpResult = itemLoockUpResult
+            self.itemLookUp = itemLoockUpResult
         })
     }
     func packagePrealert(prealertDictionary: [String:Any]){
@@ -222,8 +222,26 @@ class MainViewModel{
         self.packagePrealertResult = packagePrealert
     }
     
-    private func setupItemLookUp(with itemLookup: ItemLookUpModel){
-        self.itemLoockUpResult = itemLookup
+    private func setupItemLookUp(with item: ItemLookUpModel){
+        var variantKey = ""
+        let firstItem = item.itemLookUp?.first
+        if(firstItem != nil){
+            variantKey = firstItem?.size != nil ? firstItem?.size?.lowercased().replacingOccurrences(of: "", with: "") ?? "" : ""
+            variantKey += firstItem?.color != nil ? firstItem?.color?.lowercased() ?? "" : ""
+            
+          variantKey = "x-largeb-hof110-ocs"
+            
+            if let val = firstItem?.itemVariations {
+                if let variant = val[variantKey]{
+                    firstItem?.price = variant["price"] as? Double
+                    firstItem?.color = variant["color"] as? String
+                    firstItem?.selectedVariation = variant
+                }else{
+                    firstItem?.selectedVariation = nil
+                }
+            }
+        }
+        itemLoockUpResult = firstItem
     }
 }
 class FlippedView: NSView {
