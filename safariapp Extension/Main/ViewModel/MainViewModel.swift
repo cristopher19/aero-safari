@@ -8,6 +8,7 @@
 
 import Foundation
 import SafariServices
+import SwiftyJSON
 class MainViewModel{
     private var dataService: MainDataManager?
     
@@ -29,13 +30,13 @@ class MainViewModel{
     var prealertStatusList: [PrealertStatus]?
     var packagePrealertResult: PreAlertResponseModel?
     
-     var itemLoockUpResult: ItemLookUp?
+     var itemLoockUpResult: JSON?
     init() {
         dataService = MainDataManager.shared
     }
     
     // MARK: - Properties
-    private var itemLookUp: ItemLookUpModel? {
+    private var itemLookUp: JSON? {
         didSet {
             guard let p = itemLookUp else { return }
             self.setupItemLookUp(with: p)
@@ -88,18 +89,80 @@ class MainViewModel{
         }
     }
     
-    func getItemLoockUp(productId: String, sourceType: String, variantLookup: Bool){
-        self.dataService?.itemLookUp(productId: productId, sourceType: sourceType, variantLookup: variantLookup, completionHandler: { (itemLoockUpResult, error) in
+    func getItemLoockUp(userInfo: [String:Any], sourceType: String){
+   
+        self.dataService?.itemLookUp(productId: userInfo["productASIN"] as! String, sourceType: sourceType, variantLookup: true, completionHandler: { (itemLoockUpResult, error) in
             if let error = error {
                 self.error = error
                 self.isLoading = false
                 return
             }
+            let colorReq = userInfo["color"] as? String != nil ?  userInfo["color"] as! String : ""
+            let sizeReq = userInfo["size"] as? String != nil ?  userInfo["size"] as! String : ""
+            var variantKey = ""
+            if let lookUpItem = itemLoockUpResult {
+                var firstItem = lookUpItem["results"][0]
+                variantKey =  sizeReq.lowercased().replacingOccurrences(of: "", with: "")
+                variantKey += colorReq.lowercased()
+                
+                print("item color = \(colorReq) item size= \(sizeReq)")
+                
+                let val = firstItem["itemVariations"].dictionaryValue
+                if let variant = val[variantKey]{
+                    firstItem["price"] = variant["price"]
+                    firstItem["color"]  = variant["color"]
+                    firstItem["selectedVariation"] = variant
+                }else{
+                    firstItem["selectedVariation"] = ""
+                }
+                
+                self.itemLookUp = firstItem
+            }else{
+                self.itemLookUp = nil
+            }
             self.error = nil
             self.isLoading = false
-            self.itemLookUp = itemLoockUpResult
+            
         })
     }
+    
+    func addToCart(userInfo: [String:Any], sourceType: String){
+        
+        self.dataService?.itemLookUp(productId: userInfo["productASIN"] as! String, completionHandler: { (itemLoockUpResult, error) in
+            if let error = error {
+                self.error = error
+                self.isLoading = false
+                return
+            }
+            let colorReq = userInfo["color"] as? String != nil ?  userInfo["color"] as! String : ""
+            let sizeReq = userInfo["size"] as? String != nil ?  userInfo["size"] as! String : ""
+            var variantKey = ""
+            if let lookUpItem = itemLoockUpResult {
+                var firstItem = lookUpItem["results"][0]
+                variantKey =  sizeReq.lowercased().replacingOccurrences(of: "", with: "")
+                variantKey += colorReq.lowercased()
+                
+                print("item color = \(colorReq) item size= \(sizeReq)")
+                
+                let val = firstItem["itemVariations"].dictionaryValue
+                if let variant = val[variantKey]{
+                    firstItem["price"] = variant["price"]
+                    firstItem["color"]  = variant["color"]
+                    firstItem["selectedVariation"] = variant
+                }else{
+                    firstItem["selectedVariation"] = ""
+                }
+                
+                self.itemLookUp = firstItem
+            }else{
+                self.itemLookUp = nil
+            }
+            self.error = nil
+            self.isLoading = false
+            
+        })
+    }
+    
     func packagePrealert(prealertDictionary: [String:Any]){
         self.dataService?.createPrealert(prealertDictionary: prealertDictionary, completionHandler: { (prealertStatus, error) in
             if let error = error {
@@ -222,26 +285,8 @@ class MainViewModel{
         self.packagePrealertResult = packagePrealert
     }
     
-    private func setupItemLookUp(with item: ItemLookUpModel){
-        var variantKey = ""
-        let firstItem = item.itemLookUp?.first
-        if(firstItem != nil){
-            variantKey = firstItem?.size != nil ? firstItem?.size?.lowercased().replacingOccurrences(of: "", with: "") ?? "" : ""
-            variantKey += firstItem?.color != nil ? firstItem?.color?.lowercased() ?? "" : ""
-            
-          variantKey = "x-largeb-hof110-ocs"
-            
-            if let val = firstItem?.itemVariations {
-                if let variant = val[variantKey]{
-                    firstItem?.price = variant["price"] as? Double
-                    firstItem?.color = variant["color"] as? String
-                    firstItem?.selectedVariation = variant
-                }else{
-                    firstItem?.selectedVariation = nil
-                }
-            }
-        }
-        itemLoockUpResult = firstItem
+    private func setupItemLookUp(with item: JSON){
+        itemLoockUpResult = item
     }
 }
 class FlippedView: NSView {

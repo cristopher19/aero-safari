@@ -61,7 +61,6 @@
 		0E2F4FA021CC2696006D93F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA221CC2696006D93F5 /* Localizable.strings */; };
 		0E2F4FA521CC345C006D93F5 /* amazonScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA421CC345C006D93F5 /* amazonScript.js */; };
 		0E2F4FA721CC3E56006D93F5 /* quoteScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA621CC3E56006D93F5 /* quoteScript.js */; };
-		0E2F4FA921CC596B006D93F5 /* ItemLookUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA821CC596B006D93F5 /* ItemLookUpModel.swift */; };
 		0E2F90F921C017AA0019118B /* notification.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90F821C017AA0019118B /* notification.js */; };
 		0E2F90FB21C023900019118B /* logo_32_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90FA21C023900019118B /* logo_32_32.png */; };
 		0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F90FC21C0242F0019118B /* NotificationObject.swift */; };
@@ -156,7 +155,6 @@
 		0E2F4FA321CC26BC006D93F5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E2F4FA421CC345C006D93F5 /* amazonScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazonScript.js; sourceTree = "<group>"; };
 		0E2F4FA621CC3E56006D93F5 /* quoteScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = quoteScript.js; sourceTree = "<group>"; };
-		0E2F4FA821CC596B006D93F5 /* ItemLookUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLookUpModel.swift; sourceTree = "<group>"; };
 		0E2F90F821C017AA0019118B /* notification.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = notification.js; sourceTree = "<group>"; };
 		0E2F90FA21C023900019118B /* logo_32_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_32_32.png; sourceTree = "<group>"; };
 		0E2F90FC21C0242F0019118B /* NotificationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObject.swift; sourceTree = "<group>"; };
@@ -388,7 +386,6 @@
 				0E261D17219A3AA20048E91B /* TrackModel.swift */,
 				0E2ADBE921AEF5F30095BC18 /* CartModel.swift */,
 				0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */,
-				0E2F4FA821CC596B006D93F5 /* ItemLookUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -679,7 +676,6 @@
 				0E2A840321A4CA2F00748658 /* PreAlertItemView.swift in Sources */,
 				0E30B6D821A36B7300662A34 /* ColorPalette.swift in Sources */,
 				0E25334121A5A63700EE0221 /* TextFieldStyle.swift in Sources */,
-				0E2F4FA921CC596B006D93F5 /* ItemLookUpModel.swift in Sources */,
 				0E1D45CE218CE4C20079BB2A /* ModalAnimator.swift in Sources */,
 				0E23B62921A770E4001AB560 /* UserView.swift in Sources */,
 				0E2E690221B99DAE001CFE81 /* PropertyHelper.swift in Sources */,

@@ -47,11 +47,26 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             case "quoteProduct":
                 quoteProductAction(from: page, userInfo: data)
                 break;
+            case "addToCart":
+                addToCartAction(from: page, userInfo: data)
+                break;
             default:
                 print("")
             }
         }
     }
+    /*
+     * logic for addCart message
+     */
+    private func addToCartAction(from page: SFSafariPage, userInfo: [String : Any]?){
+        var calculatePriceDictionary = [String:Any]()
+        viewModel.getItemLoockUp(userInfo: userInfo ?? [String:Any](), sourceType: "amz")
+        viewModel.didFinishFetch = {
+            calculatePriceDictionary["product"] = self.viewModel.itemLoockUpResult.dictionary
+            page.dispatchMessageToScript(withName: "showQuoteAgain", userInfo: calculatePriceDictionary)
+        }
+    }
+    
     /*
      * logic for processPage message
      */
@@ -84,7 +99,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             
             let countDescription =  itemDescriptions.components(separatedBy: "|%|")
             
-            for (index, count) in  countDescription.enumerated(){
+            for (index, _) in  countDescription.enumerated(){
                 
                 var productObj = EbayProductObject()
                 productObj.description = countDescription[index]
@@ -145,16 +160,12 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      * logic for processPage message
      */
     private func quoteProductAction(from page: SFSafariPage, userInfo: [String : Any]?){
-      
-        var prealertDictionary = [String:Any]()
-      viewModel.getItemLoockUp(productId: "B07JHL5RYR", sourceType: "amz", variantLookup: false)
+       var calculatePriceDictionary = [String:Any]()
+        viewModel.getItemLoockUp(userInfo: userInfo ?? [String:Any](), sourceType: "amz")
         viewModel.didFinishFetch = {
-            let response = self.viewModel.itemLoockUpResult
-             page.dispatchMessageToScript(withName: "showQuoteData", userInfo: prealertDictionary)
+            calculatePriceDictionary["product"] = self.viewModel.itemLoockUpResult.dictionary
+             page.dispatchMessageToScript(withName: "showQuoteData", userInfo: calculatePriceDictionary)
         }
-       
-        
-        
     }
     
     /*

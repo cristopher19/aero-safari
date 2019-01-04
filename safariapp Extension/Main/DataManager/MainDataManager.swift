@@ -81,6 +81,64 @@ struct MainDataManager{
                 
             }) 
     }
+    
+    
+    /*
+     * MARK: - Prealert list
+     * retrieve prealert list
+     * @params ->
+     */
+    func addToCart(completionHandler: @escaping (_ Result:TrackModel?, _ Error:NSError?) -> Void) {
+        let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
+        var parametersBody = [ String : Any]()
+        var parametersBodyFilter = [ String : Any]()
+        parametersBodyFilter["lang"] = "en"
+        parametersBodyFilter["sessionId"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["account"] = getUserInformationInStorage()?.accountNumber ?? ""
+        parametersBodyFilter["gateway"] = getUserInformationInStorage()?.gateway ?? ""
+        parametersBodyFilter["gateway"] = getUserInformationInStorage()?.gateway ?? ""
+        
+        parametersBodyFilter["amazonTax"] = 6
+        parametersBodyFilter["shipping"] = 1
+        parametersBodyFilter["shippingRate"] = true
+        
+        parametersBodyFilter["subtotal"] = false
+        parametersBodyFilter["taxes"] = false
+        parametersBodyFilter["totalPrice"] = false
+        
+        parametersBodyFilter["hcCode"] = "inTransit"
+        parametersBodyFilter["image"] = ""
+        parametersBodyFilter["productUrl"] = "en"
+        
+        parametersBodyFilter["quantity"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["administrativeFee"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["declaredValue"] = getUserInformationInStorage()?.token ?? ""
+        
+        
+        parametersBodyFilter["price"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["category"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["title"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["weight"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["amazonTax"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["sku"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["productJson"] = getUserInformationInStorage()?.token ?? ""
+        
+        
+        
+        sessionManager.request(Endpoints.Posts.getTracking.url,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
+            .validate().responseObject(completionHandler: {(response: DataResponse<TrackModel>) in
+                switch response.result {
+                case .success(let posts):
+                    completionHandler(posts, nil)
+                case .failure( let error):
+                    print("Request failed with error:\(error)")
+                    completionHandler(nil, error as NSError?)
+                    
+                }
+                
+            })
+    }
+    
    
     /*
      * MARK: - Prealert list
@@ -109,28 +167,29 @@ struct MainDataManager{
      * item look up
      * @params ->
      */
-    func itemLookUp(productId:String,sourceType:String,variantLookup:Bool, completionHandler: @escaping (_ Result:ItemLookUpModel?, _ Error:NSError?) -> Void) {
+    func itemLookUp(productId:String,sourceType:String,variantLookup:Bool, completionHandler: @escaping (_ Result:JSON?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         
         let userGateway = getUserInformationInStorage()?.gateway ?? ""
         let userLanguage = getUserInformationInStorage()?.lang ?? 1
         let sessionId = getUserInformationInStorage()?.token ?? ""
         let showLocalCurrency = false
+        
         let urlParams = "productid=\(productId)&gateway=\(userGateway)&lang=\(userLanguage)&sourcetype=\(sourceType)&quantity=1&cartTotal=0&sessionId=\(sessionId)&showLocalCurrency=\(showLocalCurrency)&variantLookup=\(variantLookup)"
         
         let endpoint = Endpoints.Posts.itemLookUp.url + urlParams
         
         sessionManager.request(endpoint,method: .get, headers:headerParameters)
-            .validate().responseObject(completionHandler: {(response: DataResponse<ItemLookUpModel>) in
+            .validate().responseJSON { response in
                 switch response.result {
                 case .success(let posts):
-                    completionHandler(posts, nil)
+                    completionHandler(JSON(posts), nil)
                 case .failure( let error):
                     print("Request failed with error:\(error)")
                     completionHandler(nil, error as NSError?)
                     
                 }
-            })
+            }
     }
     
     /*
