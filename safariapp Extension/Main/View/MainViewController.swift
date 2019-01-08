@@ -116,6 +116,8 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
             print("default browser was successfully opened")
         }
     }
+    
+    
 }
 
 

@@ -56,12 +56,14 @@ extension MainViewController{
         // Code for show activity indicator view
         // ...
         print("start loading")
+        showActivityIndicator(parentView: boxTrack)
     }
     
     private func activityIndicatorStop() {
         // Code for stop activity indicator view
         // ...
         print("stop loading")
+        stopActivityIndicator(parentView: boxTrack)
     }
     //section tracking - prealert
     func createBottomSection(parentSection: NSView, isTrack: Bool){
@@ -74,7 +76,7 @@ extension MainViewController{
         
         //create text tracking
         let trackingTextField = NSTextField()
-        trackingTextField.stringValue = "Tracking"
+        trackingTextField.stringValue = "track_title".localized()
         trackingTextField.isEditable = false
         trackingTextField.drawsBackground = false
         trackingTextField.isBezeled = false
@@ -90,7 +92,7 @@ extension MainViewController{
         
         //create text prealert
         let prealertTextField = NSTextField()
-        prealertTextField.stringValue = "Prealert"
+        prealertTextField.stringValue = "prealert_title".localized()
         prealertTextField.isEditable = false
         prealertTextField.drawsBackground = false
         prealertTextField.isBezeled = false
@@ -203,7 +205,7 @@ extension MainViewController{
         
         //create text count items
         let countItemsTextField = NSTextField()
-        countItemsTextField.stringValue = "Last 10 trackings"
+        countItemsTextField.stringValue = "track_title_last_trackings".localized()
         countItemsTextField.isEditable = false
         countItemsTextField.drawsBackground = false
         countItemsTextField.isBezeled = false
@@ -267,15 +269,15 @@ extension MainViewController{
             
             //create text date
             let dateTextField =  TextFieldStyle()
-            dateTextField.stringValue = "Date:"
+            dateTextField.stringValue = "track_date".localized()
             
             //create text aerotrack
             let aeroTrackTextField = TextFieldStyle()
-            aeroTrackTextField.stringValue = "Aerotrack #:"
+            aeroTrackTextField.stringValue = "track_aero_track".localized()
             
             //create text status
             let statusTextField = TextFieldStyle()
-            statusTextField.stringValue = "Status: "
+            statusTextField.stringValue = "track_status".localized()
             
             //create text datevalue
             let dateValueTextField = TextFieldStyle()

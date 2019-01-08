@@ -11,3 +11,48 @@
 "login_description" = "Sing in with your aeropost.com credentials";
 "login_forgot_password" = "Forgot your password?";
 "login_plugin_version" = "This is the version of the Aeropost Plug In V.2.2.3";
+//cart
+"addtocart_congratulations_title" =  "extension.addtocart.congratulations.title";
+"addtocart_congratulations_msg" = "extension.addtocart.congratulations.msg";
+"removetocart_congratulations_msg" = "Product removed from your cart!";
+"addtocart_error_title" = "extension.addtocart.error.title";
+"addtocart_error_msg" = "extension.addtocart.error.msg";
+"removetocart_error_msg" = "We were not able to remove the product from your cart";
+//track
+"track_title" = "Tracking";
+"track_title_last_trackings" = "Last 10 trackings";
+"track_date" = "Date: ";
+"track_aero_track" = "Aerotrack #: ";
+"track_status" = "Status: ";
+//prealert
+"prealert_title" = "Prealert";
+"prealert_title_last_trackings" = "Last 10 prealert shown";
+"prealert_new_prealert" = "New Prealert";
+"prealert_edit" = "Edit";
+//profile
+"profile_account" = "Account";
+"profile_logOut" = "Logout";
+"profile_information" = "Profile Information";
+"profile_address_information" = "Address Information";
+"profile_edit_information" = "Edit Information";
+"profile_name" = "Name: ";
+"profile_account" = "Account: ";
+"profile_delivery" = "Delivery: ";
+"profile_address" = "Address: ";
+"profile_phone" = "Phone: ";
+//cart
+"cart_shopping_title" = "Shopping cart (%@)";
+"cart_empty" = "Your cart is empty";
+"cart_empty_description" = "You don't have any products added to your cart yet.";
+"cart_visit_aero" = "Visit Aeropost.com";
+"cart_quantity" = "Quantity %@";
+"cart_remove" = "Remove";
+"cart_order_summary" = "Order summary";
+"cart_subtotal" = "Subtotal: ";
+"cart_admin_fee" = "Administrative Fee: ";
+"cart_taxes" = "Taxes";
+"cart_shipping_cost" = "Shipping cost to destination country";
+"cart_multiple_products" = "Multiple Product discount";
+"cart_order_total" = "Order total";
+"cart_price_includes" = "Price includes shipping and taxes";
+"cart_continue_checkout" = "Continue to checkout";

@@ -98,7 +98,7 @@ extension MainViewController{
         
         //create text count items
         let countItemsTextField = NSTextField()
-        countItemsTextField.stringValue = "Last 10 prealert shown"
+        countItemsTextField.stringValue = "prealert_title_last_trackings".localized()
         countItemsTextField.isEditable = false
         countItemsTextField.drawsBackground = false
         countItemsTextField.isBezeled = false
@@ -118,7 +118,7 @@ extension MainViewController{
         buttonPrealert.layer?.cornerRadius = 4
         buttonPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonPrealert.isBordered = true
-        buttonPrealert.title = "New Prealert"
+        buttonPrealert.title = "prealert_new_prealert".localized()
         buttonPrealert.tag = UrlPages.prealert.idPage
         buttonPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
         
@@ -207,7 +207,7 @@ extension MainViewController{
             editPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
             editPrealert.layer?.cornerRadius = 4
             editPrealert.isBordered = true
-            editPrealert.title = "Edit"
+            editPrealert.title = "prealert_edit".localized()
             editPrealert.tag = UrlPages.prealert.idPage
             editPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
             

@@ -29,10 +29,19 @@ class MainViewModel{
     var cartObject: CartModel?
     var prealertStatusList: [PrealertStatus]?
     var packagePrealertResult: PreAlertResponseModel?
-    
-     var itemLoockUpResult: JSON?
+    var addCartResult: BasciRsponseModel?
+    var itemLoockUpResult: JSON?
     init() {
         dataService = MainDataManager.shared
+    }
+    
+    // MARK: - Properties
+    private var addTocartProp: BasciRsponseModel? {
+        didSet {
+            guard let p = addTocartProp else { return }
+            self.setupAddToCart(with: p)
+            self.didFinishFetch?()
+        }
     }
     
     // MARK: - Properties
@@ -126,42 +135,20 @@ class MainViewModel{
         })
     }
     
-    func addToCart(userInfo: [String:Any], sourceType: String){
+    func addToCart(userInfo: [String:Any]){
         
-        self.dataService?.itemLookUp(productId: userInfo["productASIN"] as! String, completionHandler: { (itemLoockUpResult, error) in
+        self.dataService?.addToCart(product: userInfo, completionHandler: { (addCartResult, error) in
             if let error = error {
                 self.error = error
                 self.isLoading = false
                 return
             }
-            let colorReq = userInfo["color"] as? String != nil ?  userInfo["color"] as! String : ""
-            let sizeReq = userInfo["size"] as? String != nil ?  userInfo["size"] as! String : ""
-            var variantKey = ""
-            if let lookUpItem = itemLoockUpResult {
-                var firstItem = lookUpItem["results"][0]
-                variantKey =  sizeReq.lowercased().replacingOccurrences(of: "", with: "")
-                variantKey += colorReq.lowercased()
-                
-                print("item color = \(colorReq) item size= \(sizeReq)")
-                
-                let val = firstItem["itemVariations"].dictionaryValue
-                if let variant = val[variantKey]{
-                    firstItem["price"] = variant["price"]
-                    firstItem["color"]  = variant["color"]
-                    firstItem["selectedVariation"] = variant
-                }else{
-                    firstItem["selectedVariation"] = ""
-                }
-                
-                self.itemLookUp = firstItem
-            }else{
-                self.itemLookUp = nil
-            }
             self.error = nil
             self.isLoading = false
-            
+            self.addTocartProp = addCartResult
         })
     }
+    
     
     func packagePrealert(prealertDictionary: [String:Any]){
         self.dataService?.createPrealert(prealertDictionary: prealertDictionary, completionHandler: { (prealertStatus, error) in
@@ -190,6 +177,7 @@ class MainViewModel{
     }
     
     func getOrderPackagesList(){
+
         self.dataService?.retrievePackageTrackingList(completionHandler: { (tracking, error) in
             if let error = error {
                 self.error = error
@@ -203,6 +191,7 @@ class MainViewModel{
     }
     
     func getPrealertList(){
+   
         self.dataService?.retrievePrealertList(completionHandler: { (prealerts, error) in
             if let error = error {
                 self.error = error
@@ -215,6 +204,7 @@ class MainViewModel{
         })
     }
     func getCart(){
+  
         self.dataService?.retrieveCart(completionHandler: { (cart, error) in
             if let error = error {
                 self.error = error
@@ -287,6 +277,17 @@ class MainViewModel{
     
     private func setupItemLookUp(with item: JSON){
         itemLoockUpResult = item
+    }
+    
+    private func setupAddToCart(with item: BasciRsponseModel){
+        if(item.status == 201){
+            item.descriptionTitle = "addtocart_congratulations_title".localized()
+            item.description = "addtocart_congratulations_msg".localized()
+        }else{
+            item.descriptionTitle = "addtocart_error_title".localized()
+            item.description = "addtocart_error_msg".localized()
+        }
+        addCartResult = item
     }
 }
 class FlippedView: NSView {

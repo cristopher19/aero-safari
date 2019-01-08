@@ -21,8 +21,10 @@ class LoginViewModel{
     private var user: UserModel? {
         didSet {
             guard let p = user else { return }
+           
             self.setupText(with: p)
             self.didFinishFetch?()
+            
         }
     }
     
@@ -30,8 +32,10 @@ class LoginViewModel{
     private var countries: CountriesModel? {
         didSet {
             guard let p = countries else { return }
+          
             self.setupArray(with: p)
             self.didFinishFetch?()
+           
         }
     }
     
@@ -48,7 +52,7 @@ class LoginViewModel{
     var didFinishFetch: (() -> ())?
     
     func userAuth(_ accountNumber: String, _ password: String, _ gateWay: String){
-        
+        self.isLoading = true
         self.dataService?.retrieveUserSoap(accountNumber,password,gateWay, completionHandler: { (user, error) in
             if let error = error {
                 self.error = error
@@ -92,6 +96,7 @@ class LoginViewModel{
     }
     
     func getCountries(){
+        
         self.dataService?.retrieveCountries(completionHandler: { (countries, error) in
             if let error = error {
                 self.error = error

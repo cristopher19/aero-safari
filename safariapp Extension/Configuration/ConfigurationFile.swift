@@ -35,6 +35,7 @@ enum Endpoints {
         case prealertPackageAmazon
         case prealertPackageEbay
         case itemLookUp
+        case addShoppingCart
         public var path: String {
             switch self {
             case .getCountries: return "/country/GetCountries?ip=&lang="
@@ -46,6 +47,7 @@ enum Endpoints {
             case .prealertPackageAmazon: return "/PackagePrealert/PrealertAmazon"
             case .prealertPackageEbay: return "/PackagePrealert/PrealertEbay"
             case .itemLookUp: return "/search/itemlookup?"
+            case .addShoppingCart: return "/shoppingcart/AddShoppingCartProduct"
             }
         }
         
@@ -60,6 +62,7 @@ enum Endpoints {
             case .prealertPackageAmazon:return "\(API.baseUrl)\(path)"
             case .prealertPackageEbay:return "\(API.baseUrl)\(path)"
             case .itemLookUp:return "\(API.baseUrl)\(path)"
+            case .addShoppingCart:return "\(API.baseUrl)\(path)"
             }
         }
     }

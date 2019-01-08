@@ -227,7 +227,9 @@ COLORBOX_WIDTH: 600,
                            ContentScript.showQuoteData(info);
                        break;
                        case "showQuoteAgain":
-                            $("#addToCartBtn").text( $.i18n.getString("quote_script_quote_add_again_label") );
+                            var info = msgEvent.message;
+                            ContentScript.showNotification(info,false,1)
+                            $("#addToCartBtn").text($.i18n.getString("quote_script_quote_add_again_label") );
                        break;
                }
            }

@@ -64,7 +64,7 @@ extension MainViewController{
         if(cartObjects == 0){
             //create text count items
             let accountTitleTextField = TextFieldStyle()
-            accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
+            accountTitleTextField.stringValue = String(format: NSLocalizedString("cart_shopping_title", comment: "any comment"), String(cartObjects))
             accountTitleTextField.sizeToFit()
             accountTitleTextField.tag = 903
             // add items to trackbox
@@ -115,7 +115,7 @@ extension MainViewController{
             
             //create text count items
             let accountTitleTextField = TextFieldStyle()
-            accountTitleTextField.stringValue = "Shopping cart (\(String(cartObjects)))"
+            accountTitleTextField.stringValue = String(format: NSLocalizedString("cart_shopping_title", comment: "any comment"), String(cartObjects))
             accountTitleTextField.sizeToFit()
             accountTitleTextField.tag = 903
             // add items to trackbox
@@ -141,12 +141,12 @@ extension MainViewController{
         
         //create text desc items
         let cartEmptyTextField = TextFieldStyle()
-        cartEmptyTextField.stringValue = "Your cart is empty"
+        cartEmptyTextField.stringValue = "cart_empty".localized()
         cartEmptyTextField.sizeToFit()
         
         //create text desc items
         let descriptionTextField = TextFieldStyle()
-        descriptionTextField.stringValue = "You don't have any products added to your cart yet."
+        descriptionTextField.stringValue = "cart_empty_description".localized()
         descriptionTextField.sizeToFit()
         
         /** btn checkout **/
@@ -154,7 +154,7 @@ extension MainViewController{
         buttonLogOut.wantsLayer = true
         buttonLogOut.layer?.cornerRadius = 4
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
-        buttonLogOut.title = "Visit Aeropost.com"
+        buttonLogOut.title = "cart_visit_aero".localized()
         buttonLogOut.tag = UrlPages.checkOut.idPage
         buttonLogOut.action = #selector(MainViewController.openUrlInWeb(_:))
         
@@ -216,12 +216,12 @@ extension MainViewController{
                 
                 //create text courier name items
                 let quantityTextField = TextFieldStyle()
-                quantityTextField.stringValue = "Quantity \(itemCart.quantity ?? 0)"
+                quantityTextField.stringValue = String(format: NSLocalizedString("cart_quantity", comment: "any comment"), itemCart.quantity ?? 0)
                 quantityTextField.sizeToFit()
                 
                 //create text courier name items
                 let removeTextField = TextFieldStyle()
-                removeTextField.stringValue = "Remove"
+                removeTextField.stringValue = "cart_remove".localized()
                 removeTextField.sizeToFit()
                 removeTextField.tag = index
                 let removeClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
@@ -303,49 +303,49 @@ extension MainViewController{
         
         //create text desc items
         let titleTextField = TextFieldStyle()
-        titleTextField.stringValue = "Order summary".uppercased()
+        titleTextField.stringValue = "cart_order_summary".localized().uppercased()
         titleTextField.sizeToFit()
         titleTextField.alignment = .center
         
         //create text desc items
         let subTotalTextField = TextFieldStyle()
-        subTotalTextField.stringValue = "Subtotal: "
+        subTotalTextField.stringValue = "cart_subtotal".localized()
         subTotalTextField.sizeToFit()
         subTotalTextField.alignment = .right
         
         //create text desc items
         let admFeeTextField = TextFieldStyle()
-        admFeeTextField.stringValue = "Administrative Fee: "
+        admFeeTextField.stringValue = "cart_admin_fee".localized()
         admFeeTextField.sizeToFit()
         admFeeTextField.alignment = .right
         
         //create text desc items
         let taxesTextField = TextFieldStyle()
-        taxesTextField.stringValue = "Taxes"
+        taxesTextField.stringValue = "cart_taxes".localized()
         taxesTextField.sizeToFit()
         taxesTextField.alignment = .right
         
         //create text desc items
         let shippingCostTextField = TextFieldStyle()
-        shippingCostTextField.stringValue = "Shipping cost to destination country"
+        shippingCostTextField.stringValue = "cart_shipping_cost".localized()
         shippingCostTextField.sizeToFit()
         shippingCostTextField.alignment = .right
         
         //create text desc items
         let multipleProductTextField = TextFieldStyle()
-        multipleProductTextField.stringValue = "Multiple Product discount"
+        multipleProductTextField.stringValue = "cart_multiple_products".localized()
         multipleProductTextField.sizeToFit()
         multipleProductTextField.alignment = .right
         
         //create text desc items
         let orderTotalTextField = TextFieldStyle()
-        orderTotalTextField.stringValue = "Order total".uppercased()
+        orderTotalTextField.stringValue = "cart_order_total".localized().uppercased()
         orderTotalTextField.sizeToFit()
         orderTotalTextField.alignment = .right
         
         //create text desc items
         let priceDescriptionTextField = TextFieldStyle()
-        priceDescriptionTextField.stringValue = "Price includes shipping and taxes"
+        priceDescriptionTextField.stringValue = "cart_price_includes".localized()
         priceDescriptionTextField.sizeToFit()
         priceDescriptionTextField.alignment = .right
         
@@ -389,7 +389,7 @@ extension MainViewController{
         buttonLogOut.wantsLayer = true
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonLogOut.layer?.cornerRadius = 4
-        buttonLogOut.title = "Continue to checkout"
+        buttonLogOut.title = "cart_continue_checkout".localized()
         buttonLogOut.tag = UrlPages.checkOut.idPage
         buttonLogOut.action = #selector(MainViewController.openUrlInWeb(_:))
         

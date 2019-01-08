@@ -13,7 +13,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         page.getPropertiesWithCompletionHandler { properties in
-            NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
+         
         }
         if let data = userInfo {
             switch messageName {
@@ -59,11 +59,17 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
      * logic for addCart message
      */
     private func addToCartAction(from page: SFSafariPage, userInfo: [String : Any]?){
-        var calculatePriceDictionary = [String:Any]()
-        viewModel.getItemLoockUp(userInfo: userInfo ?? [String:Any](), sourceType: "amz")
-        viewModel.didFinishFetch = {
-            calculatePriceDictionary["product"] = self.viewModel.itemLoockUpResult.dictionary
-            page.dispatchMessageToScript(withName: "showQuoteAgain", userInfo: calculatePriceDictionary)
+        var addToCartResult = [String:Any]()
+        if let info = userInfo{
+            let product = info["productInfo"] as? [String : Any]
+            if(product != nil){
+                viewModel.addToCart(userInfo: product!)
+                viewModel.didFinishFetch = {
+                    addToCartResult["title"] = self.viewModel.addCartResult?.descriptionTitle
+                    addToCartResult["msg"] = self.viewModel.addCartResult?.description
+                    page.dispatchMessageToScript(withName: "showQuoteAgain", userInfo: addToCartResult)
+                }
+            }
         }
     }
     

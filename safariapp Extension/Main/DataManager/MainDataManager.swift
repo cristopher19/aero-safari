@@ -88,45 +88,57 @@ struct MainDataManager{
      * retrieve prealert list
      * @params ->
      */
-    func addToCart(completionHandler: @escaping (_ Result:TrackModel?, _ Error:NSError?) -> Void) {
+    func addToCart(product:[String:Any], completionHandler: @escaping (_ Result:BasciRsponseModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
-        var parametersBody = [ String : Any]()
+
         var parametersBodyFilter = [ String : Any]()
         parametersBodyFilter["lang"] = "en"
         parametersBodyFilter["sessionId"] = getUserInformationInStorage()?.token ?? ""
         parametersBodyFilter["account"] = getUserInformationInStorage()?.accountNumber ?? ""
         parametersBodyFilter["gateway"] = getUserInformationInStorage()?.gateway ?? ""
-        parametersBodyFilter["gateway"] = getUserInformationInStorage()?.gateway ?? ""
+        parametersBodyFilter["cartId"] =  ""//new cart
         
-        parametersBodyFilter["amazonTax"] = 6
-        parametersBodyFilter["shipping"] = 1
-        parametersBodyFilter["shippingRate"] = true
+        var params  = JSON(product)
+
+        parametersBodyFilter["shipping"] = params["priceBreakdown"]["shipping"].doubleValue
+        parametersBodyFilter["shippingRate"] = params["priceBreakdown"]["shippingRate"].doubleValue
         
-        parametersBodyFilter["subtotal"] = false
-        parametersBodyFilter["taxes"] = false
-        parametersBodyFilter["totalPrice"] = false
+        parametersBodyFilter["subtotal"] = params["priceBreakdown"]["subtotal"].doubleValue
+        parametersBodyFilter["taxes"] = params["priceBreakdown"]["taxes"].doubleValue
+        parametersBodyFilter["totalPrice"] = params["priceBreakdown"]["total"].doubleValue
         
-        parametersBodyFilter["hcCode"] = "inTransit"
-        parametersBodyFilter["image"] = ""
-        parametersBodyFilter["productUrl"] = "en"
+        parametersBodyFilter["hcCode"] = params["hcInfo"]["hc"].stringValue
+        parametersBodyFilter["image"] = params["imageLink"].stringValue
+        parametersBodyFilter["productUrl"] = params["link"].stringValue
         
-        parametersBodyFilter["quantity"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["administrativeFee"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["declaredValue"] = getUserInformationInStorage()?.token ?? ""
-        
-        
-        parametersBodyFilter["price"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["category"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["title"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["weight"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["amazonTax"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["sku"] = getUserInformationInStorage()?.token ?? ""
-        parametersBodyFilter["productJson"] = getUserInformationInStorage()?.token ?? ""
+        parametersBodyFilter["quantity"] = params["quantity"].intValue
+        parametersBodyFilter["administrativeFee"] = params["administrativeFee"].doubleValue
+        parametersBodyFilter["declaredValue"] = params["priceBreakdown"]["declaredValue"].doubleValue
         
         
+        parametersBodyFilter["price"] = params["price"].doubleValue
+        parametersBodyFilter["category"] = params["category"].stringValue
+        parametersBodyFilter["title"] = params["title"].stringValue
+        parametersBodyFilter["weight"] = params["weight"].stringValue
+        parametersBodyFilter["amazonTax"] = params["priceBreakdown"]["amazonTax"].doubleValue
         
-        sessionManager.request(Endpoints.Posts.getTracking.url,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
-            .validate().responseObject(completionHandler: {(response: DataResponse<TrackModel>) in
+        var selectedVariation = params["selectedVariation"]
+        if(selectedVariation.count != 0){
+            params["sku"].stringValue = selectedVariation["sku"].stringValue
+        }
+        parametersBodyFilter["sku"] = params["sku"].stringValue
+        
+        params["offers"] = ""
+        params["itemVariations"] = ""
+        params["selectedVariation"] = ""
+        params["selectedOffer"] = ""
+        
+        parametersBodyFilter["productJson"] = params.dictionaryObject
+        
+        
+        
+        sessionManager.request(Endpoints.Posts.addShoppingCart.url,method: .post, parameters:parametersBodyFilter,encoding: JSONEncoding.default, headers:headerParameters)
+            .validate().responseObject(completionHandler: {(response: DataResponse<BasciRsponseModel>) in
                 switch response.result {
                 case .success(let posts):
                     completionHandler(posts, nil)

@@ -52,7 +52,7 @@ extension MainViewController{
         //create text count items
         let accountTitleTextField = NSTextField()
         accountTitleTextField.tag = 902
-        accountTitleTextField.stringValue = "Account"
+        accountTitleTextField.stringValue = "profile_account".localized()
         accountTitleTextField.isEditable = false
         accountTitleTextField.drawsBackground = false
         accountTitleTextField.isBezeled = false
@@ -65,7 +65,7 @@ extension MainViewController{
         buttonLogOut.layer?.cornerRadius = 4
         buttonLogOut.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
         buttonLogOut.isBordered = true
-        buttonLogOut.title = "LogOut"
+        buttonLogOut.title = "profile_logOut".localized()
         buttonLogOut.action = #selector(MainViewController.logOutPressed)
         
         // add items to trackbox
@@ -90,11 +90,11 @@ extension MainViewController{
     
     func createProfileOptions(parent: NSView){
         //agrega el haeder de profile info
-        let userInfoheaderView = self.createProfileHeaderBox(icon: "icon_profile", title: "Profile Information", editUrl: UrlPages.editProfile.idPage, parent: parent)
+        let userInfoheaderView = self.createProfileHeaderBox(icon: "icon_profile", title: "profile_information".localized(), editUrl: UrlPages.editProfile.idPage, parent: parent)
         self.createProfileInformation(parent: userInfoheaderView)
         
         //agrega el haeder del addres information
-        let addresInfoheaderView = self.createProfileHeaderBox(icon: "profile_address", title: "Address Information", editUrl: UrlPages.editProfileAddress.idPage, parent: parent)
+        let addresInfoheaderView = self.createProfileHeaderBox(icon: "profile_address", title: "profile_address_information".localized(), editUrl: UrlPages.editProfileAddress.idPage, parent: parent)
         self.createAddresInformation(parent: addresInfoheaderView)
         
         
@@ -134,7 +134,7 @@ extension MainViewController{
         profileInformationTitleTextField.sizeToFit()
         
         let editInformationTextField = NSTextField()
-        editInformationTextField.stringValue = "Edit Information"
+        editInformationTextField.stringValue = "profile_edit_information".localized()
         editInformationTextField.isEditable = false
         editInformationTextField.drawsBackground = false
         editInformationTextField.isBezeled = false
@@ -191,7 +191,7 @@ extension MainViewController{
     func createProfileInformation(parent: NSView){
         //create text name
         let profileInformationNameTextField = NSTextField()
-        profileInformationNameTextField.stringValue = "Name: "
+        profileInformationNameTextField.stringValue = "profile_name".localized()
         profileInformationNameTextField.isEditable = false
         profileInformationNameTextField.drawsBackground = false
         profileInformationNameTextField.isBezeled = false
@@ -200,7 +200,7 @@ extension MainViewController{
         
         //create text account
         let profileInformationAccountTextField = NSTextField()
-        profileInformationAccountTextField.stringValue = "Account: "
+        profileInformationAccountTextField.stringValue = "profile_account".localized()
         profileInformationAccountTextField.isEditable = false
         profileInformationAccountTextField.drawsBackground = false
         profileInformationAccountTextField.isBezeled = false
@@ -209,7 +209,7 @@ extension MainViewController{
         
         //create text  delivery
         let profileInformationDeliveryTextField = NSTextField()
-        profileInformationDeliveryTextField.stringValue = "Delivery: "
+        profileInformationDeliveryTextField.stringValue = "profile_delivery".localized()
         profileInformationDeliveryTextField.isEditable = false
         profileInformationDeliveryTextField.drawsBackground = false
         profileInformationDeliveryTextField.isBezeled = false
@@ -281,7 +281,7 @@ extension MainViewController{
     func createAddresInformation(parent: NSView){
         //create text name
         let addressTextField = NSTextField()
-        addressTextField.stringValue = "Address: "
+        addressTextField.stringValue = "profile_address".localized()
         addressTextField.isEditable = false
         addressTextField.drawsBackground = false
         addressTextField.isBezeled = false
@@ -290,7 +290,7 @@ extension MainViewController{
         
         //create text account
         let phoneTextField = NSTextField()
-        phoneTextField.stringValue = "Phone: "
+        phoneTextField.stringValue = "profile_phone".localized()
         phoneTextField.isEditable = false
         phoneTextField.drawsBackground = false
         phoneTextField.isBezeled = false

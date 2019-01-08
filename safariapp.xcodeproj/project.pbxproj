@@ -41,6 +41,8 @@
 		0E261D16219A3A970048E91B /* PreAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D15219A3A970048E91B /* PreAlertModel.swift */; };
 		0E261D18219A3AA20048E91B /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D17219A3AA20048E91B /* TrackModel.swift */; };
 		0E261D1C219A3ABC0048E91B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E261D1B219A3ABC0048E91B /* MainViewModel.swift */; };
+		0E280AAD21E3A3E7002D4CDC /* BasicResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E280AAC21E3A3E7002D4CDC /* BasicResponseModel.swift */; };
+		0E280AAF21E3F676002D4CDC /* logger.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E280AAE21E3F676002D4CDC /* logger.js */; };
 		0E28920721C1697C00B35C95 /* jquery.base64.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E28920621C1697C00B35C95 /* jquery.base64.js */; };
 		0E29215921AF4B6100A8275D /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29215821AF4B6100A8275D /* CartView.swift */; };
 		0E2A6070219C927700DA51C6 /* UtilConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A606F219C927700DA51C6 /* UtilConstraint.swift */; };
@@ -65,6 +67,7 @@
 		0E2F90FB21C023900019118B /* logo_32_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F90FA21C023900019118B /* logo_32_32.png */; };
 		0E2F90FD21C0242F0019118B /* NotificationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F90FC21C0242F0019118B /* NotificationObject.swift */; };
 		0E30B6D821A36B7300662A34 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30B6D721A36B7300662A34 /* ColorPalette.swift */; };
+		0E8DD42821E53EC30020A6EC /* spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E8DD42721E53EC30020A6EC /* spinner.gif */; };
 		84428F4BB20E7FFC3C8A647F /* Pods_safariapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */; };
 		9CB894D69239C1606EB24F81 /* Pods_safariapp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E13290951B41B9A5D8C24B /* Pods_safariapp_Extension.framework */; };
 		F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = F9D4DD6C21B8757E0078F23E /* jquery.js */; };
@@ -137,6 +140,8 @@
 		0E261D15219A3A970048E91B /* PreAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertModel.swift; sourceTree = "<group>"; };
 		0E261D17219A3AA20048E91B /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		0E261D1B219A3ABC0048E91B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		0E280AAC21E3A3E7002D4CDC /* BasicResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicResponseModel.swift; sourceTree = "<group>"; };
+		0E280AAE21E3F676002D4CDC /* logger.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = logger.js; sourceTree = "<group>"; };
 		0E28920621C1697C00B35C95 /* jquery.base64.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.base64.js; sourceTree = "<group>"; };
 		0E29215821AF4B6100A8275D /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 		0E2F90FA21C023900019118B /* logo_32_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_32_32.png; sourceTree = "<group>"; };
 		0E2F90FC21C0242F0019118B /* NotificationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObject.swift; sourceTree = "<group>"; };
 		0E30B6D721A36B7300662A34 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		0E8DD42721E53EC30020A6EC /* spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = spinner.gif; sourceTree = "<group>"; };
 		2BFFD120128AB0E2CEA91841 /* Pods_safariapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safariapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE3BD78068C3E509B61FC2A /* Pods-safariapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp/Pods-safariapp.debug.xcconfig"; sourceTree = "<group>"; };
 		3C08F956E80338FD526A1B44 /* Pods-safariapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safariapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-safariapp/Pods-safariapp.release.xcconfig"; sourceTree = "<group>"; };
@@ -286,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				0E2504F92190F4E500159CB0 /* LoginViewModel.swift */,
-				0E23B62821A770E4001AB560 /* UserView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 		0E2504ED2190AABF00159CB0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0E23B62821A770E4001AB560 /* UserView.swift */,
 				0E2504F72190DF9600159CB0 /* UserModel.swift */,
 				0E253F872195E1DD00135127 /* CountriesModel.swift */,
 			);
@@ -325,6 +331,7 @@
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
 				0E2F4FA621CC3E56006D93F5 /* quoteScript.js */,
+				0E8DD42721E53EC30020A6EC /* spinner.gif */,
 				0E2F4FA421CC345C006D93F5 /* amazonScript.js */,
 				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
 				0E06101321C2F7B700640CBB /* jquery.appear.js */,
@@ -337,6 +344,7 @@
 				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
 				0E06100D21C2DBA400640CBB /* bootstrap.min.js */,
 				0E06100E21C2DBA400640CBB /* popover.js */,
+				0E280AAE21E3F676002D4CDC /* logger.js */,
 				0E06100F21C2DBA400640CBB /* tooltip.js */,
 				0E1D45BC218CE1370079BB2A /* contentScript.js */,
 				0E2F90F821C017AA0019118B /* notification.js */,
@@ -386,6 +394,7 @@
 				0E261D17219A3AA20048E91B /* TrackModel.swift */,
 				0E2ADBE921AEF5F30095BC18 /* CartModel.swift */,
 				0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */,
+				0E280AAC21E3A3E7002D4CDC /* BasicResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -550,11 +559,13 @@
 				0E2F4FA021CC2696006D93F5 /* Localizable.strings in Resources */,
 				0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */,
 				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
+				0E8DD42821E53EC30020A6EC /* spinner.gif in Resources */,
 				0E2F90F921C017AA0019118B /* notification.js in Resources */,
 				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
 				0E06101021C2DBA600640CBB /* bootstrap.min.js in Resources */,
 				0E2F4FA721CC3E56006D93F5 /* quoteScript.js in Resources */,
+				0E280AAF21E3F676002D4CDC /* logger.js in Resources */,
 				0E28920721C1697C00B35C95 /* jquery.base64.js in Resources */,
 				0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */,
 				0E2F4FA521CC345C006D93F5 /* amazonScript.js in Resources */,
@@ -669,6 +680,7 @@
 				0E2504F82190DF9600159CB0 /* UserModel.swift in Sources */,
 				0E29215921AF4B6100A8275D /* CartView.swift in Sources */,
 				0E261D1C219A3ABC0048E91B /* MainViewModel.swift in Sources */,
+				0E280AAD21E3A3E7002D4CDC /* BasicResponseModel.swift in Sources */,
 				0E2504F62190BB7400159CB0 /* LoginDataManager.swift in Sources */,
 				0E253F882195E1DD00135127 /* CountriesModel.swift in Sources */,
 				0E261D0C2199D37B0048E91B /* Utils.swift in Sources */,
