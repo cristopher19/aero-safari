@@ -34,6 +34,7 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     var mutableData:NSMutableData  = NSMutableData()
     var currentElementName:String = ""
     var countryArray = [String]()
+    var gifView: NSView? = nil
     override func viewDidLoad() {
         // THIS IS ABSOLUTELY CRICITAL FOR THE POPUP TO ACTUALLY SHOW UP
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP
@@ -163,7 +164,17 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         // Code for show activity indicator view
         // ...
         print("start loading")
-       showActivityIndicator(parentView: self.view)
+        self.gifView = NSView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        
+        self.gifView!.wantsLayer = true
+        self.gifView!.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor
+        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "spinner", withExtension: "gif")!)
+        let jeremyGif = NSImage.sd_animatedGIF(with: imageData)
+        let imageView = NSImageView(image: jeremyGif!)
+        imageView.tag = 666
+        imageView.frame = CGRect(x: (self.view.frame.size.width / 2) - 40, y: (self.view.frame.size.height / 2) - 40, width: 80, height: 80)
+        self.gifView!.addSubview(imageView)
+        view.addSubview(self.gifView!)
     }
     
     private func activityIndicatorStop() {
@@ -171,29 +182,13 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         // ...
         
         print("stop loading")
+        if(self.gifView != nil){
+            self.gifView!.removeFromSuperview()
+        }
+        
     }
 }
 
-extension SFSafariExtensionViewController{
-    func showActivityIndicator(parentView: NSView){
-        let gifView = NSView(frame: CGRect(x: 0, y: 0, width: parentView.frame.size.width, height: parentView.frame.size.height))
-       
-        gifView.wantsLayer = true
-        gifView.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor
-        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "spinner", withExtension: "gif")!)
-        let jeremyGif = NSImage.sd_animatedGIF(with: imageData)
-        let imageView = NSImageView(image: jeremyGif!)
-        imageView.tag = 666
-        imageView.frame = CGRect(x: (parentView.frame.size.width / 2) - 40, y: (parentView.frame.size.height / 2) - 40, width: 80, height: 80)
-        gifView.addSubview(imageView)
-        view.addSubview(gifView)
-    }
-    
-    func stopActivityIndicator(parentView: NSView){
-        if let foundView = parentView.viewWithTag(666) {
-            foundView.removeFromSuperview()
-        }
-    }
-    
-}
+
+
 

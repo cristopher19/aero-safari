@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  aero
 //
-//  Created by Juan Manuel Rodriguez Alvarado on 10/10/18.
+//  Created by Centauro Solutions on 10/10/18.
 //  Copyright © 2018 Aeropost. All rights reserved.
 //
 
@@ -38,6 +38,7 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     var userInformation: UserView?
     var trackRemoveView = false
     var prealertRemoveView = false
+    var gifView: NSView? = nil
     override func viewDidLoad() {
         // THIS IS ABSOLUTELY CRICITAL FOR THE POPUP TO ACTUALLY SHOW UP
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP
@@ -68,11 +69,13 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
         trackingLabel.isEditable = false
         trackingLabel.drawsBackground = false
         trackingLabel.isBezeled = false
-        
         self.showTrackingView()
+       
     }
 
-    
+    override func viewDidAppear() {
+        
+    }
     static func getInstance() -> MainViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateController(withIdentifier: "MainViewController") as! MainViewController

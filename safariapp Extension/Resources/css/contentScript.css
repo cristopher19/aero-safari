@@ -1485,7 +1485,7 @@ fieldset[disabled] .btn-default.active {
 }
 
 .barNotification .aIconBluBar div{
-  background-image: url("core/images/icon-16.png");
+  background-image: url("icon-16.png");
   width: 15px;
   height: 15px;
   float: left;
@@ -1719,7 +1719,7 @@ fieldset[disabled] .btn-default.active {
 }
 
 .chevronBarRight{
-  background-image: url("core/images/chevronBarRight.png");
+  background-image: url("chevronBarRight.png");
   float: right;
   display: block;
   text-decoration:none;
@@ -1730,7 +1730,7 @@ fieldset[disabled] .btn-default.active {
 }
 
 .chevronBarLeft{
-  background-image: url("core/images/chevronBarLeft.png");
+  background-image: url("chevronBarLeft.png");
   float: right;
   display: block;
   text-decoration:none;

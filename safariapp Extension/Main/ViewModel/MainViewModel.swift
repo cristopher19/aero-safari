@@ -164,6 +164,7 @@ class MainViewModel{
     }
     
     func getPrealertStatusByTracking(trackingList: [[String:Any]]){
+        self.isLoading = true
         self.dataService?.getPrealertStatusByTracking(trackingList: trackingList, completionHandler: { (prealertStatus, error) in
             if let error = error {
                 self.error = error
@@ -177,7 +178,7 @@ class MainViewModel{
     }
     
     func getOrderPackagesList(){
-
+        self.isLoading = true
         self.dataService?.retrievePackageTrackingList(completionHandler: { (tracking, error) in
             if let error = error {
                 self.error = error
@@ -191,7 +192,7 @@ class MainViewModel{
     }
     
     func getPrealertList(){
-   
+        self.isLoading = true
         self.dataService?.retrievePrealertList(completionHandler: { (prealerts, error) in
             if let error = error {
                 self.error = error
@@ -204,7 +205,7 @@ class MainViewModel{
         })
     }
     func getCart(){
-  
+        self.isLoading = true
         self.dataService?.retrieveCart(completionHandler: { (cart, error) in
             if let error = error {
                 self.error = error

@@ -242,7 +242,7 @@ COLORBOX_WIDTH: 600,
      * @param aQuoteData the quote data to be displayed
      */
     showQuoteData : function(aQuoteData) {
-        if (aQuoteData != null && aQuoteData.product != null && aQuoteData.product.hcInfo.hc != null) {
+        if (aQuoteData != null && aQuoteData.product.hcInfo != null && aQuoteData.product != null && aQuoteData.product.hcInfo.hc != null) {
             // if it already exists, update it
             if ($("#aero-quote-main-container").length) {
                 QuoteScript._updateQuoteDiv(aQuoteData.product);

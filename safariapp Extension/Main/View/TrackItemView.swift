@@ -21,7 +21,7 @@ extension MainViewController{
         self.cartContentBox?.isHidden = true
         self.prealertContentBox?.isHidden = true
         self.profileContentBox?.isHidden = true
-   
+        
         if (self.contentBox.viewWithTag(900) == nil || trackRemoveView){
             trackRemoveView = false
             // - 12 del scroll / - 30 de la section bottom
@@ -56,14 +56,26 @@ extension MainViewController{
         // Code for show activity indicator view
         // ...
         print("start loading")
-        showActivityIndicator(parentView: boxTrack)
+        self.gifView = NSView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        
+        self.gifView!.wantsLayer = true
+        self.gifView!.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor
+        let imageData = try? Data(contentsOf: Bundle.main.url(forResource: "spinner", withExtension: "gif")!)
+        let jeremyGif = NSImage.sd_animatedGIF(with: imageData)
+        let imageView = NSImageView(image: jeremyGif!)
+        imageView.tag = 666
+        imageView.frame = CGRect(x: (self.view.frame.size.width / 2) - 40, y: (self.view.frame.size.height / 2) - 40, width: 80, height: 80)
+        self.gifView!.addSubview(imageView)
+        view.addSubview(self.gifView!)
     }
     
     private func activityIndicatorStop() {
         // Code for stop activity indicator view
         // ...
         print("stop loading")
-        stopActivityIndicator(parentView: boxTrack)
+        if(self.gifView != nil){
+            self.gifView!.removeFromSuperview()
+        }
     }
     //section tracking - prealert
     func createBottomSection(parentSection: NSView, isTrack: Bool){
@@ -170,39 +182,86 @@ extension MainViewController{
         trackBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.trackContentBox!)
         trackBox.addConstraintHeight(height: self.trackContentBox!.frame.size.height - 30)
         
-        // Initial scrollview
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.borderType = .noBorder
-        scrollView.layer?.backgroundColor = NSColor.red.cgColor
-        scrollView.hasVerticalScroller = true
         
-        trackBox.addSubview(scrollView)
-        trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
-        trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
-        
-        // Initial clip view
-        let clipView = NSClipView()
-        clipView.layer?.backgroundColor = NSColor.white.cgColor
-        clipView.backgroundColor = NSColor.white
-        clipView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentView = clipView
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
-        
-        // Initial document view
-        let documentView = FlippedView()
-        documentView.translatesAutoresizingMaskIntoConstraints = false
-        documentView.wantsLayer = true
-        documentView.layer?.backgroundColor = NSColor.white.cgColor
-        
-        scrollView.documentView = documentView
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
-        
+        let packagesCount = self.viewModel.trackingList?.count ?? 0
+        if(packagesCount == 0){
+            self.createTrackEmpty(parent: trackBox)
+        }else{
+            
+            // Initial scrollview
+            let scrollView = NSScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.borderType = .noBorder
+            scrollView.layer?.backgroundColor = NSColor.red.cgColor
+            scrollView.hasVerticalScroller = true
+            
+            trackBox.addSubview(scrollView)
+            trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            trackBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            
+            // Initial clip view
+            let clipView = NSClipView()
+            clipView.layer?.backgroundColor = NSColor.white.cgColor
+            clipView.backgroundColor = NSColor.white
+            clipView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.contentView = clipView
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
+            
+            // Initial document view
+            let documentView = FlippedView()
+            documentView.translatesAutoresizingMaskIntoConstraints = false
+            documentView.wantsLayer = true
+            documentView.layer?.backgroundColor = NSColor.white.cgColor
+            
+            scrollView.documentView = documentView
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
+            
+            //create text count items
+            let countItemsTextField = NSTextField()
+            countItemsTextField.stringValue = "track_title_last_trackings".localized()
+            countItemsTextField.isEditable = false
+            countItemsTextField.drawsBackground = false
+            countItemsTextField.isBezeled = false
+            countItemsTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+            countItemsTextField.sizeToFit()
+            //create image refresh
+            let imageRefresh = NSImageView.init(frame:NSMakeRect(countItemsTextField.frame.size.width + 15, 8, 10, 10))
+            imageRefresh.image = NSImage(named:"icon_refresh")
+            
+            let refreshImageClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
+            refreshImageClick.action = #selector(MainViewController.refreshTrackList(_:))
+            imageRefresh.addGestureRecognizer(refreshImageClick)
+            
+            documentView.addSubview(countItemsTextField)
+            documentView.addSubview(imageRefresh)
+            
+            //textfield constrains
+            countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
+            countItemsTextField.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            countItemsTextField.addConstraintWidth(width: countItemsTextField.frame.width)
+            countItemsTextField.addConstraintHeight(height: 20.0)
+            //textfield constrains
+            imageRefresh.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: countItemsTextField)
+            imageRefresh.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            imageRefresh.addConstraintWidth(width: 20.0)
+            imageRefresh.addConstraintHeight(height: 20.0)
+            
+            self.lastTrackBox = countItemsTextField
+            if let trackingList = self.viewModel.trackingList{
+                self.lastTrackBox = countItemsTextField
+                self.listOfTracking(parentBox: documentView,trackList:trackingList)
+            }
+            scrollView.documentView = documentView
+            
+        }
+    }
+    
+    private func createTrackEmpty(parent: NSView){
         //create text count items
         let countItemsTextField = NSTextField()
         countItemsTextField.stringValue = "track_title_last_trackings".localized()
@@ -219,30 +278,45 @@ extension MainViewController{
         refreshImageClick.action = #selector(MainViewController.refreshTrackList(_:))
         imageRefresh.addGestureRecognizer(refreshImageClick)
         
-        documentView.addSubview(countItemsTextField)
-        documentView.addSubview(imageRefresh)
+        parent.addSubview(countItemsTextField)
+        parent.addSubview(imageRefresh)
         
         //textfield constrains
-        countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
-        countItemsTextField.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+        countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: contentBox)
+        countItemsTextField.addConstraintTop(topOffset: 10, toItem: contentBox, firstAttribute: .top, secondAttribute: .top)
         countItemsTextField.addConstraintWidth(width: countItemsTextField.frame.width)
         countItemsTextField.addConstraintHeight(height: 20.0)
         //textfield constrains
         imageRefresh.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: countItemsTextField)
-        imageRefresh.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+        imageRefresh.addConstraintTop(topOffset: 10, toItem: contentBox, firstAttribute: .top, secondAttribute: .top)
         imageRefresh.addConstraintWidth(width: 20.0)
         imageRefresh.addConstraintHeight(height: 20.0)
         
         self.lastTrackBox = countItemsTextField
-        if let trackingList = self.viewModel.trackingList{
-            self.lastTrackBox = countItemsTextField
-            self.listOfTracking(parentBox: documentView,trackList:trackingList)
-            
-        }
-        scrollView.documentView = documentView
         
+        let imageInfoNotData = NSImageView.init(frame:NSMakeRect(15, 8, 10, 10))
+        imageInfoNotData.image = NSImage(named: "icon_info")
+        
+        //create text desc items
+        let prealertEmptyTextField = TextFieldStyle()
+        prealertEmptyTextField.stringValue = "track_any".localized()
+        prealertEmptyTextField.sizeToFit()
+        
+        
+        parent.addSubview(imageInfoNotData)
+        parent.addSubview(prealertEmptyTextField)
+        
+        imageInfoNotData.addConstraintWidth(width: 30.0)
+        imageInfoNotData.addConstraintHeight(height: 30.0)
+        imageInfoNotData.addConstraintLeft(leftOffset: (contentBox.frame.size.width / 2) - 15, firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
+        imageInfoNotData.addConstraintTop(topOffset: 35.0, toItem: lastTrackBox, firstAttribute: .top, secondAttribute: .bottom)
+        
+        prealertEmptyTextField.addConstraintWidth(width: prealertEmptyTextField.frame.size.width)
+        prealertEmptyTextField.addConstraintLeft(leftOffset: (contentBox.frame.size.width / 2) - (prealertEmptyTextField.frame.size.width / 2), firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
+        prealertEmptyTextField.addConstraintTop(topOffset: 25.0, toItem: imageInfoNotData, firstAttribute: .top, secondAttribute: .bottom)
         
     }
+    
     @objc func refreshTrackList(_ sender: Any){
         trackContentBox?.removeFromSuperview()
         trackRemoveView = true

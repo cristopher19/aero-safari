@@ -216,7 +216,8 @@ extension MainViewController{
                 
                 //create text courier name items
                 let quantityTextField = TextFieldStyle()
-                quantityTextField.stringValue = String(format: NSLocalizedString("cart_quantity", comment: "any comment"), itemCart.quantity ?? 0)
+           
+                quantityTextField.stringValue = String(format: NSLocalizedString("cart_quantity", comment: "any comment"), String(itemCart.quantity ?? 0))
                 quantityTextField.sizeToFit()
                 
                 //create text courier name items

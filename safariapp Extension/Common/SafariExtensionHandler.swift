@@ -50,6 +50,16 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             case "addToCart":
                 addToCartAction(from: page, userInfo: data)
                 break;
+            case "SearchURL":
+                
+                var url = "http://aeropost.com/site/%S1/search?q=%S2&gtw=%S3&lang=%S4";
+                url = url.replacingOccurrences(of: "%S1", with: "en")
+                url = url.replacingOccurrences(of: "%S2", with: data["url"] as? String ?? "")
+                url = url.replacingOccurrences(of: "%S3", with: getUserInformationInStorage()?.gateway ?? "")
+                url = url.replacingOccurrences(of: "%S4", with: String(getUserInformationInStorage()?.lang ?? 1))
+          
+                url.openUrlInWebWithUrlString
+                break;
             default:
                 print("")
             }

@@ -48,6 +48,9 @@
 		0E2A6070219C927700DA51C6 /* UtilConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A606F219C927700DA51C6 /* UtilConstraint.swift */; };
 		0E2A840321A4CA2F00748658 /* PreAlertItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */; };
 		0E2ADBEA21AEF5F30095BC18 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2ADBE921AEF5F30095BC18 /* CartModel.swift */; };
+		0E2B6D0A21E66B970037B4FC /* icon-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2B6D0921E66B970037B4FC /* icon-16.png */; };
+		0E2B6D1021E66CB30037B4FC /* chevronBarLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2B6D0E21E66CB30037B4FC /* chevronBarLeft.png */; };
+		0E2B6D1121E66CB30037B4FC /* chevronBarRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */; };
 		0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2BC13421C4006A002301E1 /* ebayContentScript.js */; };
 		0E2BC13721C41E49002301E1 /* ebayProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BC13621C41E49002301E1 /* ebayProductObject.swift */; };
 		0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45D1218CE4E00079BB2A /* LoginStoryboard.storyboard */; };
@@ -147,6 +150,9 @@
 		0E2A606F219C927700DA51C6 /* UtilConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilConstraint.swift; sourceTree = "<group>"; };
 		0E2A840221A4CA2F00748658 /* PreAlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertItemView.swift; sourceTree = "<group>"; };
 		0E2ADBE921AEF5F30095BC18 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		0E2B6D0921E66B970037B4FC /* icon-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-16.png"; sourceTree = "<group>"; };
+		0E2B6D0E21E66CB30037B4FC /* chevronBarLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevronBarLeft.png; sourceTree = "<group>"; };
+		0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevronBarRight.png; sourceTree = "<group>"; };
 		0E2BC13421C4006A002301E1 /* ebayContentScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebayContentScript.js; sourceTree = "<group>"; };
 		0E2BC13621C41E49002301E1 /* ebayProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ebayProductObject.swift; sourceTree = "<group>"; };
 		0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrealertStatusModel.swift; sourceTree = "<group>"; };
@@ -328,29 +334,11 @@
 		0E2504F12190B03800159CB0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0E2B6D0D21E66C8D0037B4FC /* css */,
+				0E2B6D0B21E66C360037B4FC /* Images */,
 				0E30B6D621A36B5E00662A34 /* Style */,
 				0E1D45CF218CE4CB0079BB2A /* myaero.pdf */,
-				0E2F4FA621CC3E56006D93F5 /* quoteScript.js */,
-				0E8DD42721E53EC30020A6EC /* spinner.gif */,
-				0E2F4FA421CC345C006D93F5 /* amazonScript.js */,
-				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
-				0E06101321C2F7B700640CBB /* jquery.appear.js */,
-				0E2BC13421C4006A002301E1 /* ebayContentScript.js */,
-				0E28920621C1697C00B35C95 /* jquery.base64.js */,
-				0E2F90FA21C023900019118B /* logo_32_32.png */,
-				0E2E690521B9C04D001CFE81 /* colorbox.css */,
-				F9D4DD7021B8E3070078F23E /* icon-a.png */,
-				F9D4DD6C21B8757E0078F23E /* jquery.js */,
-				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
-				0E06100D21C2DBA400640CBB /* bootstrap.min.js */,
-				0E06100E21C2DBA400640CBB /* popover.js */,
-				0E280AAE21E3F676002D4CDC /* logger.js */,
-				0E06100F21C2DBA400640CBB /* tooltip.js */,
-				0E1D45BC218CE1370079BB2A /* contentScript.js */,
-				0E2F90F821C017AA0019118B /* notification.js */,
-				0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */,
-				0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */,
-				0E2E68FF21B99C21001CFE81 /* locales.js */,
+				0E2B6D0C21E66C530037B4FC /* script */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -414,6 +402,51 @@
 				0E2A606F219C927700DA51C6 /* UtilConstraint.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0E2B6D0B21E66C360037B4FC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0E2B6D0E21E66CB30037B4FC /* chevronBarLeft.png */,
+				0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */,
+				0E8DD42721E53EC30020A6EC /* spinner.gif */,
+				0E2B6D0921E66B970037B4FC /* icon-16.png */,
+				0E2F90FA21C023900019118B /* logo_32_32.png */,
+				F9D4DD7021B8E3070078F23E /* icon-a.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0E2B6D0C21E66C530037B4FC /* script */ = {
+			isa = PBXGroup;
+			children = (
+				0E06101321C2F7B700640CBB /* jquery.appear.js */,
+				0E2F4FA621CC3E56006D93F5 /* quoteScript.js */,
+				0E2F4FA421CC345C006D93F5 /* amazonScript.js */,
+				0E2BC13421C4006A002301E1 /* ebayContentScript.js */,
+				0E28920621C1697C00B35C95 /* jquery.base64.js */,
+				F9D4DD6C21B8757E0078F23E /* jquery.js */,
+				0E2E690721B9C102001CFE81 /* jquery.i18n.js */,
+				0E06100D21C2DBA400640CBB /* bootstrap.min.js */,
+				0E06100E21C2DBA400640CBB /* popover.js */,
+				0E280AAE21E3F676002D4CDC /* logger.js */,
+				0E06100F21C2DBA400640CBB /* tooltip.js */,
+				0E1D45BC218CE1370079BB2A /* contentScript.js */,
+				0E2F90F821C017AA0019118B /* notification.js */,
+				0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */,
+				0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */,
+				0E2E68FF21B99C21001CFE81 /* locales.js */,
+			);
+			path = script;
+			sourceTree = "<group>";
+		};
+		0E2B6D0D21E66C8D0037B4FC /* css */ = {
+			isa = PBXGroup;
+			children = (
+				F9D4DD6E21B8DE2B0078F23E /* contentScript.css */,
+				0E2E690521B9C04D001CFE81 /* colorbox.css */,
+			);
+			path = css;
 			sourceTree = "<group>";
 		};
 		0E30B6D621A36B5E00662A34 /* Style */ = {
@@ -560,7 +593,10 @@
 				0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */,
 				0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */,
 				0E8DD42821E53EC30020A6EC /* spinner.gif in Resources */,
+				0E2B6D0A21E66B970037B4FC /* icon-16.png in Resources */,
+				0E2B6D1021E66CB30037B4FC /* chevronBarLeft.png in Resources */,
 				0E2F90F921C017AA0019118B /* notification.js in Resources */,
+				0E2B6D1121E66CB30037B4FC /* chevronBarRight.png in Resources */,
 				0E2F90FB21C023900019118B /* logo_32_32.png in Resources */,
 				0E1D45D0218CE4CB0079BB2A /* myaero.pdf in Resources */,
 				0E06101021C2DBA600640CBB /* bootstrap.min.js in Resources */,

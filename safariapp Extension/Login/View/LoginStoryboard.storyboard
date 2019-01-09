@@ -149,7 +149,7 @@
                                         </box>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vte-u1-zCa">
                                             <rect key="frame" x="23" y="41" width="352" height="14"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="This is the version of the Aeropost Plug-in V.2.2.3" id="Tdp-6N-Ehi">
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Version Stage 1.1" id="Tdp-6N-Ehi">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

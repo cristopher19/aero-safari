@@ -46,8 +46,6 @@ extension MainViewController{
     }
     
     func createPrealertView(){
-        
-        
         //create content box  prealert info
         let prealertBox = NSView()
         prealertBox.viewWithTag(1001)
@@ -60,42 +58,106 @@ extension MainViewController{
         prealertBox.addConstraintLeft(leftOffset: 0, firstAttribute: .leading, secondAttribute: .leading, toItem: self.prealertContentBox!)
         prealertBox.addConstraintHeight(height: self.prealertContentBox!.frame.size.height - 30)
         
-        
-        // Initial scrollview
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.borderType = .noBorder
-        scrollView.layer?.backgroundColor = NSColor.red.cgColor
-        scrollView.hasVerticalScroller = true
-        
-        prealertBox.addSubview(scrollView)
-        prealertBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
-        prealertBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
-        
-        // Initial clip view
-        let clipView = NSClipView()
-        clipView.backgroundColor = NSColor.white
-
-        clipView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentView = clipView
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
-        scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
+        let prealertCount = self.viewModel.preAlertList?.count ?? 0
+        if(prealertCount == 0){
+            self.createPrealertEmpty(parent: prealertBox)
+        }else{
+            // Initial scrollview
+            let scrollView = NSScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.borderType = .noBorder
+            scrollView.layer?.backgroundColor = NSColor.red.cgColor
+            scrollView.hasVerticalScroller = true
+            
+            prealertBox.addSubview(scrollView)
+            prealertBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            prealertBox.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView]))
+            
+            // Initial clip view
+            let clipView = NSClipView()
+            clipView.backgroundColor = NSColor.white
+            
+            clipView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.contentView = clipView
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1.0, constant: 0))
+            scrollView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1.0, constant: 0))
+            
+            // Initial document view
+            let documentView = FlippedView()
+            documentView.translatesAutoresizingMaskIntoConstraints = false
+            documentView.wantsLayer = true
+            documentView.layer?.backgroundColor = NSColor.white.cgColor
+            
+            scrollView.documentView = documentView
+            scrollView.documentView?.scroll(.zero)
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
+            clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
+            
+            //create text count items
+            let countItemsTextField = NSTextField()
+            countItemsTextField.stringValue = "prealert_title_last_trackings".localized()
+            countItemsTextField.isEditable = false
+            countItemsTextField.drawsBackground = false
+            countItemsTextField.isBezeled = false
+            countItemsTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+            countItemsTextField.sizeToFit()
+            countItemsTextField.tag = 901
+            
+            //create image refresh
+            let imageRefresh = NSImageView.init(frame:NSMakeRect(countItemsTextField.frame.size.width + 15, 8, 10, 10))
+            imageRefresh.image = NSImage(named:"icon_refresh")
+            let preRefreshImageClick: NSClickGestureRecognizer = NSClickGestureRecognizer()
+            preRefreshImageClick.action = #selector(MainViewController.refreshPrealertList(_:))
+            imageRefresh.addGestureRecognizer(preRefreshImageClick)
+            
+            let buttonPrealert = NSButton()
+            buttonPrealert.wantsLayer = true
+            buttonPrealert.layer?.cornerRadius = 4
+            buttonPrealert.layer?.backgroundColor = NSColor(hex: ColorPalette.BackgroundColor.bgDarkBlue).cgColor
+            buttonPrealert.isBordered = true
+            buttonPrealert.title = "prealert_new_prealert".localized()
+            buttonPrealert.tag = UrlPages.prealert.idPage
+            buttonPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
+            
+            // add items to trackbox
+            documentView.addSubview(countItemsTextField)
+            documentView.addSubview(imageRefresh)
+            documentView.addSubview(buttonPrealert)
+            
+            //track content constrains
+            //trackBox.addConstraintsToItem(leftOffset: 0, rightOffset: 0, topOffset: 0, height: contentBox.frame.size.height, toItem: contentBox)
+            //textfield constrains
+            countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
+            countItemsTextField.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            countItemsTextField.addConstraintWidth(width: countItemsTextField.frame.width)
+            countItemsTextField.addConstraintHeight(height: 20.0)
+            //textfield constrains
+            imageRefresh.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: countItemsTextField)
+            imageRefresh.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            imageRefresh.addConstraintWidth(width: 20.0)
+            imageRefresh.addConstraintHeight(height: 20.0)
+            
+            buttonPrealert.addConstraintRight(rightOffset: -20, toItem: clipView)
+            buttonPrealert.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+            buttonPrealert.addConstraintWidth(width: self.contentBox.frame.size.width / 2 - (40) )
+            buttonPrealert.addConstraintHeight(height: 40)
+            self.lastPrealertBox = buttonPrealert
+            
+            if let prealertList = self.viewModel.preAlertList{
+                
+                self.listOfPrealert(parentBox: documentView,prealertList:prealertList)
+                
+            }
+            scrollView.documentView = documentView
+        }
        
-        // Initial document view
-        let documentView = FlippedView()
-        documentView.translatesAutoresizingMaskIntoConstraints = false
-        documentView.wantsLayer = true
-        documentView.layer?.backgroundColor = NSColor.white.cgColor
-        
-        scrollView.documentView = documentView
-         scrollView.documentView?.scroll(.zero)
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .left, relatedBy: .equal, toItem: documentView, attribute: .left, multiplier: 1.0, constant: 0))
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .top, relatedBy: .equal, toItem: documentView, attribute: .top, multiplier: 1.0, constant: 0))
-        clipView.addConstraint(NSLayoutConstraint(item: clipView, attribute: .right, relatedBy: .equal, toItem: documentView, attribute: .right, multiplier: 1.0, constant: 0))
-        
-        
+    
+    }
+    
+    private func createPrealertEmpty(parent: NSView){
         //create text count items
         let countItemsTextField = NSTextField()
         countItemsTextField.stringValue = "prealert_title_last_trackings".localized()
@@ -123,36 +185,48 @@ extension MainViewController{
         buttonPrealert.action = #selector(MainViewController.openUrlInWeb(_:))
         
         // add items to trackbox
-        documentView.addSubview(countItemsTextField)
-        documentView.addSubview(imageRefresh)
-        documentView.addSubview(buttonPrealert)
+        parent.addSubview(countItemsTextField)
+        parent.addSubview(imageRefresh)
+        parent.addSubview(buttonPrealert)
         
-        //track content constrains
-        //trackBox.addConstraintsToItem(leftOffset: 0, rightOffset: 0, topOffset: 0, height: contentBox.frame.size.height, toItem: contentBox)
-        //textfield constrains
-        countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: clipView)
-        countItemsTextField.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+        countItemsTextField.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .leading, toItem: contentBox
+        )
+        countItemsTextField.addConstraintTop(topOffset: 10, toItem: contentBox, firstAttribute: .top, secondAttribute: .top)
         countItemsTextField.addConstraintWidth(width: countItemsTextField.frame.width)
         countItemsTextField.addConstraintHeight(height: 20.0)
         //textfield constrains
         imageRefresh.addConstraintLeft(leftOffset: 20.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: countItemsTextField)
-        imageRefresh.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+        imageRefresh.addConstraintTop(topOffset: 10, toItem: contentBox, firstAttribute: .top, secondAttribute: .top)
         imageRefresh.addConstraintWidth(width: 20.0)
         imageRefresh.addConstraintHeight(height: 20.0)
         
-        buttonPrealert.addConstraintRight(rightOffset: -20, toItem: clipView)
-        buttonPrealert.addConstraintTop(topOffset: 10, toItem: clipView, firstAttribute: .top, secondAttribute: .top)
+        buttonPrealert.addConstraintRight(rightOffset: -20, toItem: contentBox)
+        buttonPrealert.addConstraintTop(topOffset: 10, toItem: contentBox, firstAttribute: .top, secondAttribute: .top)
         buttonPrealert.addConstraintWidth(width: self.contentBox.frame.size.width / 2 - (40) )
         buttonPrealert.addConstraintHeight(height: 40)
         self.lastPrealertBox = buttonPrealert
         
-        if let prealertList = self.viewModel.preAlertList{
-            
-            self.listOfPrealert(parentBox: documentView,prealertList:prealertList)
-            
-        }
-        scrollView.documentView = documentView
-        // }
+        
+        let imageInfoNotData = NSImageView.init(frame:NSMakeRect(15, 8, 10, 10))
+        imageInfoNotData.image = NSImage(named: "icon_info")
+        
+        //create text desc items
+        let prealertEmptyTextField = TextFieldStyle()
+        prealertEmptyTextField.stringValue = "prealert_any".localized()
+        prealertEmptyTextField.sizeToFit()
+        
+        
+        parent.addSubview(imageInfoNotData)
+        parent.addSubview(prealertEmptyTextField)
+        
+        imageInfoNotData.addConstraintWidth(width: 30.0)
+        imageInfoNotData.addConstraintHeight(height: 30.0)
+        imageInfoNotData.addConstraintLeft(leftOffset: (contentBox.frame.size.width / 2) - 15, firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
+        imageInfoNotData.addConstraintTop(topOffset: 35.0, toItem: lastPrealertBox, firstAttribute: .top, secondAttribute: .bottom)
+     
+        prealertEmptyTextField.addConstraintWidth(width: prealertEmptyTextField.frame.size.width)
+        prealertEmptyTextField.addConstraintLeft(leftOffset: (contentBox.frame.size.width / 2) - (prealertEmptyTextField.frame.size.width / 2), firstAttribute: .leading, secondAttribute: .leading, toItem: parent)
+        prealertEmptyTextField.addConstraintTop(topOffset: 25.0, toItem: imageInfoNotData, firstAttribute: .top, secondAttribute: .bottom)
     }
     
     @objc func refreshPrealertList(_ sender: Any){

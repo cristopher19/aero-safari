@@ -24,11 +24,13 @@
 "track_date" = "Date: ";
 "track_aero_track" = "Aerotrack #: ";
 "track_status" = "Status: ";
+"track_any" = "Your account doesn't have any packages";
 //prealert
 "prealert_title" = "Prealert";
 "prealert_title_last_trackings" = "Last 10 prealert shown";
 "prealert_new_prealert" = "New Prealert";
 "prealert_edit" = "Edit";
+"prealert_any" = "Your account doesn't have any prealerts";
 //profile
 "profile_account" = "Account";
 "profile_logOut" = "Logout";
