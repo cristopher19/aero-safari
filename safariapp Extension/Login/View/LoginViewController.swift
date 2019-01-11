@@ -46,7 +46,8 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         accountNumberLabel.stringValue = "login_account_number".localized()
         passwordLabel.stringValue = "login_password".localized()
         signInDescription.stringValue = "login_description".localized()
-        forgotButton.stringValue = "login_forgot_password".localized()
+   
+        forgotButton.title = "login_forgot_password".localized()
         pluginVersionLabel.stringValue = "login_plugin_version".localized()
         
         signInBtn.wantsLayer = true
@@ -54,6 +55,7 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         signInBtn.isBordered = false
         signInBtn.layer?.cornerRadius = 4
         signInBtn.frame.size.height = 40
+        signInBtn.title = "login_sign_in".localized()
         
         customLoginBox.wantsLayer = true
         customLoginBox.fillColor = NSColor(hex: ColorPalette.BackgroundColor.bgLightGray2)

@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:safariapp.xcodeproj">
+      location = "group:/Users/centaurosolutions/Documents/projects/safariPlugin/safariapp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -1,16 +1,17 @@
-/* 
-  Localizable.strings
-  safariapp
-
-  Created by Centauro-mac on 12/20/18.
-  Copyright © 2018 Centauro-mac. All rights reserved.
-*/
+/*
+ Localizable.strings
+ safariapp
+ 
+ Created by Centauro-mac on 12/20/18.
+ Copyright © 2018 Centauro-mac. All rights reserved.
+ */
 "login_country" = "País";
 "login_account_number" = "Número de cuenta";
 "login_password" = "Contraseña";
 "login_description" = "Ingresa con tus credenciales de aeropost.com";
 "login_forgot_password" = "Olvidaste tu contraseña?";
-"login_plugin_version" = "Versión de plugin de Aeropost  V.2.2.3";
+"login_sign_in" = "Ingresar";
+"login_plugin_version" = "This is the version of the Aeropost Plugin-in V2.2.5";
 
 //cart
 "addtocart_congratulations_title" =  "extension.addtocart.congratulations.title";
@@ -20,40 +21,41 @@
 "addtocart_error_msg" = "extension.addtocart.error.msg";
 "removetocart_error_msg" = "We were not able to remove the product from your cart";
 //track
-"track_title" = "Tracking";
-"track_title_last_trackings" = "Last 10 trackings";
-"track_date" = "Date: ";
+"track_title" = "Rastreo";
+"track_title_last_trackings" = "Últimos 10 seguimientos";
+"track_date" = "Fecha: ";
 "track_aero_track" = "Aerotrack #: ";
-"track_status" = "Status: ";
-"track_any" = "Your account doesn't have any packages";
+"track_status" = "Estado: ";
+"track_any" = "Tu cuenta no tiene paquetes";
 //prealert
-"prealert_title" = "Prealert";
-"prealert_title_last_trackings" = "Last 10 prealert shown";
-"prealert_new_prealert" = "New Prealert";
-"prealert_edit" = "Edit";
-"prealert_any" = "Your account doesn't have any prealerts";
+"prealert_title" = "Pre alertar";
+"prealert_title_last_trackings" = "Se muestran las 10 últimas alertas previas";
+"prealert_new_prealert" = "Nueva prealerta";
+"prealert_edit" = "Editar";
+"prealert_any" = "Tu cuenta no tiene pre alertas";
 //profile
-"profile_account" = "Account";
-"profile_logOut" = "Logout";
-"profile_information" = "Profile Information";
-"profile_address_information" = "Address Information";
-"profile_edit_information" = "Edit Information";
-"profile_name" = "Name: ";
-"profile_account" = "Account: ";
-"profile_delivery" = "Delivery: ";
-"profile_address" = "Address: ";
-"profile_phone" = "Phone: ";
+"profile_account" = "Cuenta";
+"profile_logOut" = "Salir";
+"profile_information" = "Información de perfil";
+"profile_address_information" = "Datos del domicilio";
+"profile_edit_information" = "Editar información";
+"profile_name" = "Nombre: ";
+"profile_account" = "Cuenta: ";
+"profile_delivery" = "Entrega: ";
+"profile_address" = "Domicilio: ";
+"profile_phone" = "Teléfono: ";
 //cart
-"cart_shopping_title" = "Shopping cart (%@)";
-"cart_empty" = "Your cart is empty";
-"cart_empty_description" = "You don't have any products added to your cart yet.";
-"cart_visit_aero" = "Visit Aeropost.com";
-"cart_quantity" = "Quantity %@";
-"cart_remove" = "Remove";
-"cart_order_summary" = "Order summary";
+"cart_shopping_cart_title" = "Carrito";
+"cart_shopping_title" = "Carrito de compras (%@)";
+"cart_empty" = "Tu carrito esta vacío";
+"cart_empty_description" = "Aún no tiene productos añadidos a su carrito.";
+"cart_visit_aero" = "Visite Aeropost.com";
+"cart_quantity" = "Cantidad %@";
+"cart_remove" = "Remover";
+"cart_order_summary" = "Resumen de la orden";
 "cart_subtotal" = "Subtotal: ";
-"cart_admin_fee" = "Administrative Fee: ";
-"cart_taxes" = "Taxes";
+"cart_admin_fee" = "Tasa administrativa: ";
+"cart_taxes" = "Impuestos";
 "cart_shipping_cost" = "Shipping cost to destination country";
 "cart_multiple_products" = "Multiple Product discount";
 "cart_order_total" = "Order total";

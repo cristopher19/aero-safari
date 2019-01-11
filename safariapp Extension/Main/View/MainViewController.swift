@@ -47,7 +47,8 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
         
         boxCart.wantsLayer = true
         boxTrack.wantsLayer = true
-        
+        shoppingCartLabel.stringValue = "cart_shopping_cart_title".localized()
+        trackingLabel.stringValue = "track_title".localized()
         shoppingCartLabel.wantsLayer = true
         trackingLabel.wantsLayer = true
         

@@ -8,9 +8,10 @@
 "login_country" = "Account number";
 "login_account_number" = "Account number";
 "login_password" = "Password";
-"login_description" = "Sing in with your aeropost.com credentials";
+"login_description" = "Log in with your aeropost.com credentials";
 "login_forgot_password" = "Forgot your password?";
-"login_plugin_version" = "This is the version of the Aeropost Plug In V.2.2.3";
+"login_plugin_version" = "This is the version of the Aeropost Plugin-in V2.2.5";
+"login_sign_in" = "Log in";
 //cart
 "addtocart_congratulations_title" =  "extension.addtocart.congratulations.title";
 "addtocart_congratulations_msg" = "extension.addtocart.congratulations.msg";
@@ -43,6 +44,7 @@
 "profile_address" = "Address: ";
 "profile_phone" = "Phone: ";
 //cart
+"cart_shopping_cart_title" = "Shopping cart";
 "cart_shopping_title" = "Shopping cart (%@)";
 "cart_empty" = "Your cart is empty";
 "cart_empty_description" = "You don't have any products added to your cart yet.";

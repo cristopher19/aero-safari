@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>safariapp Extension</string>
+	<string>aeropost extension</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,10 +47,10 @@
 				<key>Script</key>
 				<string>jquery.base64.js</string>
 			</dict>
-            <dict>
-                <key>Script</key>
-                <string>logger.js</string>
-            </dict>
+			<dict>
+				<key>Script</key>
+				<string>logger.js</string>
+			</dict>
 			<dict>
 				<key>Script</key>
 				<string>jquery.i18n.js</string>
@@ -87,10 +87,10 @@
 				<key>Script</key>
 				<string>amazonContentScript.js</string>
 			</dict>
-            <dict>
-                <key>Script</key>
-                <string>quoteScript.js</string>
-            </dict>
+			<dict>
+				<key>Script</key>
+				<string>quoteScript.js</string>
+			</dict>
 			<dict>
 				<key>Script</key>
 				<string>ebayContentScript.js</string>

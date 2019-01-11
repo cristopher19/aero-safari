@@ -8,13 +8,13 @@
 
 import Foundation
 struct SoapUrl {
-    //static let actionUrl = "https://www2.myaeropost.com/WS_MyAero/Services.svc"
-    static let actionUrl = "https://www2.myaeropost.com/DEVEL/WS_MyAero/Services.svc"
+    static let actionUrl = "https://www2.myaeropost.com/WS_MyAero/Services.svc"
+    //static let actionUrl = "https://www2.myaeropost.com/DEVEL/WS_MyAero/Services.svc"
 }
 struct API {
-    //static let baseUrl = "https://marketplace-api.aeropost.com/api"
+    static let baseUrl = "https://marketplace-api.aeropost.com/api"
     //static let baseUrl = "http://marketplace-dev.api.int.aeropost.com/api"
-    static let baseUrl = "http://marketplace-stage.api.int.aeropost.com/api"
+    //static let baseUrl = "http://marketplace-stage.api.int.aeropost.com/api"
 }
 
 protocol Endpoint {

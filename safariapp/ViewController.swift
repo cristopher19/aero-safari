@@ -15,11 +15,11 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appNameLabel.stringValue = "safariapp";
+        self.appNameLabel.stringValue = "aeropost extension";
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.aeropost.safariapp.safariextension") { error in
+        SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.aeropost.safari.extension") { error in
             if let _ = error {
                 // Insert code to inform the user that something went wrong.
 

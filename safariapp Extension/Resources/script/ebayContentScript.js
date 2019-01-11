@@ -300,7 +300,7 @@ var EbayContentScript = {
        infoObj.packageDescription = ContentScript._trimHTML($(orderDescription[0]).text());
         infoObj.firstItemDescription = infoObj.packageDescription;
        } else if (orderDescription.length > 1) {
-         infoObj.packageDescription = ContentScript._strings["extension_prealert_multiple_items"];
+         infoObj.packageDescription = $.i18n.getString("extension_prealert_multiple_items");
         infoObj.firstItemDescription = ContentScript._trimHTML($(orderDescription[0]).text());
        }
       var invoiceUrl = $(aNode).find("[title='View order details'],[title='Ver datos del pedido']");
