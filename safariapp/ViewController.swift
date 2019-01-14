@@ -16,6 +16,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appNameLabel.stringValue = "aeropost extension";
+      
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {

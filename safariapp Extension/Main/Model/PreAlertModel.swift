@@ -40,6 +40,7 @@ class PreAlert: Mappable{
 class PreAlertResponseModel: Mappable{
     var status: Int?
     var noteId: Int?
+    var errDescription: String?
     var errorDescriptions:[String]?
     var errorCodes:[String]?
     required init?(map: Map) {
@@ -48,7 +49,8 @@ class PreAlertResponseModel: Mappable{
     func mapping(map: Map) {
         status <- map["status"]
         noteId <- map["results.noteId"]
-        errorDescriptions <- map["results.errorDescriptions"]
+        errorDescriptions <- map["message"]
         errorCodes <- map["results.errorCodes"]
+        errDescription <- map["message"]
     }
 }

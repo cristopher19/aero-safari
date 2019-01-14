@@ -157,9 +157,9 @@ COLORBOX_WIDTH: 600,
                                // handled by Aeropost
                                //$(targetButton).remove();
                                // now we show the NOT PREALERTABLE button
-                              // $(targetButton).addClass("disabled");
-                              // $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
-                              // $(targetButton).removeClass("cboxElement");
+                               $(targetButton).addClass("disabled");
+                               $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
+                               $(targetButton).removeClass("cboxElement");
                            } else {
                                var invoiceUrl = info.invoiceUrl;
                                var firstItemDescription = info.firstItemDescription;

@@ -1204,7 +1204,7 @@ fieldset[disabled] .btn-default.active {
 
 .aero-first-run-guide img {
   display: inline-block;
-  background-image: url("core/images/aeropost-logo-head.png");
+  background-image: url("aeropost-logo-head.png");
   width: 0px;
   height: 0px;
   padding: 16.5px 75px 16.5px 75px !important;

@@ -268,7 +268,8 @@ struct MainDataManager{
     func createPrealert(prealertDictionary: [String:Any],completionHandler: @escaping (_ Result:PreAlertResponseModel?, _ Error:NSError?) -> Void) {
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         var endPoint: String = Endpoints.Posts.prealertPackageAmazon.url
-        if(prealertDictionary["shipperName"] as! String != "amazon"){
+        let shipperName = prealertDictionary["shipperName"] as? String ?? ""
+        if(shipperName.lowercased() != "amazon"){
             endPoint = Endpoints.Posts.prealertPackageEbay.url
         }
         var parametersBody = [ String : Any]()
@@ -296,7 +297,8 @@ struct MainDataManager{
         parametersBody["aeroShopOrderNumber"] = "-1"
         parametersBody["ip"] = "0"
         
-        sessionManager.request(endPoint,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
+        
+      sessionManager.request(endPoint,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
             .validate().responseObject(completionHandler: {(response: DataResponse<PreAlertResponseModel>) in
                 switch response.result {
                 case .success(let posts):

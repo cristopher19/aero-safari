@@ -63,6 +63,7 @@
 		0E2E690621B9C04D001CFE81 /* colorbox.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690521B9C04D001CFE81 /* colorbox.css */; };
 		0E2E690821B9C102001CFE81 /* jquery.i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2E690721B9C102001CFE81 /* jquery.i18n.js */; };
 		0E2EB02B21CA984900D3A556 /* safariapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E2EC8DD21ECFC1200E9500D /* aeropost-logo-head.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2EC8DC21ECFC1200E9500D /* aeropost-logo-head.png */; };
 		0E2F4FA021CC2696006D93F5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA221CC2696006D93F5 /* Localizable.strings */; };
 		0E2F4FA521CC345C006D93F5 /* amazonScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA421CC345C006D93F5 /* amazonScript.js */; };
 		0E2F4FA721CC3E56006D93F5 /* quoteScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2F4FA621CC3E56006D93F5 /* quoteScript.js */; };
@@ -107,7 +108,7 @@
 		0E06100E21C2DBA400640CBB /* popover.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = popover.js; sourceTree = "<group>"; };
 		0E06100F21C2DBA400640CBB /* tooltip.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = tooltip.js; sourceTree = "<group>"; };
 		0E06101321C2F7B700640CBB /* jquery.appear.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.appear.js; sourceTree = "<group>"; };
-		0E1D4599218CE1360079BB2A /* safariapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safariapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E1D4599218CE1360079BB2A /* aeropost extension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "aeropost extension.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1D459C218CE1360079BB2A /* safariapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = safariapp.entitlements; sourceTree = "<group>"; };
 		0E1D459E218CE1360079BB2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E1D45A1218CE1360079BB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainApp.storyboard; sourceTree = "<group>"; };
@@ -162,6 +163,8 @@
 		0E2E690321B9C03E001CFE81 /* jquery.colorbox-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.colorbox-min.js"; sourceTree = "<group>"; };
 		0E2E690521B9C04D001CFE81 /* colorbox.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = colorbox.css; sourceTree = "<group>"; };
 		0E2E690721B9C102001CFE81 /* jquery.i18n.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.i18n.js; sourceTree = "<group>"; };
+		0E2EC8DC21ECFC1200E9500D /* aeropost-logo-head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aeropost-logo-head.png"; sourceTree = "<group>"; };
+		0E2EC8DE21ED4C0000E9500D /* aeropost extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "aeropost extension.entitlements"; sourceTree = "<group>"; };
 		0E2F4FA121CC2696006D93F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E2F4FA321CC26BC006D93F5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E2F4FA421CC345C006D93F5 /* amazonScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazonScript.js; sourceTree = "<group>"; };
@@ -217,7 +220,7 @@
 		0E1D459A218CE1360079BB2A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0E1D4599218CE1360079BB2A /* safariapp.app */,
+				0E1D4599218CE1360079BB2A /* aeropost extension.app */,
 				0E1D45AC218CE1370079BB2A /* safariapp Extension.appex */,
 			);
 			name = Products;
@@ -226,6 +229,7 @@
 		0E1D459B218CE1360079BB2A /* safariapp */ = {
 			isa = PBXGroup;
 			children = (
+				0E2EC8DE21ED4C0000E9500D /* aeropost extension.entitlements */,
 				0E1D459C218CE1360079BB2A /* safariapp.entitlements */,
 				0E1D459E218CE1360079BB2A /* AppDelegate.swift */,
 				0E1D45A0218CE1360079BB2A /* MainApp.storyboard */,
@@ -407,6 +411,7 @@
 		0E2B6D0B21E66C360037B4FC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0E2EC8DC21ECFC1200E9500D /* aeropost-logo-head.png */,
 				0E2B6D0E21E66CB30037B4FC /* chevronBarLeft.png */,
 				0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */,
 				0E8DD42721E53EC30020A6EC /* spinner.gif */,
@@ -490,7 +495,7 @@
 			);
 			name = safariapp;
 			productName = safariapp;
-			productReference = 0E1D4599218CE1360079BB2A /* safariapp.app */;
+			productReference = 0E1D4599218CE1360079BB2A /* aeropost extension.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E1D45AB218CE1370079BB2A /* safariapp Extension */ = {
@@ -587,6 +592,7 @@
 				F9D4DD6D21B8757E0078F23E /* jquery.js in Resources */,
 				0E2E690021B99C21001CFE81 /* locales.js in Resources */,
 				0E06101421C2F7B700640CBB /* jquery.appear.js in Resources */,
+				0E2EC8DD21ECFC1200E9500D /* aeropost-logo-head.png in Resources */,
 				0E06101221C2DBA600640CBB /* tooltip.js in Resources */,
 				0E06101121C2DBA600640CBB /* popover.js in Resources */,
 				0E2F4FA021CC2696006D93F5 /* Localizable.strings in Resources */,
@@ -939,7 +945,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = safariapp/safariapp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "safariapp/aeropost extension.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -963,7 +969,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = safariapp/safariapp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "safariapp/aeropost extension.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

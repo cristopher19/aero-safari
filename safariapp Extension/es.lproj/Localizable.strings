@@ -11,7 +11,7 @@
 "login_description" = "Ingresa con tus credenciales de aeropost.com";
 "login_forgot_password" = "Olvidaste tu contraseña?";
 "login_sign_in" = "Ingresar";
-"login_plugin_version" = "This is the version of the Aeropost Plugin-in V2.2.5";
+"login_plugin_version" = "Version produccion 1.2";//"This is the version of the Aeropost Plugin-in V2.2.5";
 
 //cart
 "addtocart_congratulations_title" =  "extension.addtocart.congratulations.title";
