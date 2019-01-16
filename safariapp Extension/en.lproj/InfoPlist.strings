@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  safariapp
+
+  Created by Centauro-mac on 1/16/19.
+  Copyright © 2019 Centauro-mac. All rights reserved.
+*/
+"NSHumanReadableDescription" = "Calculate price with customs, shipping and handling of items from Amazon and prealert packages purchased on Amazon and eBay";

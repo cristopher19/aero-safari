@@ -53,6 +53,7 @@
 		0E2B6D1121E66CB30037B4FC /* chevronBarRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */; };
 		0E2BC13521C4006A002301E1 /* ebayContentScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E2BC13421C4006A002301E1 /* ebayContentScript.js */; };
 		0E2BC13721C41E49002301E1 /* ebayProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BC13621C41E49002301E1 /* ebayProductObject.swift */; };
+		0E2C7FCD21EF777D00C9AF4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E2C7FCF21EF777D00C9AF4A /* InfoPlist.strings */; };
 		0E2CD61A21B5A375007C0AE8 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1D45D1218CE4E00079BB2A /* LoginStoryboard.storyboard */; };
 		0E2CD61B21B5A381007C0AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E261D0E219A1C770048E91B /* Main.storyboard */; };
 		0E2DC24421BAD25900D1ADD0 /* PrealertStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */; };
@@ -156,6 +157,8 @@
 		0E2B6D0F21E66CB30037B4FC /* chevronBarRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevronBarRight.png; sourceTree = "<group>"; };
 		0E2BC13421C4006A002301E1 /* ebayContentScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebayContentScript.js; sourceTree = "<group>"; };
 		0E2BC13621C41E49002301E1 /* ebayProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ebayProductObject.swift; sourceTree = "<group>"; };
+		0E2C7FCE21EF777D00C9AF4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E2C7FD021EF778000C9AF4A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E2DC24321BAD25900D1ADD0 /* PrealertStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrealertStatusModel.swift; sourceTree = "<group>"; };
 		0E2E68FD21B973E2001CFE81 /* amazonContentScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = amazonContentScript.js; sourceTree = "<group>"; };
 		0E2E68FF21B99C21001CFE81 /* locales.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = locales.js; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 				0E1D45C0218CE1370079BB2A /* safariapp_Extension.entitlements */,
 				0E1D45D6218CF35A0079BB2A /* Media.xcassets */,
 				0E2F4FA221CC2696006D93F5 /* Localizable.strings */,
+				0E2C7FCF21EF777D00C9AF4A /* InfoPlist.strings */,
 			);
 			path = "safariapp Extension";
 			sourceTree = "<group>";
@@ -582,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D4DD6F21B8DE2B0078F23E /* contentScript.css in Resources */,
+				0E2C7FCD21EF777D00C9AF4A /* InfoPlist.strings in Resources */,
 				0E2E690421B9C03E001CFE81 /* jquery.colorbox-min.js in Resources */,
 				0E1D45D2218CE4E00079BB2A /* LoginStoryboard.storyboard in Resources */,
 				0E261D0F219A1C770048E91B /* Main.storyboard in Resources */,
@@ -760,6 +765,15 @@
 				0E1D45A1218CE1360079BB2A /* Base */,
 			);
 			name = MainApp.storyboard;
+			sourceTree = "<group>";
+		};
+		0E2C7FCF21EF777D00C9AF4A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E2C7FCE21EF777D00C9AF4A /* en */,
+				0E2C7FD021EF778000C9AF4A /* es */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		0E2F4FA221CC2696006D93F5 /* Localizable.strings */ = {

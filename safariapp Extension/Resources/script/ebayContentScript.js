@@ -61,8 +61,11 @@ var EbayContentScript = {
                       });
                     } 
 
-                    safari.extension.dispatchMessage("checkPreAlert", {courierNumber: courierNumber,
+                    safari.extension.dispatchMessage("checkPreAlert", {
+                      courierNumber: courierNumber,
                       delivered: $(button).attr("delivered"),
+                      shippingAddress : shippingAddress,
+                      isNewPrealert : true,
                       shipper : infoObj.shipperName});
                     // show confirmation lightbox
                     $(button).colorbox({
@@ -243,9 +246,14 @@ var EbayContentScript = {
         infoObj.value = aNode.orderCost.totalOrderCost.value;
         // extract the sub total without taxes and shipping for BOG users
         infoObj.subTotalCost = aNode.orderCost.itemSubtotal.value;
+        infoObj.packageDescriptions = [];
         if (aNode.items && aNode.items.length == 1) {
+          infoObj.packageDescriptions.push(aNode.items[0].title);
           infoObj.packageDescription = aNode.items[0].title;
         } else if (aNode.items && aNode.items.length > 1) {
+            for (var i = 0; i < aNode.items.length; i++) {
+                infoObj.packageDescriptions.push(aNode.items[i].title);
+            }
           infoObj.packageDescription = $.i18n.getString("extension_prealert_multiple_items");
         }
         infoObj.invoiceHtml = $("html").html();//EbayContentScript.generateeBayInvoice(null, null, aNode);
@@ -294,12 +302,17 @@ var EbayContentScript = {
        var total = Number(infoObj.value) + Number(shipping);
        infoObj.value = total.toFixed(2);
        }
-
+        infoObj.packageDescriptions = [];
+        
        var orderDescription = $(aNode).find("[class~='item-title']");
        if (orderDescription.length == 1) {
+           infoObj.packageDescriptions.push(ContentScript._trimHTML($(orderDescription[0]).text()));
        infoObj.packageDescription = ContentScript._trimHTML($(orderDescription[0]).text());
         infoObj.firstItemDescription = infoObj.packageDescription;
        } else if (orderDescription.length > 1) {
+           for (var i = 0; i < orderDescription.length; i++) {
+               infoObj.packageDescriptions.push(ContentScript._trimHTML($(orderDescription[i]).text()));
+           }
          infoObj.packageDescription = $.i18n.getString("extension_prealert_multiple_items");
         infoObj.firstItemDescription = ContentScript._trimHTML($(orderDescription[0]).text());
        }
@@ -460,6 +473,6 @@ var EbayContentScript = {
     address = address + $("#shippingAddressCityStateZip").text() + " ";
     address = address + $("#shippingAddressCountry").text() + " ";
 
-    return address;
+    return address.replace(/\s/g, " ");;
   }
 };

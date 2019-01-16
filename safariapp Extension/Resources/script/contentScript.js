@@ -58,7 +58,7 @@ COLORBOX_WIDTH: 600,
                var signedIn = msgEvent.message.signedIn;
                var clientAllowed = msgEvent.message.clientAllowed;
                                        
-                           console.log("msg name" + msgEvent.name);
+               console.log("msg name" + msgEvent.name);
                switch (msgEvent.name) {
                                       
                    case "processPage":
@@ -137,11 +137,17 @@ COLORBOX_WIDTH: 600,
                        var info = msgEvent.message;
                        var targetButton =
                        $("[buttonId='aero-prealert-" + info.courierNumber + (info.orderIndex != null ? "-" + info.orderIndex : "") + "']");
-                       if (info.preAlerted && targetButton.length > 0) {
+                           if(info.errorCode == "addressPackage" || info.errorCode == "addressAcct" || info.errorCode == "getAccountPrealerts"){
+                           $(targetButton).addClass("disabled");
+                           $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_not_prealertable_label"));
+                           $(targetButton).removeClass("cboxElement");
+                           }else{
+                           if (info.preAlerted) {
                            $(targetButton).addClass("disabled");
                            $(targetButton).removeClass("cboxElement");
                            $("#aero-injected-button-text", targetButton).text($.i18n.getString("content_script_button_prealerted_label"));
-                       }
+                           }
+                           }
                        // the package has a MIA
                        // make sure the button is no there already
                        if (info.mia) {
@@ -635,13 +641,22 @@ COLORBOX_WIDTH: 600,
                                            $("[class='aero-colorbox-error-msg']").show();
                                            $.colorbox.resize();
                                            } else {
+                                           $.colorbox.close();
+                                           var invoices = [];
+                                           preAlertInfo.invoiceData = invoices;
+                                            if(preAlertInfo.shipperName.toLowerCase() == "amazon"){
                                            
                                            setTimeout(function() {
-                                                      var invoices = [];
-                                                      preAlertInfo.invoiceData = invoices;
+                                                    
                                                       
                                                       preAlertInfo.descriptions = [];
-                                                      preAlertInfo.descriptions[0] = preAlertInfo.packageDescription.substring(0, 100);
+                                                      if(preAlertInfo.packageDescriptions != null){
+                                                        packageToPreAlert.descriptions = preAlertInfo.packageDescriptions;
+                                                      }else{
+                                                       preAlertInfo.descriptions[0] = preAlertInfo.packageDescription.substring(0, 100);
+                                                      }
+                                                      
+                                                      
                                                       //Se obtienen todas las facturas para enviarlas
                                                       for(var i = 0; i < preAlertInfo.ordersUrl.length; i++){
                                                           var inv = ContentScript._getInvoiceByUrlHTML(preAlertInfo.ordersUrl[i]);
@@ -656,7 +671,12 @@ COLORBOX_WIDTH: 600,
                                                       safari.extension.dispatchMessage("preAlert", preAlertInfo);
                                                       }, 0 | Math.random() * 100);
                                            
-                                           
+                                           }else{
+                                           //for ebay prealert
+                                           preAlertInfo.invoiceData[0] = $.base64.btoa(preAlertInfo.invoiceHtml, true);
+                                            preAlertInfo.descriptions =  preAlertInfo.packageDescriptions;
+                                            safari.extension.dispatchMessage("preAlert", preAlertInfo);
+                                           }
                                           
                                            }
                                            

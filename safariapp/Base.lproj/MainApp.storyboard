@@ -98,7 +98,7 @@
         <!--Aeropost extension-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="Aeropost extension" id="XfG-lQ-9wD" customClass="ViewController" customModule="aeropost_extension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Aeropost extension" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="aeropost_extension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="512" height="513"/>
                         <autoresizingMask key="autoresizingMask"/>

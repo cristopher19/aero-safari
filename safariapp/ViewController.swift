@@ -9,14 +9,15 @@
 import Cocoa
 import SafariServices.SFSafariApplication
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSWindowDelegate {
 
     @IBOutlet var appNameLabel: NSTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appNameLabel.stringValue = "aeropost extension";
-      
+       
+     
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
@@ -26,6 +27,15 @@ class ViewController: NSViewController {
 
             }
         }
+    }
+    
+    override func viewDidAppear() {
+       self.view.window?.delegate = self
+    }
+    
+    func windowShouldClose(_ sender: NSWindow) -> Bool{
+        NSApplication.shared.terminate(self)
+    return true
     }
 
 }

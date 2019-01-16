@@ -685,7 +685,7 @@ var AmazonContentScript = {
         var descObj = {};
         var orderDescription = $(aOrderNode).parent().find("div[class='a-fixed-left-grid-col a-col-right']>div[class='a-row']>a[class='a-link-normal']");
         var multipleUnitsRegex = /^(\d+) of (.*)/;
-        
+        descObj.packageDescriptions = [];
         if (orderDescription.length == 1) {
             descObj.packageDescription = ContentScript._trimHTML($(orderDescription[0]).text());
             var res = multipleUnitsRegex.exec(descObj.packageDescription);
@@ -694,6 +694,9 @@ var AmazonContentScript = {
             }
             descObj.firstItemDescription = descObj.packageDescription;
         } else if (orderDescription.length > 1) {
+            for (var i = 0; i < orderDescription.length; i++) {
+                descObj.packageDescriptions.push(ContentScript._trimHTML($(orderDescription[i]).text()));
+            }
             descObj.packageDescription = $.i18n.getString("extension_prealert_multiple_items");
             descObj.firstItemDescription = ContentScript._trimHTML($(orderDescription[0]).text());
             var res = multipleUnitsRegex.exec(descObj.firstItemDescription);

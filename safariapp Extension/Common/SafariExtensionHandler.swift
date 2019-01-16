@@ -210,7 +210,9 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 statusResponse["shipper"] = userInfo!["shipper"]
                 statusResponse["generateInvoice"] = userInfo!["generateInvoice"]
                 statusResponse["orderIndex"] = userInfo!["orderIndex"]
-                
+                statusResponse["errorCode"] = self.viewModel.prealertStatusList?.first?.errorCode
+                statusResponse["errorDescriptionEn"] = self.viewModel.prealertStatusList?.first?.errorDescriptionEn
+                statusResponse["errorDescriptionEs"] = self.viewModel.prealertStatusList?.first?.errorDescriptionEn
                 page.dispatchMessageToScript(withName: "checkedPreAlert", userInfo: statusResponse)
             }
         }
@@ -231,6 +233,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         prealertDictionary["packageDescription"] = userInfo!["packageDescription"]
         prealertDictionary["descriptions"] = userInfo!["descriptions"]
         prealertDictionary["invoiceData"] = userInfo!["invoiceData"]
+        
         
         if (gateway.lowercased() == "bog") {
             prealertDictionary["value"] = userInfo!["subTotalCost"]
@@ -260,8 +263,12 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     notification.point = ""
                     notification.title = "extension.prealert.congratulations.title"
                     notification.msg = "extension.prealert.congratulations.msg"
+                    var processPageMessage = [String:Any]()
+                    processPageMessage["signedIn"] = getUserInformationInStorage().dictionary
+                    processPageMessage["clientAllowed"] = true
+                    
                     page.dispatchMessageToScript(withName: "showNotification", userInfo: notification.dictionary)
-                    page.dispatchMessageToScript(withName: "reloadCurrentPage", userInfo:nil)
+                    page.dispatchMessageToScript(withName: "reloadCurrentPage", userInfo:processPageMessage)
                     
                 }
                 

@@ -296,7 +296,7 @@ struct MainDataManager{
         parametersBody["intranetUserEmail"] = "browser-extensions@aeropost.com"
         parametersBody["aeroShopOrderNumber"] = "-1"
         parametersBody["ip"] = "0"
-        
+        parametersBody["isDesktop"] = true
         
       sessionManager.request(endPoint,method: .post, parameters:parametersBody,encoding: JSONEncoding.default, headers:headerParameters)
             .validate().responseObject(completionHandler: {(response: DataResponse<PreAlertResponseModel>) in
