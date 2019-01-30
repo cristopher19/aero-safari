@@ -71,6 +71,7 @@ class LoginViewModel{
         
         
         if let token = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.token {
+            print("token:\(token)")
             userView.token = token
             userView.fullName = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.fullName
             userView.emailAccount = user.body?.authenticateMyAeroUserResponse?.authenticateMyAeroUserResult?.accountEmail

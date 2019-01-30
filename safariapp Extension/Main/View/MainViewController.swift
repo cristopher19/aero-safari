@@ -105,14 +105,19 @@ class MainViewController: SFSafariExtensionViewController, XMLParserDelegate {
     }
     
     @objc func openUrlInWeb(_ sender: Any){
+
         var tagItem:Int = UrlPages.aero.idPage
         if let item = sender as? NSButton {
            tagItem = item.tag
         }else{
-            if let item = sender as? NSTextField {
-                tagItem = item.tag
+            if let gesture = sender as? NSClickGestureRecognizer{
+                if let item = gesture.view as? NSTextField {
+                    tagItem = item.tag
+                }
             }
+            
         }
+        print("probando\(tagItem)")
         let urlResult = tagItem.checkUrl
         
         if let url = URL(string: urlResult),

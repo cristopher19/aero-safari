@@ -264,7 +264,7 @@ extension MainViewController{
         profileInformationAccountTextField.addConstraintTop(topOffset: 1, toItem: profileInformationNameTextField, firstAttribute: .top, secondAttribute: .bottom)
         
         /** values **/
-        profileInformationNameValueTextField.addConstraintHeight(height: 14)
+        profileInformationNameValueTextField.addConstraintHeight(height: 16)
         profileInformationNameValueTextField.addConstraintWidth(width:   (parent.frame.size.width * 0.48))
         profileInformationNameValueTextField.addConstraintTop(topOffset: 8, toItem: lastProfileBox, firstAttribute: .top, secondAttribute: .bottom)
         profileInformationNameValueTextField.addConstraintRight(rightOffset: -15, toItem: parent)

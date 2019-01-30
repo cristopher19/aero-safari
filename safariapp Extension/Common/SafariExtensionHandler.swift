@@ -10,6 +10,8 @@ import SafariServices
 import SwiftyJSON
 class SafariExtensionHandler: SFSafariExtensionHandler {
     let viewModel = MainViewModel()
+    
+   
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         page.getPropertiesWithCompletionHandler { properties in
@@ -65,6 +67,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             }
         }
     }
+    
     /*
      * logic for addCart message
      */

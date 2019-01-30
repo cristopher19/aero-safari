@@ -37,14 +37,14 @@ extension String {
     }
     //formatea las fechas a formato que utiliza aeropost
     var formatStringAeroDate:String {
-        var result = "00.00.0000"
+        var result = "00.00.00"
         if(self != ""){
             let index = self.index(self.startIndex, offsetBy: 10)
             let stringFormat = self.substring(to: index)
             
             let arraDate = stringFormat.split(separator: "-")
             if(arraDate.indices.contains(2) && arraDate.indices.contains(1) && arraDate.indices.contains(0)){
-                result = arraDate[2] + "." + arraDate[1] + "." + arraDate[0]
+                result = arraDate[2] + "/" + arraDate[1] + "/" + arraDate[0].suffix(2)
             }
             
             //result =  stringFormat.replacingOccurrences(of: "-", with: ".")
@@ -120,5 +120,15 @@ extension Encodable {
     }
     var dictionary: [String: Any] {
         return (try? JSONSerialization.jsonObject(with: JSONEncoder().encode(self))) as? [String: Any] ?? [:]
+    }
+}
+
+extension Bundle {
+    var displayName: String? {
+        return object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+    }
+    
+    var bundelVersion: String? {
+        return object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
 }

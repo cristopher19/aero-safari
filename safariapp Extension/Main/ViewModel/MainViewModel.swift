@@ -232,7 +232,8 @@ class MainViewModel{
     }
     
     func userLogOut(completionHandler: (_ result: Bool) -> Void){
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.removeObject(forKey: "cartID")
+        UserDefaults.standard.removeObject(forKey: "userInformation")
         UserDefaults.standard.synchronize()
         completionHandler(true) // return data & close
     }

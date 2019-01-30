@@ -38,7 +38,6 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
     override func viewDidLoad() {
         // THIS IS ABSOLUTELY CRICITAL FOR THE POPUP TO ACTUALLY SHOW UP
         // WITHOUT IT, YOU SEE A SMALLER (EMPTY) POPUP
-        
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
         country.drawsBackground = false
 
@@ -70,6 +69,11 @@ class LoginViewController: SFSafariExtensionViewController, NSURLConnectionDeleg
         accountNumberText.layer?.borderColor = NSColor(hex:ColorPalette.BorderColor.bgMidGray).cgColor
         accountNumberText.layer?.cornerRadius = 4
      
+        //generate UUID and storage
+        if(UserDefaults.standard.string(forKey: "clientId") == "" || UserDefaults.standard.string(forKey: "clientId") == nil){
+            UserDefaults.standard.set(NSUUID().uuidString, forKey: "clientId")
+        }
+        
         self.countryComboBox.dataSource = self
         viewModel.getCountries()
         viewModel.updateLoadingStatus = {

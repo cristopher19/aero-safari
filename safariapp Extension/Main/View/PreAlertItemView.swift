@@ -240,7 +240,7 @@ extension MainViewController{
     
     private func listOfPrealert(parentBox: NSView, prealertList: [PreAlert]){
         for (index,prealertItem) in prealertList.enumerated(){
-            let prealertItemBoxHeight = 60
+            let prealertItemBoxHeight = 70
             //create content box  del track item
             let prealertItemBox = NSView()
             prealertItemBox.wantsLayer = true
@@ -258,7 +258,8 @@ extension MainViewController{
             descriptionTextField.isEditable = false
             descriptionTextField.drawsBackground = false
             descriptionTextField.isBezeled = false
-            descriptionTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+            descriptionTextField.textColor = NSColor(hex: ColorPalette.TextColor.textDarkGray)
+            descriptionTextField.lineBreakMode = .byTruncatingTail
             
             //create text courier items
             let courierTrackingTextField = NSTextField()
@@ -266,7 +267,8 @@ extension MainViewController{
             courierTrackingTextField.isEditable = false
             courierTrackingTextField.drawsBackground = false
             courierTrackingTextField.isBezeled = false
-            courierTrackingTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+            courierTrackingTextField.textColor = NSColor(hex: ColorPalette.TextColor.textLightBlue)
+            courierTrackingTextField.lineBreakMode = .byTruncatingTail
             
             //create text courier name items
             let courierNameTextField = NSTextField()
@@ -274,7 +276,10 @@ extension MainViewController{
             courierNameTextField.isEditable = false
             courierNameTextField.drawsBackground = false
             courierNameTextField.isBezeled = false
-            courierNameTextField.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
+            courierNameTextField.textColor = NSColor.black//(hex: ColorPalette.TextColor.textDarkGray)
+            courierNameTextField.font = NSFont(name: "Helvetica Neue", size: 11)
+            courierNameTextField.font = NSFont.boldSystemFont(ofSize: 11)
+            courierNameTextField.lineBreakMode = .byTruncatingTail
             
             let editPrealert = NSButton()
             editPrealert.wantsLayer = true
@@ -302,11 +307,11 @@ extension MainViewController{
             imageRefresh.addConstraintWidth(width: 30)
             imageRefresh.addConstraintHeight(height: 30)
             imageRefresh.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .leading, toItem: prealertItemBox)
-            imageRefresh.addConstraintTop(topOffset: 15, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
+            imageRefresh.addConstraintTop(topOffset: 20, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
             
             descriptionTextField.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
-            descriptionTextField.addConstraintTop(topOffset: 0, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
-            descriptionTextField.addConstraintWidth(width: ((self.prealertContentBox!.frame.size.width - 40) * 50) / 100)
+            descriptionTextField.addConstraintTop(topOffset: 5, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
+            descriptionTextField.addConstraintRight(rightOffset: -85, toItem: editPrealert)
             descriptionTextField.addConstraintHeight(height: CGFloat((prealertItemBoxHeight / 3)))
             
             courierTrackingTextField.addConstraintLeft(leftOffset: 10, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
@@ -320,7 +325,7 @@ extension MainViewController{
             courierNameTextField.addConstraintHeight(height: CGFloat((prealertItemBoxHeight / 3) ))
             
             editPrealert.addConstraintRight(rightOffset: -15, toItem: prealertItemBox)
-            editPrealert.addConstraintTop(topOffset: 10, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
+            editPrealert.addConstraintTop(topOffset: 15, toItem: prealertItemBox, firstAttribute: .top, secondAttribute: .top)
             editPrealert.addConstraintWidth(width: 80)
             editPrealert.addConstraintHeight(height: 40)
             self.lastPrealertBox = prealertItemBox

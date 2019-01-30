@@ -48,9 +48,9 @@ struct MainDataManager{
         let headerParameters  = ["Content-Type":"application/json; charset=utf-8"]
         var parametersBody = [ String : Any]()
         var parametersBodyFilter = [ String : Any]()
-        parametersBodyFilter["onlyPendingPayment"] = false
+        parametersBodyFilter["onlyPendingPayment"] = true
         parametersBodyFilter["onlyCancelled"] = false
-        parametersBodyFilter["onlyOpen"] = false
+        parametersBodyFilter["onlyOpen"] = true
         parametersBodyFilter["account"] = getUserInformationInStorage()?.accountNumber ?? ""
         parametersBodyFilter["gateway"] = getUserInformationInStorage()?.gateway ?? ""
         parametersBodyFilter["rowsPerPage"] = 6
@@ -60,9 +60,11 @@ struct MainDataManager{
         parametersBodyFilter["isGraphicView"] = false
         parametersBodyFilter["fillPackagesCharges"] = false
         parametersBodyFilter["includePreAlerts"] = false
-        parametersBodyFilter["filterByStatus"] = "inTransit"
+        parametersBodyFilter["filterByStatus"] = ""
         parametersBodyFilter["searchText"] = ""
         parametersBodyFilter["lang"] = "en"
+        parametersBodyFilter["orderRowsPerPage"] = 5
+        parametersBodyFilter["pakagesRowsPerPage"] = 5
         parametersBody["token"] = getUserInformationInStorage()?.token ?? ""
         parametersBody["pageIndex"] = 1
         parametersBody["pageSize"] = 1

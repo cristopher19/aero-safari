@@ -9,7 +9,7 @@
 import Foundation
 import SafariServices
 class TextFieldStyle: NSTextField {
-  
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -25,7 +25,8 @@ class TextFieldStyle: NSTextField {
         self.drawsBackground = false
         self.isBezeled = false
         self.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
-        self.font = NSFont(name: "Helvetica Neue", size: 12)
+        self.font = NSFont(name: "Helvetica Neue", size: 11)
+        self.lineBreakMode = .byTruncatingTail
     }
 }
 
@@ -43,8 +44,8 @@ class HyperlinkTextField: NSTextField {
         self.drawsBackground = false
         self.isBezeled = false
         self.textColor = NSColor(hex: ColorPalette.TextColor.textBlue)
-        self.font = NSFont(name: "Helvetica Neue", size: 12)
-      
+        self.font = NSFont(name: "Helvetica Neue", size: 11)
+        self.lineBreakMode = .byTruncatingTail
     }
     
     override func mouseDown(with theEvent: NSEvent) {

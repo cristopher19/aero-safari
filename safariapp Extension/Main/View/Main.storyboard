@@ -31,16 +31,16 @@
                                             </imageView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LIL-Ru-bc7">
                                                 <rect key="frame" x="46" y="22" width="69" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="ucl-L9-EtJ">
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Label" id="ucl-L9-EtJ">
                                                     <font key="font" metaFont="cellTitle"/>
                                                     <color key="textColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lnA-F8-JP7">
-                                                <rect key="frame" x="46" y="6" width="69" height="14"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="j9n-DL-tqQ">
-                                                    <font key="font" metaFont="smallSystem"/>
+                                                <rect key="frame" x="46" y="7" width="69" height="13"/>
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Label" id="j9n-DL-tqQ">
+                                                    <font key="font" metaFont="system" size="10"/>
                                                     <color key="textColor" name="selectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>

@@ -344,14 +344,17 @@ extension MainViewController{
             //create text date
             let dateTextField =  TextFieldStyle()
             dateTextField.stringValue = "track_date".localized()
+            dateTextField.font = NSFont(name: "Helvetica Neue", size: 12)
             
             //create text aerotrack
             let aeroTrackTextField = TextFieldStyle()
             aeroTrackTextField.stringValue = "track_aero_track".localized()
+            aeroTrackTextField.font = NSFont(name: "Helvetica Neue", size: 12)
             
             //create text status
             let statusTextField = TextFieldStyle()
             statusTextField.stringValue = "track_status".localized()
+            statusTextField.font = NSFont(name: "Helvetica Neue", size: 12)
             
             //create text datevalue
             let dateValueTextField = TextFieldStyle()
@@ -366,8 +369,8 @@ extension MainViewController{
             //create text status value
             let statusValueTextField = TextFieldStyle()
             statusValueTextField.stringValue = trackItem.packageOrderStatus!
-            
-            
+            statusValueTextField.lineBreakMode = .byTruncatingTail
+            statusValueTextField.maximumNumberOfLines = 1
             /** section button **/
             //create content box de la descripcion del item
             let descriptionSectionBox = NSView(frame: NSMakeRect(contentBox.frame.origin.x,contentBox.frame.origin.y,
@@ -388,7 +391,8 @@ extension MainViewController{
             //create text item description
             let itemDescriptionTextField = TextFieldStyle()
             itemDescriptionTextField.stringValue = trackItem.packageOrderDescripcion!
-            itemDescriptionTextField.sizeToFit()
+            itemDescriptionTextField.lineBreakMode = .byTruncatingTail
+            itemDescriptionTextField.maximumNumberOfLines = 1
             
             //add subviews
             /**top section **/
@@ -421,30 +425,30 @@ extension MainViewController{
             //constraint fields
             dateTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .leading, toItem: trackItemBox)
             dateTextField.addConstraintTop(topOffset: 5.0, toItem: trackItemBox, firstAttribute: .top, secondAttribute: .top)
-            dateTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*18)/100)
+            dateTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*14)/100)
             
             
-            aeroTrackTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: dateTextField)
+            aeroTrackTextField.addConstraintLeft(leftOffset: 5.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: dateTextField)
             aeroTrackTextField.addConstraintTop(topOffset: 5.0, toItem: trackItemBox, firstAttribute: .top, secondAttribute: .top)
             aeroTrackTextField.addConstraintWidth(width: ((self.trackContentBox!.frame.size.width*28)/100) )
             
-            statusTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: aeroTrackTextField)
+            statusTextField.addConstraintLeft(leftOffset: 5.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: aeroTrackTextField)
             statusTextField.addConstraintTop(topOffset: 5.0, toItem: trackItemBox, firstAttribute: .top, secondAttribute: .top)
             statusTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*54)/100)
             
             //add constraint values
             dateValueTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .leading, toItem: trackItemBox)
             dateValueTextField.addConstraintTop(topOffset: 5.0, toItem: dateTextField, firstAttribute: .top, secondAttribute: .bottom)
-            dateValueTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*18)/100)
+            dateValueTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*14)/100)
             
-            aeroTrackValueTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: dateValueTextField)
+            aeroTrackValueTextField.addConstraintLeft(leftOffset: 5.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: dateValueTextField)
             aeroTrackValueTextField.addConstraintTop(topOffset: 5.0, toItem: aeroTrackTextField, firstAttribute: .top, secondAttribute: .bottom)
             aeroTrackValueTextField.addConstraintWidth(width: ((self.trackContentBox!.frame.size.width*28)/100) )
             
-            statusValueTextField.addConstraintLeft(leftOffset: 10.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: aeroTrackValueTextField)
+            statusValueTextField.addConstraintLeft(leftOffset: 5.0, firstAttribute: .leading, secondAttribute: .trailing, toItem: aeroTrackValueTextField)
             statusValueTextField.addConstraintTop(topOffset: 5.0, toItem: statusTextField, firstAttribute: .top, secondAttribute: .bottom)
-            
-            statusValueTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*53)/100)
+            statusValueTextField.addConstraintRight(rightOffset: -5, toItem: trackItemBox)
+            //statusValueTextField.addConstraintWidth(width: (self.trackContentBox!.frame.size.width*53)/100)
             
             /** description box section **/
             descriptionSectionBox.addConstraintHeight(height: CGFloat(descriptionBoxHeight))
@@ -457,11 +461,11 @@ extension MainViewController{
             imageRefresh.addConstraintWidth(width: 20)
             imageRefresh.addConstraintTop(topOffset:  CGFloat((descriptionBoxHeight / 2)) - (20 / 2), toItem: descriptionSectionBox, firstAttribute: .top, secondAttribute: .top)
             
-            itemDescriptionTextField.addConstraintWidth(width: itemDescriptionTextField.frame.size.width)
-            itemDescriptionTextField.addConstraintHeight(height: itemDescriptionTextField.frame.size.height)
+            //itemDescriptionTextField.addConstraintWidth(width: itemDescriptionTextField.frame.size.width)
+            itemDescriptionTextField.addConstraintHeight(height: 20)
             itemDescriptionTextField.addConstraintLeft(leftOffset: 5, firstAttribute: .leading, secondAttribute: .trailing, toItem: imageRefresh)
-            itemDescriptionTextField.addConstraintTop(topOffset: CGFloat((descriptionBoxHeight / 2)) - (itemDescriptionTextField.frame.size.height / 2) , toItem: descriptionSectionBox, firstAttribute: .top, secondAttribute: .top)
-            
+            itemDescriptionTextField.addConstraintTop(topOffset: CGFloat((descriptionBoxHeight / 2)) - (8) , toItem: descriptionSectionBox, firstAttribute: .top, secondAttribute: .top)
+            itemDescriptionTextField.addConstraintRight(rightOffset: -5, toItem: descriptionSectionBox)
             self.lastTrackBox = trackItemBox
             
             if(index == (trackList.count - 1)){
